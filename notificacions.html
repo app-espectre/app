@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPECTRE – Notificacions</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div class="phone"><div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-user">
+    <div class="drawer-avatar">AM</div>
+    <div><div class="drawer-name">Ana Molina</div><div class="drawer-email">anamolina@gmail.com</div></div>
+  </div>
+  <a href="home.html" class="drawer-item"><span class="dot"></span><span>Home</span></a><a href="perfil_habilitats.html" class="drawer-item"><span class="dot"></span><span>Perfil</span></a><a href="informacio.html" class="drawer-item"><span class="dot"></span><span>Informació</span></a><a href="progres.html" class="drawer-item"><span class="dot"></span><span>Progrés</span></a><a href="recursos.html" class="drawer-item"><span class="dot"></span><span>Recursos</span></a><a href="professionals.html" class="drawer-item"><span class="dot"></span><span>Professionals</span></a><a href="reportes.html" class="drawer-item"><span class="dot"></span><span>Reportes</span></a><a href="comunitat.html" class="drawer-item"><span class="dot"></span><span>Comunitat</span></a><a href="benestar.html" class="drawer-item"><span class="dot"></span><span>Respira</span></a><a href="config.html" class="drawer-item"><span class="dot"></span><span>Configuració</span></a>
+  <div class="drawer-sep">
+    <a href="splash.html" class="drawer-item"><span class="dot" style="background:#e74c3c"></span><span>Tancar sessió</span></a>
+  </div>
+</div><div class="topbar"><button class="menu-btn" onclick="openDrawer()">☰</button><span class="title">Notificacions i recordatoris</span><div style="width:34px"></div></div>
+<div class="screen" style="padding-top:0">
+  <div class="scroll-area">
+    <div class="chips mb-14"><span class="chip active" onclick="selectChip('nf',this)" data-group="nf">Totes</span><span class="chip" onclick="selectChip('nf',this)" data-group="nf">Cites</span><span class="chip" onclick="selectChip('nf',this)" data-group="nf">Consells</span><span class="chip" onclick="selectChip('nf',this)" data-group="nf">Comunitat</span></div>
+    <div class="sec">Propers recordatoris</div>
+    <a href="notificacions.html" class="reminder-item"><div class="reminder-date"><div class="reminder-day">5</div><div class="reminder-mon">ABR</div></div><div class="reminder-sep" style="background:var(--blu)"></div><div class="reminder-info"><div class="reminder-title">Sessió de logopèdia</div><div class="reminder-sub">Avui, 15:00 h</div></div><span class="today-badge">Avui</span></a>
+    <div class="reminder-item"><div class="reminder-date"><div class="reminder-day">18</div><div class="reminder-mon">ABR</div></div><div class="reminder-sep" style="background:var(--yellow)"></div><div class="reminder-info"><div class="reminder-title">Revisió pediàtrica</div><div class="reminder-sub">10:00 h</div></div></div>
+    <div class="reminder-item"><div class="reminder-date"><div class="reminder-day">20</div><div class="reminder-mon">ABR</div></div><div class="reminder-sep" style="background:var(--green)"></div><div class="reminder-info"><div class="reminder-title">Reunió PIA a l'escola</div><div class="reminder-sub">14:00 h</div></div></div>
+    <div class="reminder-item"><div class="reminder-date"><div class="reminder-day">22</div><div class="reminder-mon">ABR</div></div><div class="reminder-sep" style="background:var(--blu)"></div><div class="reminder-info"><div class="reminder-title">Teràpia ocupacional</div><div class="reminder-sub">11:00 h</div></div></div>
+    <a href="nou_recordatori.html" class="btn-outline mb-14">+ Afegir nou recordatori</a>
+    <div class="sec">Notificacions recents</div>
+    <div class="card">
+      <div class="notif-item"><div class="notif-icon">🗓️</div><div><div class="notif-title">Recordatori de cita</div><div class="notif-sub">Demà a les 15:00 — Sessió de logopèdia</div><div class="notif-time">Fa 2 hores</div></div></div>
+      <div class="notif-item"><div class="notif-icon">💡</div><div><div class="notif-title">Consell del dia</div><div class="notif-sub">Les rutines visuals redueixen l'ansietat. Prova-ho!</div><div class="notif-time">Fa 5 hores</div></div></div>
+      <div class="notif-item"><div class="notif-icon">💬</div><div><div class="notif-title">Nova resposta a la teva publicació</div><div class="notif-sub">David L. ha respost al teu fil sobre el CEIP.</div><div class="notif-time">Fa 1 hora</div></div></div>
+      <div class="notif-item"><div class="notif-icon">📋</div><div><div class="notif-title">Recordatori de seguiment</div><div class="notif-sub">Fa 2 setmanes que no fas cap avaluació.</div><div class="notif-time">Ahir</div><a href="progres.html" class="notif-action">Fer seguiment ara →</a></div></div>
+    </div>
+  </div>
+</div></div>
+<script src="nav.js"></script>
+</body>
+</html>

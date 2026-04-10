@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPECTRE – Professionals</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div class="phone"><div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-user">
+    <div class="drawer-avatar">AM</div>
+    <div><div class="drawer-name">Ana Molina</div><div class="drawer-email">anamolina@gmail.com</div></div>
+  </div>
+  <a href="home.html" class="drawer-item"><span class="dot"></span><span>Home</span></a><a href="perfil_habilitats.html" class="drawer-item"><span class="dot"></span><span>Perfil</span></a><a href="informacio.html" class="drawer-item"><span class="dot"></span><span>Informació</span></a><a href="progres.html" class="drawer-item"><span class="dot"></span><span>Progrés</span></a><a href="recursos.html" class="drawer-item"><span class="dot"></span><span>Recursos</span></a><a href="professionals.html" class="drawer-item"><span class="dot"></span><span>Professionals</span></a><a href="reportes.html" class="drawer-item"><span class="dot"></span><span>Reportes</span></a><a href="comunitat.html" class="drawer-item"><span class="dot"></span><span>Comunitat</span></a><a href="benestar.html" class="drawer-item"><span class="dot"></span><span>Respira</span></a><a href="config.html" class="drawer-item"><span class="dot"></span><span>Configuració</span></a>
+  <div class="drawer-sep">
+    <a href="splash.html" class="drawer-item"><span class="dot" style="background:#e74c3c"></span><span>Tancar sessió</span></a>
+  </div>
+</div><div class="topbar"><button class="menu-btn" onclick="openDrawer()">☰</button><span class="title">Professionals</span><div style="width:34px"></div></div>
+<div class="screen" style="padding-top:0">
+  <div class="scroll-area">
+    <div style="background:var(--blu-ll);border:1.5px solid var(--border);border-radius:12px;display:flex;align-items:center;gap:8px;padding:11px 14px;margin-bottom:10px"><span>🔍</span><span style="font-size:13px;color:var(--text2)">Cerca per nom, especialitat, ubicació...</span></div>
+    <div style="background:var(--blu-ll);border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;gap:12px;font-size:11px;font-weight:700;color:var(--text)">
+      <span>Tipus <span class="text-blu">▼</span></span>
+      <span style="border-left:1px solid var(--border);padding-left:12px">Zona <span class="text-blu">▼</span></span>
+      <span style="border-left:1px solid var(--border);padding-left:12px">Modalitat <span class="text-blu">▼</span></span>
+    </div>
+    <a href="prof_perfil.html" class="prof-card"><div class="prof-avatar">MP</div><div style="flex:1"><div class="prof-name">Dra. Marta Puig</div><div class="prof-spec">Psicòloga especialista TEA</div><div class="prof-loc">Barcelona · Presencial + Online</div><div class="prof-stars">★ 4.9 <span class="text-muted font-bold">(127 ressenyes)</span></div></div><button class="btn-sm-blue">Veure</button></a>
+    <a href="prof_perfil.html" class="prof-card"><div class="prof-avatar">MF</div><div style="flex:1"><div class="prof-name">Marc Ferrer</div><div class="prof-spec">Logopeda · Comm. augmentativa</div><div class="prof-loc">Gràcia, BCN · Presencial</div><div class="prof-stars">★ 4.8 <span class="text-muted font-bold">(89 ressenyes)</span></div></div><button class="btn-sm-blue">Veure</button></a>
+    <a href="prof_perfil.html" class="prof-card"><div class="prof-avatar">LS</div><div style="flex:1"><div class="prof-name">Laura Sánchez</div><div class="prof-spec">Terapeuta ocupacional</div><div class="prof-loc">Sarrià, BCN · Presencial</div><div class="prof-stars">★ 4.7 <span class="text-muted font-bold">(54 ressenyes)</span></div></div><button class="btn-sm-blue">Veure</button></a>
+    <div class="sec mt-14">Especialitats més cercades</div>
+    <div class="chips"><span class="chip active">TEA</span><span class="chip">Logopèdia</span><span class="chip">Ter. ocupacional</span><span class="chip">TDAH</span><span class="chip">Psicologia infantil</span></div>
+  </div>
+</div></div>
+<script src="nav.js"></script>
+</body>
+</html>

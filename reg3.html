@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPECTRE – Onboarding pas 3</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div class="phone">
+<div class="screen">
+  <div style="background:var(--blu-ll);padding:20px 24px 14px;text-align:center;flex-shrink:0">
+    <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div>
+    <div style="font-size:20px;font-weight:800;color:var(--text)">Diagnòstic i necessitats</div>
+    <div style="font-size:12px;color:var(--text2);margin-top:4px">Pas 3 de 3 · Podràs editar-ho sempre</div>
+  </div>
+  <div class="scroll-area">
+    <div class="field">
+      <label>Diagnòstic (selecció única)</label>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">
+        <div style="border:2px solid var(--blu);border-radius:10px;padding:12px 14px;background:var(--blu-ll);display:flex;justify-content:space-between;align-items:center;cursor:pointer"><span style="font-size:13px;font-weight:600">TEA nivell de suport 1</span><span style="color:var(--blu)">●</span></div>
+        <div style="border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:13px;cursor:pointer">TEA nivell de suport 2</div>
+        <div style="border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:13px;cursor:pointer">TEA nivell de suport 3</div>
+        <div style="border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:13px;cursor:pointer">En procés de diagnòstic</div>
+        <div style="border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:13px;cursor:pointer">Altre</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Necessitats específiques (selecció múltiple)</label>
+      <div class="chips">
+        <span class="chip active" onclick="toggleChip(this)">Comunicació verbal</span>
+        <span class="chip active" onclick="toggleChip(this)">Sensorial</span>
+        <span class="chip active" onclick="toggleChip(this)">Socialització</span>
+        <span class="chip" onclick="toggleChip(this)">Conductes rep.</span>
+        <span class="chip" onclick="toggleChip(this)">Autonomia</span>
+        <span class="chip" onclick="toggleChip(this)">Son</span>
+        <span class="chip" onclick="toggleChip(this)">Aprenentatge</span>
+        <span class="chip" onclick="toggleChip(this)">Alimentació</span>
+      </div>
+    </div>
+    <a href="reg_ok.html" class="btn">Finalitzar registre ✓</a>
+  </div>
+</div></div>
+<script src="nav.js"></script>
+</body>
+</html>

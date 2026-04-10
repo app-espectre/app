@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPECTRE – Configuració</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div class="phone"><div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-user">
+    <div class="drawer-avatar">AM</div>
+    <div><div class="drawer-name">Ana Molina</div><div class="drawer-email">anamolina@gmail.com</div></div>
+  </div>
+  <a href="home.html" class="drawer-item"><span class="dot"></span><span>Home</span></a><a href="perfil_habilitats.html" class="drawer-item"><span class="dot"></span><span>Perfil</span></a><a href="informacio.html" class="drawer-item"><span class="dot"></span><span>Informació</span></a><a href="progres.html" class="drawer-item"><span class="dot"></span><span>Progrés</span></a><a href="recursos.html" class="drawer-item"><span class="dot"></span><span>Recursos</span></a><a href="professionals.html" class="drawer-item"><span class="dot"></span><span>Professionals</span></a><a href="reportes.html" class="drawer-item"><span class="dot"></span><span>Reportes</span></a><a href="comunitat.html" class="drawer-item"><span class="dot"></span><span>Comunitat</span></a><a href="benestar.html" class="drawer-item"><span class="dot"></span><span>Respira</span></a><a href="config.html" class="drawer-item"><span class="dot"></span><span>Configuració</span></a>
+  <div class="drawer-sep">
+    <a href="splash.html" class="drawer-item"><span class="dot" style="background:#e74c3c"></span><span>Tancar sessió</span></a>
+  </div>
+</div><div class="topbar"><button class="menu-btn" onclick="openDrawer()">☰</button><span class="title">Configuració</span><div style="width:34px"></div></div>
+<div class="screen" style="padding-top:0">
+  <div class="scroll-area">
+    <div style="background:var(--blu-ll);border-radius:14px;padding:14px;margin-bottom:18px;display:flex;gap:12px;align-items:center;cursor:pointer">
+      <div style="width:50px;height:50px;border-radius:50%;background:var(--blu);border:2px solid var(--blu-d);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff">AM</div>
+      <div><div style="font-size:16px;font-weight:700;color:var(--text)">Ana Molina</div><div class="text-sm text-muted">anamolina@gmail.com</div><div class="text-sm text-blu">Editar perfil →</div></div>
+    </div>
+    <div class="settings-section">
+      <div class="sec">🔔 Notificacions</div>
+      <div class="settings-card">
+        <div class="settings-row"><span class="settings-label">Notificacions push</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+        <div class="settings-row"><span class="settings-label">Recordatoris de cites</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+        <div class="settings-row"><span class="settings-label">Consell diari</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+        <div class="settings-row"><span class="settings-label">Activitat comunitat</span><div class="toggle off" onclick="toggleSwitch(this)"></div></div>
+        <div class="settings-row"><span class="settings-label">Recordatoris de seguiment</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+      </div>
+    </div>
+    <div class="settings-section">
+      <div class="sec">♿ Accessibilitat</div>
+      <div class="settings-card">
+        <div class="settings-row"><span class="settings-label">Mode fosc</span><div class="toggle off" onclick="toggleSwitch(this)"></div></div>
+        <div class="settings-row"><span class="settings-label">Text gran</span><div class="toggle off" onclick="toggleSwitch(this)"></div></div>
+        <div class="settings-row"><span class="settings-label">Alt contrast</span><div class="toggle off" onclick="toggleSwitch(this)"></div></div>
+      </div>
+    </div>
+    <div class="settings-section">
+      <div class="sec">Altres</div>
+      <div class="settings-card">
+        <div class="settings-row"><span class="settings-label">🌍 Idioma</span><span class="settings-val text-blu">Català ▼</span></div>
+        <div class="settings-row"><span class="settings-label">❓ Preguntes freqüents</span><span class="settings-val">→</span></div>
+        <div class="settings-row"><span class="settings-label">💬 Contactar suport</span><span class="settings-val">→</span></div>
+        <div class="settings-row"><span class="settings-label">📲 Versió de l'app</span><span class="settings-val">1.0.0</span></div>
+      </div>
+    </div>
+    <a href="splash.html" class="btn-red">Tancar sessió</a>
+  </div>
+</div></div>
+<script src="nav.js"></script>
+</body>
+</html>

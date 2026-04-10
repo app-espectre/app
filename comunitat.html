@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPECTRE – Comunitat</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div class="phone"><div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-user">
+    <div class="drawer-avatar">AM</div>
+    <div><div class="drawer-name">Ana Molina</div><div class="drawer-email">anamolina@gmail.com</div></div>
+  </div>
+  <a href="home.html" class="drawer-item"><span class="dot"></span><span>Home</span></a><a href="perfil_habilitats.html" class="drawer-item"><span class="dot"></span><span>Perfil</span></a><a href="informacio.html" class="drawer-item"><span class="dot"></span><span>Informació</span></a><a href="progres.html" class="drawer-item"><span class="dot"></span><span>Progrés</span></a><a href="recursos.html" class="drawer-item"><span class="dot"></span><span>Recursos</span></a><a href="professionals.html" class="drawer-item"><span class="dot"></span><span>Professionals</span></a><a href="reportes.html" class="drawer-item"><span class="dot"></span><span>Reportes</span></a><a href="comunitat.html" class="drawer-item"><span class="dot"></span><span>Comunitat</span></a><a href="benestar.html" class="drawer-item"><span class="dot"></span><span>Respira</span></a><a href="config.html" class="drawer-item"><span class="dot"></span><span>Configuració</span></a>
+  <div class="drawer-sep">
+    <a href="splash.html" class="drawer-item"><span class="dot" style="background:#e74c3c"></span><span>Tancar sessió</span></a>
+  </div>
+</div>
+<div class="topbar">
+  <button class="menu-btn" onclick="openDrawer()">☰</button>
+  <span class="title">Comunitat</span>
+  <a href="nova_pub.html" class="right-btn">+ Publicar</a>
+</div>
+<div class="screen" style="padding-top:0">
+  <div class="scroll-area">
+    <div class="card-blue text-xs text-muted mb-14">🛡️ Continguts moderats per garantir un espai segur i respectuós.</div>
+    <div class="sec">Grups destacats</div>
+    <a href="xat.html" class="group-item"><div class="group-left"><div class="group-avatar" style="background:#dbeafe;color:#1e40af">1D</div><div><div class="group-name">Primer diagnòstic</div><div class="group-members">234 membres</div></div></div><button class="join-btn">+</button></a>
+    <a href="xat.html" class="group-item"><div class="group-left"><div class="group-avatar" style="background:#d1fae5;color:#065f46">EC</div><div><div class="group-name">Reptes a l'escola</div><div class="group-members">189 membres</div></div></div><button class="join-btn">+</button></a>
+    <a href="xat.html" class="group-item"><div class="group-left"><div class="group-avatar" style="background:#fef3c7;color:#92400e">AA</div><div><div class="group-name">Adolescència i autisme</div><div class="group-members">156 membres</div></div></div><button class="join-btn">+</button></a>
+    <a href="xat.html" class="group-item"><div class="group-left"><div class="group-avatar" style="background:#ede9fe;color:#4c1d95">PS</div><div><div class="group-name">Processament sensorial</div><div class="group-members">201 membres</div></div></div><button class="join-btn">+</button></a>
+    <div class="sec">Discussions recents</div>
+    <a href="post_detall.html" class="discussion-item"><div class="discussion-meta">Maria G. · fa 2 hores · Primer diagnòstic</div><div class="discussion-title">Com gestioneu els matins escolars?</div><div class="discussion-replies">💬 24 respostes</div></a>
+    <a href="post_detall.html" class="discussion-item"><div class="discussion-meta">David L. · fa 5 hores · Comunitat general</div><div class="discussion-title">Celebrant un gran avenç avui! 🎉</div><div class="discussion-replies">💬 45 respostes</div></a>
+    <a href="post_detall.html" class="discussion-item"><div class="discussion-meta">Jennifer W. · fa 1 dia · Reptes escola</div><div class="discussion-title">Busco recomanació de dentista sensorialment amigable</div><div class="discussion-replies">💬 12 respostes</div></a>
+    <div class="sec">Pròxims events</div>
+    <div class="card">
+      <div class="event-item"><div><div class="event-title">Grup de suport en línia</div><div class="event-meta">15 abr · 💻 Online</div></div><button class="btn-sm-blue">Apuntar-me</button></div>
+      <div class="event-item"><div><div class="event-title">Cinema sensorialment amigable</div><div class="event-meta">22 abr · 📍 BCN</div></div><button class="btn-sm-blue">Apuntar-me</button></div>
+    </div>
+  </div>
+<nav class="bottom-nav"><a href="home.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Inici</span></a><a href="perfil_habilitats.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Perfil</span></a><a href="progres.html" class="nav-item"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Progrés</span></a><a href="comunitat.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span>Comunitat</span></a><a href="benestar.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span>Respira</span></a></nav></div></div>
+<script src="nav.js"></script>
+</body>
+</html>

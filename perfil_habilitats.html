@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPECTRE – Perfil – Habilitats</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div class="phone"><div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-user">
+    <div class="drawer-avatar">AM</div>
+    <div><div class="drawer-name">Ana Molina</div><div class="drawer-email">anamolina@gmail.com</div></div>
+  </div>
+  <a href="home.html" class="drawer-item"><span class="dot"></span><span>Home</span></a><a href="perfil_habilitats.html" class="drawer-item"><span class="dot"></span><span>Perfil</span></a><a href="informacio.html" class="drawer-item"><span class="dot"></span><span>Informació</span></a><a href="progres.html" class="drawer-item"><span class="dot"></span><span>Progrés</span></a><a href="recursos.html" class="drawer-item"><span class="dot"></span><span>Recursos</span></a><a href="professionals.html" class="drawer-item"><span class="dot"></span><span>Professionals</span></a><a href="reportes.html" class="drawer-item"><span class="dot"></span><span>Reportes</span></a><a href="comunitat.html" class="drawer-item"><span class="dot"></span><span>Comunitat</span></a><a href="benestar.html" class="drawer-item"><span class="dot"></span><span>Respira</span></a><a href="config.html" class="drawer-item"><span class="dot"></span><span>Configuració</span></a>
+  <div class="drawer-sep">
+    <a href="splash.html" class="drawer-item"><span class="dot" style="background:#e74c3c"></span><span>Tancar sessió</span></a>
+  </div>
+</div><div class="topbar"><button class="menu-btn" onclick="openDrawer()">☰</button><span class="title">Perfil del nen/a</span><a href="editar_perfil.html" class="right-btn">Editar</a></div>
+<div class="screen" style="padding-top:0">
+  <div class="profile-header">
+    <div class="profile-avatar">M</div>
+    <div class="profile-name">Martina Molina</div>
+    <div class="profile-meta">7 anys · TEA nivell 1 · CEIP Montserrat</div>
+    <div class="chips" style="justify-content:center;margin:8px 0 0"><span class="tag">Comunicació</span>&nbsp;<span class="tag">Sensorial</span>&nbsp;<span class="tag">Social</span></div>
+  </div>
+  <div class="scroll-area">
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('hab')" data-tab="hab">Habilitats</button>
+      <button class="tab" onclick="showTab('diari')" data-tab="diari">Diari</button>
+      <button class="tab" onclick="showTab('info')" data-tab="info">Info</button>
+    </div>
+    <div id="tab-hab" class="tab-panel">
+      <div class="sec">Àrees de seguiment <span style="font-size:11px;color:var(--text2);font-weight:400">— toca per editar</span></div>
+      <a href="editar_habilitat.html" class="skill-row"><span class="skill-label">Comunicació</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:60%"></div></div><span class="skill-pct">60%</span></a>
+      <a href="editar_habilitat.html" class="skill-row"><span class="skill-label">Interacció social</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:45%"></div></div><span class="skill-pct">45%</span></a>
+      <a href="editar_habilitat.html" class="skill-row"><span class="skill-label">Autonomia</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div><span class="skill-pct">70%</span></a>
+      <a href="editar_habilitat.html" class="skill-row"><span class="skill-label">Habilitats motrius</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:55%"></div></div><span class="skill-pct">55%</span></a>
+      <a href="editar_habilitat.html" class="skill-row"><span class="skill-label">Conducta emocional</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:48%"></div></div><span class="skill-pct">48%</span></a>
+      <a href="progres.html" class="btn mt-14">Veure avaluació completa</a>
+    </div>
+    <div id="tab-diari" class="tab-panel" style="display:none">
+      <div class="flex-between mb-14"><div class="sec" style="margin:0">Diari d'observacions</div><a href="nova_anotacio.html" class="btn-sm-blue">+ Nova</a></div>
+      <div class="chips"><span class="chip active" onclick="toggleChip(this)">Tots</span><span class="chip" onclick="toggleChip(this)">Assoliment</span><span class="chip" onclick="toggleChip(this)">Dificultat</span><span class="chip" onclick="toggleChip(this)">Canvis</span></div>
+      <a href="detall_anotacio.html" class="journal-item"><div class="journal-date">10 abr 2026 · 🌟 Assoliment</div><div class="journal-text">Gran dia a l'escola. Ha fet contacte visual amb un nou company per primera vegada!</div><div class="journal-actions">Editar · Eliminar</div></a>
+      <a href="detall_anotacio.html" class="journal-item yellow"><div class="journal-date">8 abr 2026 · ⚠️ Dificultat</div><div class="journal-text">Ha tingut dificultats en les transicions entre activitats. Crisi de 10 min al canviar de classe.</div><div class="journal-actions">Editar · Eliminar</div></a>
+      <a href="detall_anotacio.html" class="journal-item green"><div class="journal-date">5 abr 2026 · 🌟 Assoliment</div><div class="journal-text">Primera vegada que fa servir la cullera sola al sopar!</div><div class="journal-actions">Editar · Eliminar</div></a>
+    </div>
+    <div id="tab-info" class="tab-panel" style="display:none">
+      <div class="card">
+        <div class="flex-between" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="text-sm text-muted">Nom complet</span><span class="text-sm font-bold">Martina Molina García</span></div>
+        <div class="flex-between" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="text-sm text-muted">Data de naix.</span><span class="text-sm font-bold">15/03/2018</span></div>
+        <div class="flex-between" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="text-sm text-muted">Escola</span><span class="text-sm font-bold">CEIP Montserrat</span></div>
+        <div class="flex-between" style="padding:7px 0"><span class="text-sm text-muted">Diagnòstic</span><span class="text-sm font-bold">TEA nivell 1</span></div>
+      </div>
+      <a href="editar_perfil.html" class="btn-outline">✏️ Editar informació</a>
+      <a href="reportes.html" class="btn mt-10">📄 Exportar informe</a>
+    </div>
+  </div>
+<nav class="bottom-nav"><a href="home.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Inici</span></a><a href="perfil_habilitats.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Perfil</span></a><a href="progres.html" class="nav-item"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Progrés</span></a><a href="comunitat.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span>Comunitat</span></a><a href="benestar.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span>Respira</span></a></nav></div></div>
+<script src="nav.js"></script>
+</body>
+</html>
