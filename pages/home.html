@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#d1eaff">
+  <title>ESPECTRE – Inici</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="home">
+<div id="app">
+  <section class="page active app" id="page-home">
+    <div class="home-hero">
+      <h1 class="home-hero__greeting">Hola de nou! 👋</h1>
+      <p class="home-hero__sub">El teu espai de suport per fer el seguiment, aprendre i connectar.</p>
+    </div>
+    <div class="page-scroll">
+      <div class="alert alert--green mb-16">
+        <span class="alert__icon">✅</span>
+        <div class="alert__body">
+          <div class="alert__title">Recordatori diari</div>
+          <div class="alert__text">Ho estàs fent molt bé. Recorda cuidar-te tu també</div>
+        </div>
+      </div>
+      <h2 class="section-title">Propers recordatoris</h2>
+      <div id="home-reminder-list" class="flex flex-col gap-12 mb-24"></div>
+      <button class="btn btn--outline" onclick="goTo('reminders')">Veure tots els recordatoris</button>
+      <h2 class="section-title mt-24">Accés ràpid</h2>
+      <div class="flex flex-col gap-8">
+        <button class="card card--clickable flex items-center gap-16 text-left" onclick="goTo('progress')">
+          <div class="avatar avatar--md avatar--accent">📊</div>
+          <div><div class="fw-semi text-primary">Avaluació de progrés</div><div class="text-xs text-secondary">Darrera: 5 abr 2026</div></div>
+        </button>
+        <button class="card card--clickable flex items-center gap-16 text-left" onclick="goTo('info')">
+          <div class="avatar avatar--md avatar--purple">📖</div>
+          <div><div class="fw-semi text-primary">Recursos i articles</div><div class="text-xs text-secondary">Guies, vídeos i estratègies</div></div>
+        </button>
+        <button class="card card--clickable flex items-center gap-16 text-left" onclick="goTo('professionals')">
+          <div class="avatar avatar--md avatar--green">👩‍⚕️</div>
+          <div><div class="fw-semi text-primary">Trobar professionals</div><div class="text-xs text-secondary">Terapeutes, logopedes i més</div></div>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+  <script src="../js/state.js"></script>
+  <script src="../js/shell.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>

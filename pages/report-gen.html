@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#d1eaff">
+  <title>ESPECTRE – Generar informe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="report-gen">
+<div id="app">
+  <section class="page active app" id="page-report-gen">
+    <div class="sub-top">
+      <button class="back-btn" data-action="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg></button>
+      <h1 class="sub-top__title">Generar informe</h1>
+    </div>
+    <div class="page-scroll">
+      <div class="card mb-20"><h2 class="fw-black text-primary text-md mb-4">Crea un informe professional</h2><p class="text-sm text-secondary">Per compartir amb metges, terapeutes i mestres.</p></div>
+      <h2 class="section-title">Continguts a incloure</h2>
+      <div class="flex flex-col gap-0">
+        <div class="report-section"><div class="report-section__icon">🧒</div><div class="report-section__body"><div class="report-section__title">Informació bàsica</div><div class="report-section__desc">Nom, edat, diagnòstic, escola</div></div><input type="checkbox" class="report-section__checkbox" checked></div>
+        <div class="report-section"><div class="report-section__icon">📈</div><div class="report-section__body"><div class="report-section__title">Progrés d'habilitats</div><div class="report-section__desc">Gràfics de les 5 àrees</div></div><input type="checkbox" class="report-section__checkbox" checked></div>
+        <div class="report-section"><div class="report-section__icon">📋</div><div class="report-section__body"><div class="report-section__title">Avaluacions</div><div class="report-section__desc">Puntuacions i interpretació</div></div><input type="checkbox" class="report-section__checkbox" checked></div>
+        <div class="report-section"><div class="report-section__icon">📝</div><div class="report-section__body"><div class="report-section__title">Diari d'observacions</div><div class="report-section__desc">Últimes 10 anotacions</div></div><input type="checkbox" class="report-section__checkbox" checked></div>
+        <div class="report-section"><div class="report-section__icon">💡</div><div class="report-section__body"><div class="report-section__title">Recomanacions</div><div class="report-section__desc">Generades automàticament</div></div><input type="checkbox" class="report-section__checkbox"></div>
+      </div>
+      <button class="btn btn--primary mt-24" id="btn-generate-report">Generar informe</button>
+    </div>
+  </section>
+</div>
+
+  <script src="../js/state.js"></script>
+  <script src="../js/shell.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>
