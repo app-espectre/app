@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#d1eaff">
+  <title>ESPECTRE – Avaluació</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="assessment">
+<div id="app">
+  <section class="page active app" id="page-assessment">
+    <div class="assessment-header">
+      <div class="assessment-progress" id="assessment-steps"></div>
+      <div id="assessment-area" class="assessment-header__area"></div>
+      <div id="assessment-q-num" class="text-xs text-secondary"></div>
+      <h2 id="assessment-q-text" class="assessment-header__q"></h2>
+      <p class="assessment-header__hint">Basant-te en el comportament dels últims 30 dies.</p>
+    </div>
+  <div class="page-scroll page-scroll--padded">
+      <div id="assessment-options" class="flex flex-col gap-12"></div>
+    </div>
+    <footer class="assessment-footer">
+      <button class="btn btn--outline flex-1" id="assessment-prev" disabled>Anterior</button>
+      <button class="btn btn--primary flex-1" id="assessment-next">Següent</button>
+    </footer>
+  </section>
+</div>
+
+  <script src="../js/state.js"></script>
+  <script src="../js/shell.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>

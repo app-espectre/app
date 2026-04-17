@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#d1eaff">
+  <title>ESPECTRE – Configuració</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body data-page="settings">
+<div id="app">
+  <section class="page active app" id="page-settings">
+    <div class="page-header"><h1 class="page-header__title">Configuració</h1></div>
+    <div class="page-scroll">
+      
+      <div class="settings-section">
+        <div class="settings-section__title">Compte</div>
+        <div class="settings-row">
+          <div class="avatar avatar--md">AM</div>
+          <div class="settings-row__body"><div class="settings-row__title">Ana Molina</div><div class="settings-row__sub">anamolina@gmail.com</div></div>
+          <button class="btn btn--outline btn--sm btn--auto" onclick="goTo('profile-edit')">Edita</button>
+        </div>
+  <div class="settings-row settings-row--clickable" onclick="goTo('profile-edit')">
+          <div class="settings-row__body"><div class="settings-row__title">Editar perfil de la Martina</div></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-border)" stroke-width="2" stroke-linecap="round"><polyline points="9,18 15,12 9,6"/></svg>
+        </div>
+      </div>  
+      
+      <div class="settings-section">
+        <div class="settings-section__title">Notificacions</div>
+        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Notificacions push</div></div><label class="toggle"><input type="checkbox" checked><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Recordatoris de cites</div></div><label class="toggle"><input type="checkbox" checked><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Consell diari</div></div><label class="toggle"><input type="checkbox" checked><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Activitat comunitat</div></div><label class="toggle"><input type="checkbox"><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Recordatoris de seguiment</div></div><label class="toggle"><input type="checkbox" checked><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section__title">Accessibilitat</div>
+  <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Mode fosc</div></div><label class="toggle"><input type="checkbox" id="toggle-dark"><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Text gran</div></div><label class="toggle"><input type="checkbox"><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+      </div>
+  <button class="btn btn--danger mt-8" id="btn-logout-settings">Tancar sessió</button>
+  <button class="btn btn--danger mt-8" id="btn-delete-account" onclick="goTo('welcome')">Eliminar compte</button>
+    </div>
+  </section>
+</div>
+
+  <script src="../js/state.js"></script>
+  <script src="../js/shell.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>
