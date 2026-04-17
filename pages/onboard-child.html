@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#d1eaff">
+  <title>ESPECTRE – Dades de l'infant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="onboard-child">
+<div id="app">
+  <section class="page active" id="page-onboard-child">
+    <div class="auth-page-outer">
+      <div class="auth-header">
+        <div class="auth-header__title">Parla'ns del teu fill/a</div>
+        <div class="auth-header__sub">Aquesta informació és confidencial i només la veuràs tu.</div>
+        <div class="circulo" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    <div class="auth-content">
+      <div class="flex flex-col gap-16">
+        <div class="field"><label class="field__label" for="child-name">Nom de l'infant</label><input class="field__input" id="child-name" type="text" placeholder="Martina" value="Martina"></div>
+        <div class="field"><label class="field__label" for="child-birth">Data de neixement</label><input class="field__input" id="child-birth" type="date" value="2018-03-15"></div>
+        <div class="field">
+          <label class="field__label">Gènere</label>
+          <div class="gender-options">
+            <div class="option-chip gender-chip selected">Nena</div>
+            <div class="option-chip gender-chip">Nen</div>
+            <div class="option-chip gender-chip">Prefereixo no dir</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="child-course">Curs escolar (opcional)</label>
+          <select class="field__select" id="child-course">
+            <option>Selecciona...</option><option>P3</option><option>P4</option><option>P5</option>
+            <option selected>1r de primària</option><option>2n de primària</option><option>3r de primària</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn--primary" id="btn-onboard-child">Continua</button>
+    </div>
+  </section>
+</div>
+
+  <script src="../js/state.js"></script>
+  <script src="../js/shell.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>
