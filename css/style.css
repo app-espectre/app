@@ -439,7 +439,50 @@ img, svg { display: block; max-width: 100%; }
 
 /* Progress bar */
 .progress-bar { height: 10px; border-radius: var(--r-full); background: var(--color-bg-header); overflow: hidden; }
-.progress-bar__fill { height: 100%; border-radius: var(--r-full); background: var(--color-accent); transition: width .5s ease; }
+.progress-bar__fill {
+  position: relative;
+  height: 100%;
+  border-radius: var(--r-full);
+  background: var(--color-accent);
+  transition: width .5s ease;
+  transform-origin: left;
+  transform: scaleX(0); /* start collapsed so the animation can grow */
+}
+
+/* Animated load effect for the progress fill.
+   Applied on pages that should show the loading animation by using the
+   body[data-page="report-done"] selector (or add the class
+   .progress-bar--animated to the .progress-bar element). */
+body[data-page="report-done"] .progress-bar__fill,
+.progress-bar--animated .progress-bar__fill {
+  animation: progress-fill 2000ms cubic-bezier(.2,.9,.3,1) forwards;
+}
+
+/* subtle shimmer that moves across the fill once the bar expands */
+.progress-bar__fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 100%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+body[data-page="report-done"] .progress-bar__fill::after,
+.progress-bar--animated .progress-bar__fill::after {
+  animation: progress-shimmer 950ms linear 280ms forwards;
+}
+
+@keyframes progress-fill {
+  0% { transform: scaleX(0); }
+  60% { transform: scaleX(1.02); } /* slight overshoot for a natural feel */
+  100% { transform: scaleX(1); }
+}
+
+@keyframes progress-shimmer {
+  0% { transform: translateX(-120%); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateX(120%); opacity: 0; }
+}
 
 /* Toggle switch */
 .toggle {
@@ -600,7 +643,6 @@ img, svg { display: block; max-width: 100%; }
   cursor: pointer;
   transition: box-shadow var(--transition);
 }
-.pro-card:hover { box-shadow: var(--shadow-elevated); }
 .pro-card__body { flex: 1; min-width: 0; }
 .pro-card__name { font-size: var(--fs-base); font-weight: var(--fw-bold); color: var(--color-primary); }
 .pro-card__spec { font-size: var(--fs-sm); color: var(--color-secondary); margin-top: var(--sp-2); }
@@ -705,8 +747,9 @@ img, svg { display: block; max-width: 100%; }
 .filter-row { display: flex; gap: var(--sp-8); overflow-x: auto; padding-bottom: var(--sp-4); scrollbar-width: none; }
 .filter-row::-webkit-scrollbar { display: none; }
 .filter-chip {
-  display: flex; align-items: center; gap: var(--sp-6);
-  padding: var(--sp-6) var(--sp-14);
+  display: inline-flex; /* shrink to content */
+  align-items: center; gap: var(--sp-6);
+  padding: var(--sp-6) var(--sp-12);
   border: 1.5px solid var(--color-border);
   border-radius: var(--r-full);
   font-size: var(--fs-sm); font-weight: var(--fw-semi); color: var(--color-primary);
@@ -714,7 +757,25 @@ img, svg { display: block; max-width: 100%; }
   cursor: pointer; transition: background var(--transition), border-color var(--transition);
 }
 .filter-chip:hover { background: var(--color-bg-header); }
-.filter-chip select { border: none; background: none; font-size: var(--fs-sm); font-weight: var(--fw-semi); color: var(--color-primary); outline: none; cursor: pointer; }
+
+/* Let the select size itself to the selected option */
+.filter-chip select {
+  width: auto;
+  min-width: 0;
+  padding: 0 28px 0 0; /* reserve space for custom arrow */
+  background: transparent;
+  border: none;
+  appearance: none; -webkit-appearance: none;
+  font: inherit; color: inherit; cursor: pointer; outline: none;
+  font-weight: var(--fw-regular); font-size: var(--fs-sm);
+}
+.filter-chip select::-ms-expand { display: none; }
+/* custom arrow kept as background so appearance:none doesn't remove it */
+.filter-chip select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a7fa0' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+}
 
 /* ── UTILITIES ────────────────────────────────────────────── */
 .flex { display: flex; }
@@ -780,7 +841,7 @@ img, svg { display: block; max-width: 100%; }
 .opacity-70 { opacity: .7; }
 .btn--whatsapp { color: #25D366; border-color: #25D366; }
 .text-left { text-align: left; }
-.emoji-large { font-size: 36px; }
+.emoji-large { font-size: 48px; }
 .page-scroll--padded { padding: var(--sp-20) var(--sp-24); }
 .avatar--accent { background: var(--color-accent); }
 /* Extra helpers used by moved inline styles */

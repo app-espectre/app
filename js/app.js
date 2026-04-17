@@ -349,15 +349,15 @@ function initReminderAdd() {
 
 function initProfessionals() {
   const pros = [
-    { initials: 'MP', name: 'Dra. Marta Puig', spec: 'Psicòloga especialista TEA', location: 'Barcelona · Presencial + Online', rating: 4.9, reviews: 127, color: '#508bbf' },
-    { initials: 'MF', name: 'Marc Ferrer', spec: 'Logopeda · Comm. augmentativa', location: 'Gràcia, BCN · Presencial', rating: 4.8, reviews: 89, color: '#508bbf' },
-    { initials: 'LS', name: 'Laura Sánchez', spec: 'Terapeuta ocupacional', location: 'Sarrià, BCN · Presencial', rating: 4.7, reviews: 54, color: '#508bbf' },
+    { initials: 'MP', name: 'Dra. Marta Puig', spec: 'Psicòloga especialista TEA', location: 'Barcelona · Presencial + Online', rating: 4.9, reviews: 227, color: '#508bbf' },
+    { initials: 'MF', name: 'Marc Ferrer', spec: 'Logopeda · Comm. augmentativa', location: 'Gràcia, BCN · Presencial', rating: 4.8, reviews: 189, color: '#508bbf' },
+    { initials: 'LS', name: 'Laura Sánchez', spec: 'Terapeuta ocupacional', location: 'Sarrià, BCN · Presencial', rating: 4.7, reviews: 117, color: '#508bbf' },
     { initials: 'PB', name: 'Pau Bosch', spec: 'Psiquiatre infantil TEA', location: 'L\'Eixample · Online + Presencial', rating: 4.9, reviews: 203, color: '#508bbf' },
   ];
   const list = document.getElementById('professionals-list');
   if (!list) return;
   list.innerHTML = pros.map(p => `
-    <article class="pro-card" onclick="goTo('professional-detail')">
+    <article class="pro-card">
       <div class="avatar avatar--lg" style="background:${p.color}">${p.initials}</div>
       <div class="pro-card__body">
         <div class="pro-card__name">${p.name}</div>
@@ -365,7 +365,7 @@ function initProfessionals() {
         <div class="pro-card__location">📍 ${p.location}</div>
         <div class="pro-card__rating mt-8">
           <span class="star">★</span>${p.rating} <span class="text-xs text-secondary">(${p.reviews} ressenyes)</span>
-          <button class="btn btn--outline btn--sm" style="width:auto;margin-left:12px" onclick="event.stopPropagation()">Contactar</button>
+          <button class="btn btn--outline btn--sm" style="width:auto;margin-left:25px" onclick="event.stopPropagation();goTo('professional-detail')">Saber més</button>
         </div>
       </div>
     </article>
@@ -397,12 +397,87 @@ function initProfessionals() {
     searchInput.addEventListener('input', applyFilter);
     searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') { searchInput.value = ''; applyFilter(); searchInput.blur(); } });
   }
+  
+  // Autosize filter-chip selects so the chip width matches the selected option text.
+  const autosizeSelect = (sel) => {
+    if (!sel) return;
+    const span = document.createElement('span');
+    span.style.position = 'absolute';
+    span.style.visibility = 'hidden';
+    span.style.whiteSpace = 'nowrap';
+    // inherit font styles from the select
+    const cs = window.getComputedStyle(sel);
+    span.style.font = cs.font || `${cs.fontSize} ${cs.fontFamily}`;
+    span.textContent = sel.options[sel.selectedIndex]?.text || sel.value || '';
+    document.body.appendChild(span);
+    const w = Math.ceil(span.getBoundingClientRect().width);
+    document.body.removeChild(span);
+    // add some padding space to account for arrow and breathing room
+    sel.style.width = (w + 34) + 'px';
+  };
+
+  // Find selects inside filter-chip and wire change event
+  const chipSelects = Array.from(document.querySelectorAll('.filter-chip select'));
+  chipSelects.forEach(s => {
+    autosizeSelect(s);
+    s.addEventListener('change', () => autosizeSelect(s));
+    // also handle when options might change dynamically
+    s.addEventListener('keyup', () => autosizeSelect(s));
+  });
 }
 
 function initCommunity() {
   renderPosts();
   document.getElementById('fab')?.addEventListener('click', () => goTo('community-publish'));
-  document.getElementById('btn-community-search')?.addEventListener('click', () => goTo('community-search'));
+
+  // Make the search-bar in community.html functional: it filters both recent discussions and groups.
+  const searchInput = document.querySelector('#page-community .search-bar input');
+  const postsContainer = document.getElementById('community-posts');
+  // collect group-card elements directly (more robust than selecting a parent container)
+  const groupCards = Array.from(document.querySelectorAll('#page-community .group-card'));
+
+  const pageScroll = document.querySelector('#page-community .page-scroll');
+  const noMsg = document.createElement('p');
+  noMsg.className = 'text-sm text-secondary mt-12';
+  noMsg.textContent = 'Cap resultat.';
+
+  const applyFilter = () => {
+    const q = (searchInput?.value || '').trim().toLowerCase();
+    let visiblePosts = 0;
+    let visibleGroups = 0;
+
+    if (postsContainer) {
+      const posts = Array.from(postsContainer.querySelectorAll('.post'));
+      posts.forEach(p => {
+        const author = p.querySelector('.post__author')?.textContent || '';
+        const text = p.querySelector('.post__text')?.textContent || '';
+        const meta = `${author} ${text}`.toLowerCase();
+        if (!q || meta.includes(q)) { p.style.display = ''; visiblePosts++; }
+        else p.style.display = 'none';
+      });
+    }
+
+    if (groupCards && groupCards.length) {
+      groupCards.forEach(g => {
+        const name = g.querySelector('.group-card__name')?.textContent || '';
+        const preview = g.querySelector('.group-card__preview')?.textContent || '';
+        const members = g.querySelector('.group-card__members')?.textContent || '';
+        const txt = `${name} ${preview} ${members}`.toLowerCase();
+        if (!q || txt.includes(q)) { g.style.display = ''; visibleGroups++; }
+        else g.style.display = 'none';
+      });
+    }
+
+    // show no-results message if nothing visible
+    const anyVisible = (visiblePosts + visibleGroups) > 0;
+    if (!anyVisible && pageScroll && !pageScroll.contains(noMsg)) pageScroll.appendChild(noMsg);
+    if (anyVisible && pageScroll && pageScroll.contains(noMsg)) noMsg.remove();
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener('input', applyFilter);
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') { searchInput.value = ''; applyFilter(); searchInput.blur(); } });
+  }
 }
 
 function renderPosts() {
