@@ -1378,8 +1378,8 @@ body[data-page="report-done"] .progress-bar__fill::after,
   align-items: center;
 }
 .side-menu__icon {
-  width: 15px;
-  height: 15px;
+  width: 1.5rem;
+  height: 1.5rem;
   object-fit: contain;
   display: inline-block;
   vertical-align: middle;
