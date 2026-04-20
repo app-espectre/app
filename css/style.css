@@ -230,15 +230,7 @@ img, svg { display: block; max-width: 100%; }
   transition: color var(--transition);
   position: relative;
 }
-.nav-btn.active { color: var(--color-accent); }
-.nav-btn.active::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 20%; right: 20%;
-  height: 2px;
-  background: var(--color-accent);
-  border-radius: var(--r-full);
-}
+.nav-btn.active { background: var(--color-border); color: var(--color-primary); }
 .nav-btn svg { width: 22px; height: 22px; }
 .nav-btn span {
   font-size: var(--fs-xs);
@@ -269,14 +261,9 @@ img, svg { display: block; max-width: 100%; }
   gap: var(--sp-12);
 }
 .side-menu__avatar {
-  width: 48px; height: 48px;
-  border-radius: var(--r-full);
-  background: var(--color-primary);
-  color: var(--color-white);
-  font-size: var(--fs-md);
-  font-weight: var(--fw-bold);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  width: 50px; height: 43px;
+  background-image: url(../img/Logoazul.svg);
+  background-size: cover;
 }
 .side-menu__user { overflow: hidden; }
 .side-menu__name {
@@ -1375,3 +1362,16 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .mini-calendar__day.has-event::after { content: ''; display: block; width: 4px; height: 4px; border-radius: var(--r-full); background: var(--color-accent); position: absolute; bottom: 2px; }
 .mini-calendar__day { position: relative; cursor: pointer; }
 .mini-calendar__day:hover { background: var(--color-bg-header); }
+.bottom-nav__icon {
+  width: 18px;          /* cambia a 16px/14px si lo prefieres */
+  height: 18px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* opcional: ajustar el espaciado del botón para que siga viéndose equilibrado */
+.nav-btn {
+  gap: 6px;
+  padding: 8px 10px;
+  align-items: center;
+}
