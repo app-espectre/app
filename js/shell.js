@@ -27,8 +27,12 @@ function renderShell(currentPageId) {
     'community': 'community', 'community-search': 'community',
     'community-chat': 'community', 'community-publish': 'community',
     'reminders': 'reminders', 'reminder-add': 'reminders',
+    'info': 'info',
+    'professionals': 'professionals', 'professional-detail': 'professionals',
     'profile-view': 'profile-view', 'profile-edit': 'profile-view',
     'profile-note': 'profile-view', 'profile-skill': 'profile-view',
+    'report-gen': 'report-gen', 'report-done': 'report-gen',
+    'settings': 'settings',
   };
   const activeNav = navMap[currentPageId] || '';
 
@@ -54,7 +58,7 @@ function renderShell(currentPageId) {
   const navItems = [
     { id: 'home',         img: 'home.png',         label: 'Inici' },
     { id: 'profile-view', img: 'perfil.png',      label: 'Perfil' },
-    { id: 'info',     img: 'recursos.png',     label: 'Recursos' },
+    { id: 'info',         img: 'recursos.png',     label: 'Recursos' },
     { id: 'community',    img: 'comunidad.png',    label: 'Comunitat' },
     { id: 'reminders',    img: 'recordatoris.png',    label: 'Recordatoris' },
   ];

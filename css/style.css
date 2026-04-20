@@ -558,6 +558,8 @@ body[data-page="report-done"] .progress-bar__fill::after,
   margin-top: var(--sp-4);
 }
 
+
+
 /* Alert banner */
 .alert {
   border-radius: var(--r-md);
@@ -1374,4 +1376,12 @@ body[data-page="report-done"] .progress-bar__fill::after,
   gap: 6px;
   padding: 8px 10px;
   align-items: center;
+}
+.side-menu__icon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5rem;
 }
