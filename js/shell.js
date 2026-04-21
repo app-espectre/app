@@ -56,11 +56,11 @@ function renderShell(currentPageId) {
 
   // usa img filenames en lugar de SVG; ajusta los nombres a los ficheros que tens en app/img
   const navItems = [
-    { id: 'home',         img: 'home.png',         label: 'Inici' },
-    { id: 'profile-view', img: 'perfil.png',      label: 'Perfil' },
-    { id: 'info',         img: 'recursos.png',     label: 'Recursos' },
-    { id: 'community',    img: 'comunidad.png',    label: 'Comunitat' },
-    { id: 'reminders',    img: 'recordatoris.png',    label: 'Recordatoris' },
+    { id: 'home',         img: 'Home.png',         label: 'Inici' },
+    { id: 'profile-view', img: 'Perfil.png',      label: 'Perfil' },
+    { id: 'info',         img: 'Recursos.png',     label: 'Recursos' },
+    { id: 'community',    img: 'Comunitat.png',    label: 'Comunitat' },
+    { id: 'reminders',    img: 'Recordatoris.png',    label: 'Recordatoris' },
   ];
 
   bottomNav.innerHTML = `
@@ -82,17 +82,17 @@ function renderShell(currentPageId) {
 
   // build side menu items: use 'page' for navigation target and 'img' for image filename
   const sideItems = [
-    { page: 'home',           img: 'home.png',           label: 'Inici' },
-    { page: 'profile-view',   img: 'perfil.png',        label: 'Perfil de la Martina' },
+    { page: 'home',           img: 'Home.png',           label: 'Inici' },
+    { page: 'profile-view',   img: 'Perfil.png',        label: 'Perfil de la Martina' },
     { page: '--divider--',    img: '',                  label: '' },
-    { page: 'progress',       img: 'progresos.png',       label: 'Progrés' },
-    { page: 'reminders',      img: 'recordatoris.png',      label: 'Recordatoris' },
-    { page: 'info',           img: 'recursos.png',           label: 'Recursos' },
-    { page: 'professionals',  img: 'profesionales.png',  label: 'Professionals' },
-    { page: 'community',      img: 'comunidad.png',      label: 'Comunitat' },
-    { page: 'report-gen',     img: 'informe.png',     label: 'Generar informe' },
+    { page: 'progress',       img: 'Progresos.png',       label: 'Progrés' },
+    { page: 'reminders',      img: 'Recordatoris.png',      label: 'Recordatoris' },
+    { page: 'info',           img: 'Recursos.png',           label: 'Recursos' },
+    { page: 'professionals',  img: 'Professionals.png',  label: 'Professionals' },
+    { page: 'community',      img: 'Comunitat.png',      label: 'Comunitat' },
+    { page: 'report-gen',     img: 'Informe.png',     label: 'Generar informe' },
     { page: '--divider--',    img: '',                  label: '' },
-    { page: 'settings',       img: 'configuracion.png',       label: 'Configuració' },
+    { page: 'settings',       img: 'Configuracion.png',       label: 'Configuració' },
   ];
 
   sideMenu.innerHTML = `
