@@ -89,7 +89,7 @@ img, svg { display: block; max-width: 100%; }
 
   /* Layout */
   --top-bar-h:    58px;
-  --bottom-nav-h: 64px;
+  --bottom-nav-h: 80px;
   --side-menu-w:  280px;
   --page-pad:     var(--sp-24);
 
