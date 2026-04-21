@@ -1,6 +1,3 @@
-font-family: new-zen, sans-serif;
-font-weight: 100;
-font-style: normal;
 
 /* ============================================================
    ESPECTRE — style.css
@@ -98,6 +95,12 @@ img, svg { display: block; max-width: 100%; }
 
   /* Transitions */
   --transition: 0.22s ease;
+
+
+  font-family: new-zen, sans-serif;
+  font-weight: 100;
+  font-style: normal;
+
 }
 
 /* ── DARK THEME OVERRIDES ───────────────────────────────── */

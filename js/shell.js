@@ -59,7 +59,7 @@ function renderShell(currentPageId) {
     { id: 'home',         img: 'Home.png',         label: 'Inici' },
     { id: 'profile-view', img: 'Perfil.png',      label: 'Perfil' },
     { id: 'info',         img: 'Recursos.png',     label: 'Recursos' },
-    { id: 'community',    img: 'Comunitat.png',    label: 'Comunitat' },
+    { id: 'community',    img: 'Comunidad.png',    label: 'Comunitat' },
     { id: 'reminders',    img: 'Recordatoris.png',    label: 'Recordatoris' },
   ];
 
@@ -88,8 +88,8 @@ function renderShell(currentPageId) {
     { page: 'progress',       img: 'Progresos.png',       label: 'Progrés' },
     { page: 'reminders',      img: 'Recordatoris.png',      label: 'Recordatoris' },
     { page: 'info',           img: 'Recursos.png',           label: 'Recursos' },
-    { page: 'professionals',  img: 'Professionals.png',  label: 'Professionals' },
-    { page: 'community',      img: 'Comunitat.png',      label: 'Comunitat' },
+    { page: 'professionals',  img: 'Profesionales.png',  label: 'Professionals' },
+    { page: 'community',      img: 'Comunidad.png',      label: 'Comunitat' },
     { page: 'report-gen',     img: 'Informe.png',     label: 'Generar informe' },
     { page: '--divider--',    img: '',                  label: '' },
     { page: 'settings',       img: 'Configuracion.png',       label: 'Configuració' },
