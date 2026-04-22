@@ -43,14 +43,14 @@ img, svg { display: block; max-width: 100%; }
   --font-display: new-zen, sans-serif;
 
   /* Tamaños de fuente */
-  --fs-xs:   11px;
-  --fs-sm:   13px;
-  --fs-base: 15px;
-  --fs-md:   17px;
-  --fs-lg:   20px;
-  --fs-xl:   24px;
-  --fs-2xl:  28px;
-  --fs-3xl:  36px;
+  --fs-xs:   13px;
+  --fs-sm:   15px;
+  --fs-base: 17px;
+  --fs-md:   19px;
+  --fs-lg:   22px;
+  --fs-xl:   26px;
+  --fs-2xl:  29px;
+  --fs-3xl:  38px;
 
   /* Grosores */
   --fw-regular: 400;
