@@ -1,4 +1,3 @@
-
 /* ============================================================
    ESPECTRE — style.css
    Seccions: reset · variables · base · layout · components · utilities · pàgines
@@ -16,7 +15,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* ── VARIABLES ───────────────────────────────────────────── */
 :root {
-  /* Colors */
+  /* Colores */
   --color-primary:   #023059;
   --color-secondary: #5a7fa0;
   --color-accent:    #508bbf;
@@ -34,16 +33,16 @@ img, svg { display: block; max-width: 100%; }
   --color-tag-green: #00943a;
   --color-card-bg:   #ffffff;
 
-  /* Semantic aliases */
+  /* Alias semánticos */
   --bg:          var(--color-bg);
   --txt-primary: var(--color-primary);
   --txt-secondary: var(--color-secondary);
 
-  /* Typography */
+  /* Tipografía */
   --font-body: new-zen, sans-serif;
   --font-display: new-zen, sans-serif;
 
-  /* Font sizes */
+  /* Tamaños de fuente */
   --fs-xs:   11px;
   --fs-sm:   13px;
   --fs-base: 15px;
@@ -53,14 +52,14 @@ img, svg { display: block; max-width: 100%; }
   --fs-2xl:  28px;
   --fs-3xl:  36px;
 
-  /* Font weights */
+  /* Grosores */
   --fw-regular: 400;
   --fw-medium:  500;
   --fw-semi:    600;
   --fw-bold:    700;
   --fw-black:   800;
 
-  /* Spacing */
+  /* Espaciados */
   --sp-2:  2px;
   --sp-4:  4px;
   --sp-6:  6px;
@@ -76,14 +75,14 @@ img, svg { display: block; max-width: 100%; }
   --sp-48: 48px;
   --sp-64: 64px;
 
-  /* Border radius */
+  /* Radios */
   --r-sm:   8px;
   --r-md:   12px;
   --r-lg:   16px;
   --r-xl:   20px;
   --r-full: 9999px;
 
-  /* Shadows */
+  /* Sombras */
   --shadow-card: 0 2px 12px rgba(2,48,89,.08);
   --shadow-elevated: 0 4px 20px rgba(2,48,89,.12);
 
@@ -93,7 +92,7 @@ img, svg { display: block; max-width: 100%; }
   --side-menu-w:  280px;
   --page-pad:     var(--sp-24);
 
-  /* Transitions */
+  /* Transiciones */
   --transition: 0.22s ease;
 
 
@@ -130,7 +129,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* ── LAYOUT ──────────────────────────────────────────────── */
 
-/* Pages */
+/* Páginas */
 .page {
   display: none;
   flex-direction: column;
@@ -152,7 +151,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .page-scroll--no-pad { padding: 0; }
 
-/* Top bar */
+/* Barra superior */
 .top-bar {
   display: none;
   align-items: center;
@@ -174,6 +173,11 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: -0.5px;
 }
 
+.top-bar__title{
+  font-weight: var(--fw-bold);
+}
+
+/* Hamburguesa (icono) */
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -190,6 +194,7 @@ img, svg { display: block; max-width: 100%; }
   transition: var(--transition);
 }
 
+/* Avatar botón */
 .avatar-btn {
   width: 36px;
   height: 36px;
@@ -203,7 +208,7 @@ img, svg { display: block; max-width: 100%; }
   justify-content: center;
 }
 
-/* Bottom nav */
+/* Navegación inferior */
 .bottom-nav {
   display: none;
   position: fixed;
@@ -241,7 +246,7 @@ img, svg { display: block; max-width: 100%; }
   line-height: 1;
 }
 
-/* Side menu */
+/* Menú lateral */
 .side-menu {
   position: fixed;
   top: 0; left: 0; bottom: 0;
@@ -297,7 +302,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .side-menu__item:hover, .side-menu__item.active {
   background: var(--color-bg-header);
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 .side-menu__item svg { width: 20px; height: 20px; flex-shrink: 0; }
 .side-menu__divider {
@@ -307,7 +312,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .side-menu__footer { padding: var(--sp-16) var(--sp-24) calc(var(--sp-16) + env(safe-area-inset-bottom, 0px)); }
 
-/* Overlay */
+/* Superposición (overlay) */
 .overlay {
   display: none;
   position: fixed;
@@ -320,9 +325,9 @@ img, svg { display: block; max-width: 100%; }
 .overlay.visible { display: block; }
 .overlay.active { opacity: 1; }
 
-/* ── COMPONENTS ──────────────────────────────────────────── */
+/* ── COMPONENTES ─────────────────────────────────────────── */
 
-/* Buttons */
+/* Botones */
 .btn {
   display: flex;
   align-items: center;
@@ -353,6 +358,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex; align-items: center; justify-content: center;
 }
 
+/* Campos */
 .field { display: flex; flex-direction: column; gap: var(--sp-6); }
 .field__label {
   font-size: var(--fs-sm);
@@ -379,7 +385,7 @@ img, svg { display: block; max-width: 100%; }
 
 .field__char-count { font-size: var(--fs-xs); color: var(--color-secondary); text-align: right; }
 
-/* Card */
+/* Tarjeta (card) */
 .card {
   background: var(--color-card-bg);
   border: 1.5px solid var(--color-border);
@@ -391,7 +397,7 @@ img, svg { display: block; max-width: 100%; }
 .card--clickable:hover { box-shadow: var(--shadow-elevated); }
 .card--clickable:active { transform: scale(.99); }
 
-/* Section heading */
+/* Título de sección */
 .section-title {
   font-size: var(--fs-md);
   font-weight: var(--fw-bold);
@@ -399,7 +405,7 @@ img, svg { display: block; max-width: 100%; }
   margin-bottom: var(--sp-12);
 }
 
-/* Badge / Tag */
+/* Etiqueta / Tag */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -427,7 +433,7 @@ img, svg { display: block; max-width: 100%; }
 .avatar--lg { width: 56px; height: 56px; font-size: var(--fs-md); }
 .avatar--xl { width: 72px; height: 72px; font-size: var(--fs-lg); }
 
-/* Progress bar */
+/* Barra de progreso */
 .progress-bar { height: 10px; border-radius: var(--r-full); background: var(--color-bg-header); overflow: hidden; }
 .progress-bar__fill {
   position: relative;
@@ -436,19 +442,16 @@ img, svg { display: block; max-width: 100%; }
   background: var(--color-accent);
   transition: width .5s ease;
   transform-origin: left;
-  transform: scaleX(0); /* start collapsed so the animation can grow */
+  transform: scaleX(0); /* comienza colapsada para animar el crecimiento */
 }
 
-/* Animated load effect for the progress fill.
-   Applied on pages that should show the loading animation by using the
-   body[data-page="report-done"] selector (or add the class
-   .progress-bar--animated to the .progress-bar element). */
+/* Efecto animado para la carga de la barra */
 body[data-page="report-done"] .progress-bar__fill,
 .progress-bar--animated .progress-bar__fill {
   animation: progress-fill 2000ms cubic-bezier(.2,.9,.3,1) forwards;
 }
 
-/* subtle shimmer that moves across the fill once the bar expands */
+/* Brillo sutil en la barra */
 .progress-bar__fill::after {
   content: '';
   position: absolute;
@@ -464,7 +467,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 @keyframes progress-fill {
   0% { transform: scaleX(0); }
-  60% { transform: scaleX(1.02); } /* slight overshoot for a natural feel */
+  60% { transform: scaleX(1.02); } /* ligero overshoot */
   100% { transform: scaleX(1); }
 }
 
@@ -474,7 +477,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   100% { transform: translateX(120%); opacity: 0; }
 }
 
-/* Toggle switch */
+/* Interruptor (toggle) */
 .toggle {
   position: relative;
   width: 48px; height: 26px; flex-shrink: 0;
@@ -499,7 +502,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 .toggle input:checked ~ .toggle__thumb { transform: translateX(22px); }
 
-/* Appointment / reminder card */
+/* Tarjeta de cita / recordatorio */
 .appt-card {
   background: var(--color-card-bg);
   border: 1.5px solid var(--color-border);
@@ -544,7 +547,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .appt-card__title { font-size: var(--fs-base); font-weight: var(--fw-semi); color: var(--color-primary); }
 .appt-card__time { font-size: var(--fs-sm); color: var(--color-secondary); }
 
-/* Page header */
+/* Cabecera de página */
 .page-header {
   background: var(--color-bg-header);
   padding: var(--sp-16) var(--sp-24) var(--sp-20);
@@ -561,9 +564,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   margin-top: var(--sp-4);
 }
 
-
-
-/* Alert banner */
+/* Alertas */
 .alert {
   border-radius: var(--r-md);
   padding: var(--sp-12) var(--sp-16);
@@ -578,11 +579,9 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .alert__title { font-size: var(--fs-sm); font-weight: var(--fw-bold); }
 .alert__text { font-size: var(--fs-sm); color: var(--color-primary); margin-top: var(--sp-2); }
 
-/* Yellow variant for reminders */
 .alert--yellow { background: rgba(255,177,0,.15); border: 1.5px solid var(--color-yellow); color: var(--color-yellow); }
 
-
-/* Skill area row */
+/* Filas de habilidades (skill row) */
 .skill-row {
   display: flex; flex-direction: column; gap: var(--sp-8);
   padding: var(--sp-16);
@@ -597,7 +596,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .skill-row__name { font-size: var(--fs-base); font-weight: var(--fw-semi); color: var(--color-primary); }
 .skill-row__pct { font-size: var(--fs-base); font-weight: var(--fw-bold); color: var(--color-accent); }
 
-/* Radio option (assessment) */
+/* Opción radio (assessment) */
 .radio-option {
   display: flex;
   flex-direction: column;
@@ -613,7 +612,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .radio-option__main { font-size: var(--fs-base); font-weight: var(--fw-semi); color: var(--color-primary); }
 .radio-option__sub { font-size: var(--fs-sm); color: var(--color-secondary); }
 
-/* Assessment progress bar */
+/* Barra de progreso de assessment */
 .assessment-progress { display: flex; gap: var(--sp-4); padding: var(--sp-16) var(--sp-24) 0; }
 .assessment-progress__step {
   flex: 1; height: 4px; border-radius: var(--r-full);
@@ -623,7 +622,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .assessment-progress__step.done { background: var(--color-accent); }
 .assessment-progress__step.active { background: var(--color-accent); opacity: .5; }
 
-/* Professional card */
+/* Tarjeta de profesional */
 .pro-card {
   background: var(--color-card-bg);
   border: 1.5px solid var(--color-border);
@@ -646,7 +645,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .pro-card__actions { display: flex; gap: var(--sp-8); margin-top: var(--sp-10); }
 .star { color: var(--color-yellow); }
 
-/* Community post */
+/* Post de la comunidad */
 .post {
   background: var(--color-card-bg);
   border: 1.5px solid var(--color-border);
@@ -670,7 +669,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .post__action.liked { color: var(--color-red); }
 .post__action svg { width: 16px; height: 16px; }
 
-/* Chat bubble */
+/* Burbuja de chat */
 .chat-bubble {
   max-width: 72%;
   padding: var(--sp-10) var(--sp-14);
@@ -699,7 +698,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .chat-bubble--in .chat-bubble__time { color: var(--color-secondary); text-align: left; }
 .chat-bubble--out .chat-bubble__time { color: rgba(255,255,255,.7); }
 
-/* Tab bar (within page) */
+/* Barra de pestañas dentro de la página */
 .tab-bar { display: flex; border-bottom: 1.5px solid var(--color-border); background: var(--color-white); }
 .tab-btn {
   flex: 1; padding: var(--sp-14, 14px) var(--sp-8);
@@ -711,7 +710,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 .tab-btn.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
 
-/* Diary entry */
+/* Entrada de diario */
 .diary-entry { border-left: 3px solid var(--color-border); padding-left: var(--sp-12); }
 .diary-entry--achievement { border-left-color: var(--color-green); }
 .diary-entry--difficulty { border-left-color: var(--color-red); }
@@ -720,7 +719,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .diary-entry__text { font-size: var(--fs-sm); color: var(--color-primary); margin-top: var(--sp-4); line-height: 1.5; }
 .diary-entry__type { display: inline-block; margin-top: var(--sp-6); }
 
-/* Search bar */
+/* Barra de búsqueda */
 .search-bar {
   display: flex; align-items: center; gap: var(--sp-10);
   background: var(--color-white);
@@ -735,11 +734,11 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 .search-bar input::placeholder { color: var(--color-border); }
 
-/* Filter row */
+/* Fila de filtros */
 .filter-row { display: flex; gap: var(--sp-8); overflow-x: auto; padding-bottom: var(--sp-4); scrollbar-width: none; }
 .filter-row::-webkit-scrollbar { display: none; }
 .filter-chip {
-  display: inline-flex; /* shrink to content */
+  display: inline-flex; /* se ajusta al contenido */
   align-items: center; gap: var(--sp-6);
   padding: var(--sp-6) var(--sp-12);
   border: 1.5px solid var(--color-border);
@@ -750,11 +749,11 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 .filter-chip:hover { background: var(--color-bg-header); }
 
-/* Let the select size itself to the selected option */
+/* El select dentro del chip se adapta al texto seleccionado */
 .filter-chip select {
   width: auto;
   min-width: 0;
-  padding: 0 28px 0 0; /* reserve space for custom arrow */
+  padding: 0 28px 0 0; /* reservar espacio para la flecha */
   background: transparent;
   border: none;
   appearance: none; -webkit-appearance: none;
@@ -762,14 +761,13 @@ body[data-page="report-done"] .progress-bar__fill::after,
   font-weight: var(--fw-regular); font-size: var(--fs-sm);
 }
 .filter-chip select::-ms-expand { display: none; }
-/* custom arrow kept as background so appearance:none doesn't remove it */
 .filter-chip select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a7fa0' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 6px center;
 }
 
-/* ── UTILITIES ────────────────────────────────────────────── */
+/* ── UTILIDADES ─────────────────────────────────────────── */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .items-center { align-items: center; }
@@ -814,7 +812,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .hidden { display: none !important; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 
-/* Helper classes to replace inline styles in HTML */
+/* Helpers y ajustes */
 .page.app {
   top: var(--top-bar-h);
   bottom: var(--bottom-nav-h);
@@ -836,7 +834,6 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .emoji-large { font-size: 48px; }
 .page-scroll--padded { padding: var(--sp-20) var(--sp-24); }
 .avatar--accent { background: var(--color-accent); }
-/* Extra helpers used by moved inline styles */
 .avatar--purple { background: #9b59b6; }
 .avatar--green { background: var(--color-green); }
 .page-header--row { display:flex; align-items:center; justify-content:space-between; flex-direction:row; }
@@ -844,7 +841,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .lead { line-height: 1.6; }
 .mb-20 { margin-bottom: var(--sp-20); }
 
-/* Splash / loading small page */
+/* Splash / carga */
 .splash-center { display:flex; align-items:center; justify-content:center; height:100vh; flex-direction:column; gap:16px; }
 .splash-title { font-size:36px; font-weight:900; color:#005b8e; letter-spacing:-1px; }
 .splash-sub { color:#5a7fa0; font-size:14px; }
@@ -853,7 +850,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .self-start { align-self: flex-start; }
 .textarea-tall { min-height: 150px; }
 
-/* ── PÀGINES ──────────────────────────────────────────────── */
+/* ── PÁGINAS ESPECÍFICAS ─────────────────────────────────── */
 
 /* Welcome */
 #page-welcome { background: var(--color-bg); }
@@ -871,10 +868,6 @@ body[data-page="report-done"] .progress-bar__fill::after,
   background-image: url(../img/espectre.svg);
   background-size: cover;
   background-position: center;
-  /*
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-  */
 }
 .welcome__tagline {
   font-size: var(--fs-base);
@@ -888,10 +881,6 @@ body[data-page="report-done"] .progress-bar__fill::after,
   background-image: url(../img/logo.svg);
   background-size: cover;
   background-position: center;
-  /*
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-  */
 }
 .welcome__bottom {
   background: var(--color-bg-header);
@@ -900,10 +889,9 @@ body[data-page="report-done"] .progress-bar__fill::after,
   flex-direction: column; 
   gap: var(--sp-16);
   margin-bottom: 200px;
-  
 }
 
-/* Auth pages (login/register/onboarding) */
+/* Páginas de autenticación */
 .auth-page-outer {
   flex: 1;
   display: flex;
@@ -956,11 +944,11 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 .auth-header__title { font-size: var(--fs-2xl); font-weight: var(--fw-black); color: var(--color-primary); }
 
-/* Small decorative row of three circles placed under the auth subtitle */
+/* Pequeña fila decorativa de tres círculos debajo del subtítulo de autenticación */
 .circulo {
   display: flex;
   justify-content: center;
-  gap: var(--sp-10); /* 10px spacing between the dots */
+  gap: var(--sp-10); /* 10px de espacio entre los puntos */
   margin-top: var(--sp-8);
   margin-bottom: calc(var(--sp-4));
 }
@@ -972,7 +960,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   background: var(--color-accent);
   box-shadow: 0 1px 0 rgba(2,48,89,.08);
 }
-/* Make the last two dots use the lighter border color (#96c7f2) */
+/* Hacer que los dos últimos puntos usen el color de borde más claro (#96c7f2) */
 .circulo span:nth-child(n+2) {
   background: #96c7f2;
 }
@@ -986,7 +974,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .checkbox-row label { font-size: var(--fs-sm); color: var(--color-secondary); line-height: 1.4; }
 .checkbox-row label a { color: var(--color-accent); text-decoration: underline; }
 
-/* Onboarding multi-select */
+/* Selección múltiple en onboarding */
 .option-chips { display: flex; flex-wrap: wrap; gap: var(--sp-10); }
 .option-chip {
   padding: var(--sp-10) var(--sp-16);
@@ -1012,7 +1000,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .onboard-done__val { font-size: var(--fs-sm); color: var(--color-primary); font-weight: var(--fw-bold); }
 .onboard-done__note { font-size: var(--fs-xs); color: var(--color-secondary); text-align: center; }
 
-/* Home page */
+/* Página de inicio */
 #page-home { background: var(--color-bg); }
 .home-hero {
   background: var(--color-bg-header);
@@ -1022,7 +1010,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .home-hero__greeting { font-size: var(--fs-xl); font-weight: var(--fw-black); color: var(--color-primary); }
 .home-hero__sub { font-size: var(--fs-sm); color: var(--color-secondary); margin-top: var(--sp-4); line-height: 1.4; }
 
-/* Progress page */
+/* Página de progreso */
 .area-card {
   background: var(--color-card-bg);
   border: 1.5px solid var(--color-border);
@@ -1062,7 +1050,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   border-top: 1px solid var(--color-border); background: var(--color-white);
 }
 
-/* Results page */
+/* Página de resultados */
 .results-hero {
   background: var(--color-bg-header);
   padding: var(--sp-24);
@@ -1080,7 +1068,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .results-score__num { font-size: var(--fs-2xl); font-weight: var(--fw-black); line-height: 1; }
 .results-score__label { font-size: var(--fs-xs); font-weight: var(--fw-semi); }
 
-/* Profile view */
+/* Vista de perfil */
 .profile-hero {
   background: var(--color-bg-header);
   padding: var(--sp-24) var(--sp-24) var(--sp-16);
@@ -1092,7 +1080,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .profile-hero__sub { font-size: var(--fs-sm); color: var(--color-secondary); margin-top: var(--sp-4); }
 .profile-hero__actions { display: flex; gap: var(--sp-8); margin-top: var(--sp-12); }
 
-/* Info/Articles */
+/* Info/Artículos */
 .article-section { margin-bottom: var(--sp-24); }
 .article-section__title { font-size: var(--fs-base); font-weight: var(--fw-black); color: var(--color-primary); margin-bottom: var(--sp-12); border-left: 3px solid var(--color-accent); padding-left: var(--sp-10); }
 .article-item {
@@ -1116,9 +1104,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   text-align: center;
 }
 
-
-
-/* Report */
+/* Reporte */
 .report-section { 
   display: flex; 
   align-items: flex-start; 
@@ -1157,9 +1143,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   cursor: pointer; 
 }
 
-
-
-/* Professional detail */
+/* Detalle de profesional */
 .pro-detail-hero {
   background: var(--color-bg-header);
   padding: var(--sp-24);
@@ -1172,8 +1156,6 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .info-row { display: flex; justify-content: space-between; align-items: center; padding: var(--sp-14, 14px) 0; border-bottom: 1px solid var(--color-border); }
 .info-row__key { font-size: var(--fs-sm); color: var(--color-secondary); font-weight: var(--fw-semi); }
 .info-row__val { font-size: var(--fs-sm); color: var(--color-primary); font-weight: var(--fw-bold); }
-
-
 
 /* Settings */
 

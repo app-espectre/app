@@ -44,10 +44,59 @@ function renderShell(currentPageId) {
     <button class="hamburger" id="btn-menu" aria-label="Obrir menú">
       <span></span><span></span><span></span>
     </button>
-    <span class="top-bar__logo">ESPECTRE</span>
+    <div class="top-bar__title" role="heading" aria-level="1"></div>
     <button class="avatar-btn" id="btn-avatar" aria-label="Perfil">AM</button>
   `;
   app.appendChild(topBar);
+
+  // función auxiliar: obtiene el título que debe mostrarse en la top-bar
+  function getPageTitle(pageId) {
+    // 1) body[data-top-title]
+    const bodyTitle = document.body.getAttribute('data-top-title');
+    if (bodyTitle && bodyTitle.trim()) return bodyTitle.trim();
+
+    // 2) buscar el section correspondiente (id="page-<pageId>" o id="<pageId>")
+    let pageEl = null;
+    if (pageId) {
+      pageEl = document.getElementById('page-' + pageId) || document.getElementById(pageId);
+    }
+    if (!pageEl) pageEl = document.querySelector('.page.active');
+
+    if (pageEl) {
+      // 2a) data-top-title en la sección
+      const attr = pageEl.getAttribute('data-top-title');
+      if (attr && attr.trim()) return attr.trim();
+      // 2b) buscar elementos internos habituales que contengan el título
+      const sel = pageEl.querySelector('.page-header__title');
+      if (sel && sel.textContent && sel.textContent.trim()) return sel.textContent.trim();
+    }
+
+    // 3) document.title
+    if (document.title && document.title.trim()) return document.title.trim();
+
+    // 4) fallback: transformar el id en texto bonito
+    if (pageId) return pageId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    return 'Espectre';
+  }
+
+  // fijar el título inicial según currentPageId
+  const titleEl = topBar.querySelector('.top-bar__title');
+  if (titleEl) titleEl.textContent = getPageTitle(currentPageId);
+
+  // observar cambios en body[data-page] (si tu router actualiza ese atributo) y actualizar título
+  if (document.body && !document.body._topbar_title_observer) {
+    const mo = new MutationObserver(muts => {
+      for (const m of muts) {
+        if (m.type === 'attributes' && m.attributeName === 'data-page') {
+          const newId = document.body.getAttribute('data-page') || '';
+          const el = document.querySelector('.top-bar__title');
+          if (el) el.textContent = getPageTitle(newId);
+        }
+      }
+    });
+    mo.observe(document.body, { attributes: true });
+    document.body._topbar_title_observer = mo;
+  }
 
   // ── BOTTOM NAV ───────────────────────────────────────────
   const bottomNav = document.createElement('nav');
