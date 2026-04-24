@@ -363,10 +363,19 @@ function initProfessionals() {
         <div class="pro-card__name">${p.name}</div>
         <div class="pro-card__spec">${p.spec}</div>
         <div class="pro-card__location">📍 ${p.location}</div>
-        <div class="pro-card__rating mt-8">
-          <span class="star">★</span>${p.rating} <span class="text-xs text-secondary">(${p.reviews} ressenyes)</span>
-          <button class="btn btn--outline btn--sm" style="width:auto;margin-left:25px" onclick="event.stopPropagation();goTo('professional-detail')">Saber més</button>
+
+        <!-- fila meta: rating a la izquierda, botón a la derecha -->
+        <div class="pro-card__meta mt-8">
+          <div class="pro-card__rating">
+            <span class="star">★</span>
+            <span class="pro-card__rating-value">${p.rating}</span>
+            <span class="text-xs text-secondary pro-card__reviews">(${p.reviews} ressenyes)</span>
+          </div>
+          <div class="pro-card__actions">
+            <button class="btn btn--outline btn--sm" onclick="event.stopPropagation();goTo('professional-detail')">Saber més</button>
+          </div>
         </div>
+
       </div>
     </article>
   `).join('');
