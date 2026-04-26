@@ -765,7 +765,7 @@ function renderChat() {
   list.innerHTML = s.chatMessages.map(m => `
     <div class="flex flex-col ${m.from === 'out' ? 'items-end' : 'items-start'} gap-4">
       ${m.from === 'in' && m.author ? `<span class="text-xs text-secondary" style="padding-left:4px">${m.author}</span>` : ''}
-      <div class="chat-bubble chat-bubble--${m.from}">${m.text}<div class="chat-bubble__time">${m.time}</div></div>
+      <div class="chat-bubble chat-bubble--${m.from}">${m.text}</div><div class="chat-bubble__time">${m.time}</div>
     </div>
   `).join('');
   list.scrollTop = list.scrollHeight;

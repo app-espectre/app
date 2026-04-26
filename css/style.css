@@ -1152,6 +1152,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   color: var(--color-primary);
   border-bottom-left-radius: var(--sp-4);
   align-self: flex-start;
+  padding: var(--sp-10);
 }
 
 .chat-bubble--out {
@@ -1159,6 +1160,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   color: var(--color-white);
   border-bottom-right-radius: var(--sp-4);
   align-self: flex-end;
+  padding: var(--sp-10);
 }
 
 .chat-bubble__time {
@@ -2379,7 +2381,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .group-card__icon {
   width: 44px; 
   height: 44px; 
-  border-radius: var(--r-md);
+  border-radius: var(--r-full);
   background: var(--color-bg-header);
   display: flex; 
   align-items: center; 
@@ -2428,7 +2430,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 .chat-input-bar__field {
   flex: 1; 
-  padding: var(--sp-10) var(--sp-14);
+  padding: var(--sp-12);
   border: 1.5px solid var(--color-border);
   border-radius: var(--r-full);
   font-size: var(--fs-sm);

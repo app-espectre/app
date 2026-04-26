@@ -23,8 +23,7 @@
     <div class="sub-top">
       <button class="back-btn" data-action="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg></button>
       <h1 class="sub-top__title">Tornar</h1>
-      <button class="sub-top__action" id="btn-publish">Publicar</button>
-    </div>
+      <button class="btn btn--outline btn--sm" style="width:auto" onclick="goTo('profile-edit')">Publicar</button>    </div>
     <div class="page-scroll">
       <div class="flex flex-col gap-16">
         <div class="field"><label class="field__label" for="publish-title">Títol (opcional)</label><input class="field__input" id="publish-title" type="text" placeholder="Títol de la publicació"></div>
@@ -33,9 +32,11 @@
           <textarea class="field__textarea textarea-tall" id="publish-msg" placeholder="Escriu la teva publicació..."></textarea>
           <div class="field__char-count" id="publish-char-count">0/1000 caràcters</div>
         </div>
-  <div class="card card--header-bg">
-          <p class="text-xs fw-bold text-secondary mb-4">Normes de conducta</p>
-          <p class="text-xs text-secondary">Mantén un to respectuós. Les publicacions estan subjectes a moderació.</p>
+  <div class="alert alert--yellow mb-16 w-full text-left">
+    <div class="aler">
+      <p class="alert__title">Normes de conducta</p>
+          <p class="alert__text">Mantén un to respectuós. Les publicacions estan subjectes a moderació.</p>
+    </div>
         </div>
       </div>
     </div>
