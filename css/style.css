@@ -662,6 +662,12 @@ img, svg {
   font-size: var(--fs-lg); 
 }
 
+.avatar--image { 
+  background-image: url(../img/pare4.jpg);
+  background-size: cover; 
+  background-position: center; 
+}
+
 /* Barra de progreso */
 .progress-bar { 
   height: 10px; 
@@ -1173,7 +1179,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 
 .chat-bubble__time {
-  font-size: var(--fs-xs);
+  font-size: 11px;
   color: var(--color-secondary);
   margin-top: var(--sp-4);
   text-align: right;

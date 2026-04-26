@@ -823,7 +823,7 @@ function renderPosts() {
   list.innerHTML = s.posts.map((post, i) => `
     <article class="post">
       <div class="post__header">
-        <div class="avatar avatar--sm" style="background:${post.color || colors[i % colors.length]}">${post.initials}</div>
+        <div class="avatar avatar--sm avatar--image" style="background-image: url(../img/pare4.jpg)"> </div>
         <div class="post__meta"><div class="post__author">${post.author}</div><div class="post__time">${post.time}</div></div>
       </div>
       <p class="post__text">${post.text}</p>
@@ -862,9 +862,10 @@ function renderChat() {
   const list = document.getElementById('chat-messages');
   if (!list) return;
   list.innerHTML = s.chatMessages.map(m => `
-    <div class="flex flex-col ${m.from === 'out' ? 'items-end' : 'items-start'} gap-4">
+    <div class="chat-message-row flex flex-col ${m.from === 'out' ? 'items-end' : 'items-start'} gap-4">
       ${m.from === 'in' && m.author ? `<span class="text-xs text-secondary" style="padding-left:4px">${m.author}</span>` : ''}
       <div class="chat-bubble chat-bubble--${m.from}">${m.text}</div>
+      <span class="chat-bubble__time chat-bubble__time--${m.from}">${m.time}</span>
     </div>
   `).join('');
   list.scrollTop = list.scrollHeight;
