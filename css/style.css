@@ -1001,6 +1001,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   flex-direction: column;
   gap: var(--sp-2);
   padding: var(--sp-14, 14px) var(--sp-16);
+  background: var(--color-card-bg);
   border: 2px solid var(--color-border);
   border-radius: var(--r-md);
   cursor: pointer;
@@ -1484,7 +1485,8 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 
 .page-scroll--padded { 
-  padding: var(--sp-20) var(--sp-24); 
+  padding: var(--sp-20) var(--sp-24);
+  align-content: center; 
 }
 
 .avatar--accent { 
@@ -1940,11 +1942,11 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 .assessment-header {
   background: var(--color-bg-header);
-  padding: var(--sp-16) var(--sp-24);
+  padding: var(--sp-32) var(--sp-24);
   border-bottom: 1px solid var(--color-border);
   display: flex; 
   flex-direction: column; 
-  gap: var(--sp-10);
+  gap: var(--sp-16);
 }
 
 .assessment-header__area {

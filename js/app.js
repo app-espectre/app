@@ -434,7 +434,10 @@ function renderAssessmentQ() {
   const q = ASSESSMENT_QUESTIONS[currentQ];
 
   const stepsEl = document.getElementById('assessment-steps');
-  if (stepsEl) stepsEl.innerHTML = ASSESSMENT_QUESTIONS.map((_, i) => `<div class="assessment-progress__step ${i < currentQ ? 'done' : i === currentQ ? 'active' : ''}"></div>`).join('');
+  if (stepsEl) {
+    const percentage = ((currentQ + 1) / total) * 100;
+    stepsEl.style.width = percentage + '%';
+  }
 
   const setEl = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
   setEl('assessment-area', `Avalua la ${q.area}`);
@@ -462,10 +465,16 @@ function renderAssessmentQ() {
   const prevBtn = document.getElementById('assessment-prev');
   const nextBtn = document.getElementById('assessment-next');
   if (prevBtn) {
-    prevBtn.disabled = currentQ === 0;
+    prevBtn.disabled = false;
     prevBtn.onclick = () => {
       const s2 = State.load();
-      if (s2.assessment.currentQ > 0) { s2.assessment.currentQ--; State.save(s2); renderAssessmentQ(); }
+      if (s2.assessment.currentQ > 0) {
+        s2.assessment.currentQ--;
+        State.save(s2);
+        renderAssessmentQ();
+      } else {
+        goTo('progress');
+      }
     };
   }
   if (nextBtn) {
