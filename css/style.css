@@ -640,7 +640,7 @@ img, svg {
 .avatar--lg { 
   width: 56px; 
   height: 56px; 
-  font-size: var(--fs-md); 
+  border: var(--color-border) solid;
 }
 
 .avatar--xl { 
@@ -1015,7 +1015,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   background: var(--color-card-bg);
   border: 1.5px solid var(--color-border);
   border-radius: var(--r-md);
-  padding: var(--sp-16);
+  padding: var(--sp-16) var(--sp-16) var(--sp-8);
   display: flex;
   gap: var(--sp-12);
   align-items: flex-start;
@@ -1445,7 +1445,11 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 
 .avatar--accent { 
-  background: var(--color-accent); 
+  width: 120px;
+  height: 120px;
+  background-image: url(../img/professional1.jpg); 
+  background-size: cover;
+  border: 2px solid var(--color-border);
 }
 
 .avatar--purple { 

@@ -28,7 +28,7 @@
         <div class="settings-row">
           <div class="avatar avatar--md">AM</div>
           <div class="settings-row__body"><div class="settings-row__title">Ana Molina</div><div class="settings-row__sub">anamolina@gmail.com</div></div>
-          <button class="btn btn--outline btn--sm btn--auto" onclick="goTo('profile-edit')">Edita</button>
+          <button class="btn btn--outline btn--sm btn--auto" onclick="goTo('problem')">Edita</button>
         </div>
   <div class="settings-row settings-row--clickable" onclick="goTo('profile-edit')">
           <div class="settings-row__body"><div class="settings-row__title">Editar perfil de la Martina</div></div>
@@ -47,9 +47,19 @@
 
       <div class="settings-section">
         <div class="settings-section__title">Accessibilitat</div>
-  <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Mode fosc</div></div><label class="toggle"><input type="checkbox" id="toggle-dark"><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Mode fosc</div></div><label class="toggle"><input type="checkbox" id="toggle-dark"><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
         <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Text gran</div></div><label class="toggle"><input type="checkbox"><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
       </div>
+
+      <div class="settings-section">
+        <div class="settings-section__title">Altres</div>
+        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Idioma</div></div></div>
+        <div class="settings-row settings-row--clickable" onclick="goTo('profile-edit')">
+          <div class="settings-row__body"><div class="settings-row__title">Atenció al client</div></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-border)" stroke-width="2" stroke-linecap="round"><polyline points="9,18 15,12 9,6"/></svg>
+        </div>
+      </div>
+
   <button class="btn btn--danger mt-8" id="btn-logout-settings">Tancar sessió</button>
   <button class="btn btn--danger mt-8" id="btn-delete-account" onclick="goTo('welcome')">Eliminar compte</button>
     </div>

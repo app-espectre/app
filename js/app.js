@@ -583,9 +583,11 @@ function initProfessionals() {
   ];
   const list = document.getElementById('professionals-list');
   if (!list) return;
-  list.innerHTML = pros.map(p => `
-    <article class="pro-card">
-      <div class="avatar avatar--lg" style="background:${p.color}">${p.initials}</div>
+  list.innerHTML = pros.map((p, idx) => `
+    <article class="pro-card" data-pro-index="${idx}">
+      <div class="avatar avatar--lg" style="background-image:url('../img/professional${idx + 1}.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; color:transparent;">
+        ${p.initials}
+      </div>
       <div class="pro-card__body">
         <div class="pro-card__name">${p.name}</div>
         <div class="pro-card__spec">${p.spec}</div>
@@ -596,11 +598,8 @@ function initProfessionals() {
             <span class="pro-card__rating-value">${p.rating}</span>
             <span class="text-xs text-secondary pro-card__reviews">(${p.reviews} ressenyes)</span>
           </div>
-          <div class="pro-card__actions">
-            <button class="btn btn--outline btn--sm" onclick="event.stopPropagation();goTo('professional-detail')">Saber més</button>
-          </div>
+          <div class="pro-card__actions"></div>
         </div>
-
       </div>
     </article>
   `).join('');
@@ -631,6 +630,18 @@ function initProfessionals() {
     searchInput.addEventListener('input', applyFilter);
     searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') { searchInput.value = ''; applyFilter(); searchInput.blur(); } });
   }
+
+  cards.forEach(card => {
+    card.style.cursor = 'pointer';
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('click', () => goTo('professional-detail'));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        goTo('professional-detail');
+      }
+    });
+  });
   
   // Autosize filter-chip selects so the chip width matches the selected option text.
   const autosizeSelect = (sel) => {
