@@ -509,6 +509,10 @@ img, svg {
   padding-top: var(--sp-8);
 }
 
+#btn-save-profile-settings {
+  margin-bottom: var(--sp-16);
+}
+
 /* Campos */
 .field { 
   display: flex; 
@@ -660,6 +664,24 @@ img, svg {
   width: 72px; 
   height: 72px; 
   font-size: var(--fs-lg); 
+}
+
+.avatar--ana { 
+  width: 120px; 
+  height: 120px; 
+  background-image: url(../img/ana.jpg);
+  background-position: center;
+  background-size: cover;
+  border: 2px solid var(--color-primary);
+}
+
+.avatar--ana-sm { 
+  width: 40px; 
+  height: 40px; 
+  background-image: url(../img/ana.jpg);
+  background-position: center;
+  background-size: cover;
+  border: 1px solid var(--color-primary);
 }
 
 .avatar--image { 
@@ -2186,6 +2208,9 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 .settings-section { 
   margin-bottom: var(--sp-24); 
+  display: flex;
+    flex-direction: column;
+  gap: var(--sp-16);
 }
 
 .settings-section__title { 
@@ -2194,7 +2219,6 @@ body[data-page="report-done"] .progress-bar__fill::after,
   color: var(--color-secondary); 
   text-transform: uppercase; 
   letter-spacing: .8px; 
-  margin-bottom: var(--sp-12); 
 }
 
 .settings-row {
@@ -2222,6 +2246,16 @@ body[data-page="report-done"] .progress-bar__fill::after,
   font-size: var(--fs-xs); 
   color: var(--color-secondary); 
   margin-top: var(--sp-2); 
+}
+
+.settings-row__select {
+  min-width: 10px;
+  padding: 0 var(--sp-12);
+  height: 20px;
+  border: 1.5px solid var(--color-transparent);
+  background: var(--color-white);
+  color: var(--color-primary);
+  font-size: var(--fs-xs);
 }
 
 /* Floating action button */

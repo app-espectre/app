@@ -27,6 +27,7 @@ const PAGE_MAP = {
   'community-chat':       'community-chat.html',
   'community-publish':    'community-publish.html',
   'settings':             'settings.html',
+  'profile-settings':     'profile-settings.html',
   'profile-edit':         'profile-edit.html',
   'profile-view':         'profile-view.html',
   'profile-note':         'profile-note.html',
@@ -901,6 +902,21 @@ function initCommunityPublish() {
 }
 
 function initSettings() {
+  const s = State.load();
+  const avatarEl = document.getElementById('settings-parent-avatar');
+  const nameEl = document.getElementById('settings-parent-name');
+  const emailEl = document.getElementById('settings-parent-email');
+  if (avatarEl) {
+    const avatar = s.profile.parentAvatar || 'ana.jpg';
+    avatarEl.style.backgroundImage = `url('../img/ana.jpg')`;
+    avatarEl.style.backgroundSize = 'cover';
+    avatarEl.style.backgroundPosition = 'center';
+    avatarEl.style.backgroundRepeat = 'no-repeat';
+    avatarEl.style.color = 'transparent';
+  }
+  if (nameEl) nameEl.textContent = s.profile.parentName || 'Ana Molina';
+  if (emailEl) emailEl.textContent = s.profile.parentEmail || 'anamolina@gmail.com';
+
   document.getElementById('btn-logout-settings')?.addEventListener('click', () => { State.reset(); goTo('welcome'); });
 
   // Dark mode toggle
@@ -1093,6 +1109,64 @@ function initProfileEdit() {
   });
 }
 
+function initProfileSettings() {
+  const s = State.load();
+  const avatarEl = document.getElementById('profile-child-avatar');
+  const avatarEditBtn = document.getElementById('profile-settings-avatar-edit');
+  const nameEl = document.getElementById('profile-settings-name');
+  const emailEl = document.getElementById('profile-settings-email');
+  const heroNameEl = document.getElementById('profile-child-name');
+
+  const avatarKey = 'parentAvatar';
+  const currentAvatar = s.profile[avatarKey] || 'personatge1.svg';
+
+  if (avatarEl) {
+    avatarEl.style.backgroundImage = `url('../img/${currentAvatar}')`;
+    avatarEl.style.backgroundSize = 'cover';
+    avatarEl.style.backgroundPosition = 'center';
+    avatarEl.style.backgroundRepeat = 'no-repeat';
+    avatarEl.style.color = 'transparent';
+  }
+
+  if (heroNameEl) heroNameEl.textContent = s.profile.parentName || 'Ana Molina';
+  if (nameEl) nameEl.value = s.profile.parentName || '';
+  if (emailEl) emailEl.value = s.profile.parentEmail || '';
+
+  nameEl?.addEventListener('input', () => {
+    if (heroNameEl) heroNameEl.textContent = nameEl.value.trim() || 'Ana Molina';
+  });
+
+  const openAvatarModal = () => document.getElementById('avatar-modal')?.classList.remove('hidden');
+  const closeAvatarModal = () => document.getElementById('avatar-modal')?.classList.add('hidden');
+
+  avatarEditBtn?.addEventListener('click', openAvatarModal);
+  document.getElementById('avatar-modal-close')?.addEventListener('click', closeAvatarModal);
+  document.getElementById('avatar-modal-overlay')?.addEventListener('click', closeAvatarModal);
+
+  document.querySelectorAll('.avatar-option').forEach(img => {
+    img.addEventListener('click', () => {
+      const selected = img.dataset.avatar;
+      s.profile[avatarKey] = selected;
+      State.save(s);
+      if (avatarEl) avatarEl.style.backgroundImage = `url('../img/${selected}')`;
+      closeAvatarModal();
+    });
+  });
+
+  document.getElementById('btn-save-profile-settings')?.addEventListener('click', () => {
+    const name = nameEl?.value?.trim();
+    const email = emailEl?.value?.trim();
+    if (!name || !email) return;
+    s.profile.parentName = name;
+    s.profile.parentEmail = email;
+    State.save(s);
+    if (heroNameEl) heroNameEl.textContent = name;
+    goTo('settings');
+  });
+
+  document.getElementById('btn-cancel-profile-settings')?.addEventListener('click', () => goBack());
+}
+
 function initProfileNote() {
   document.querySelectorAll('.note-type-btn').forEach(btn => {
     btn.addEventListener('click', () => { document.querySelectorAll('.note-type-btn').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); });
@@ -1162,7 +1236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'professionals': initProfessionals, 'community': initCommunity,
     'community-chat': initCommunityChat, 'community-publish': initCommunityPublish,
     'settings': initSettings, 'profile-view': initProfileView,
-    'profile-edit': initProfileEdit, 'profile-note': initProfileNote,
+    'profile-settings': initProfileSettings, 'profile-edit': initProfileEdit, 'profile-note': initProfileNote,
     'report-gen': initReportGen,
   };
   PAGE_INITS[currentPage]?.();

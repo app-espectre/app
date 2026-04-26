@@ -16,6 +16,7 @@ const State = (() => {
       needs: ['Comunicació', 'Sensorial', 'Social'],
       parentName: 'Ana Molina',
       parentEmail: 'anamolina@gmail.com',
+      parentAvatar: 'personatge1.svg',
     },
     skills: {
       'Comunicació':       { pct: 60, level: 2 },

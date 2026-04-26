@@ -15,7 +15,7 @@ function renderShell(currentPageId) {
     'professional-detail','community','community-search',
     'community-chat','community-publish',
     'settings','profile-edit','profile-view',
-    'profile-note',
+    'profile-note', 'profile-settings',
   ];
 
   const isAuth = authPages.includes(currentPageId);
@@ -32,7 +32,7 @@ function renderShell(currentPageId) {
     'profile-view': 'profile-view', 'profile-edit': 'profile-view',
     'profile-note': 'profile-view',
     'report-gen': 'report-gen', 'report-done': 'report-gen',
-    'settings': 'settings',
+    'settings': 'settings', 'profile-settings': 'settings',
   };
   const activeNav = navMap[currentPageId] || '';
 
@@ -144,12 +144,17 @@ function renderShell(currentPageId) {
     { page: 'settings',       img: 'Configuracion.png',       label: 'Configuració' },
   ];
 
+  const s = State.load();
+  const parentName = s.profile.parentName || 'Ana Molina';
+  const parentEmail = s.profile.parentEmail || 'anamolina@gmail.com';
+  const parentAvatar = s.profile.parentAvatar || 'personatge1.svg';
+
   sideMenu.innerHTML = `
     <div class="side-menu__header">
-      <div class="side-menu__avatar"></div>
+      <div class="side-menu__avatar" style="background-image: url('../img/${parentAvatar}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
       <div class="side-menu__user">
-        <div class="side-menu__name">Ana Molina</div>
-        <div class="side-menu__email">anamolina@gmail.com</div>
+        <div class="side-menu__name">${parentName}</div>
+        <div class="side-menu__email">${parentEmail}</div>
       </div>
     </div>
     <nav class="side-menu__nav">
