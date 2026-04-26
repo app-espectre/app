@@ -151,7 +151,7 @@ function renderShell(currentPageId) {
 
   sideMenu.innerHTML = `
     <div class="side-menu__header">
-      <div class="side-menu__avatar" style="background-image: url('../img/${parentAvatar}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+      <div class="side-menu__avatar" style="background-image: url('../img/ana.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
       <div class="side-menu__user">
         <div class="side-menu__name">${parentName}</div>
         <div class="side-menu__email">${parentEmail}</div>

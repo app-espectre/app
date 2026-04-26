@@ -329,10 +329,10 @@ img, svg {
 }
 
 .side-menu__avatar {
-  width: 50px; 
-  height: 43px;
-  background-image: url(../img/Logoazul.svg);
-  background-size: cover;
+  width: 65px; 
+  height: 65px;
+  border: 2px solid var(--color-primary);
+  border-radius: 100%;
 }
 
 .side-menu__user { 
