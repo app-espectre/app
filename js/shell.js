@@ -185,7 +185,9 @@ function renderShell(currentPageId) {
   document.getElementById('btn-avatar').addEventListener('click', () => { closeMenu(); goTo('profile-view'); });
   document.getElementById('overlay').addEventListener('click', closeMenu);
   document.getElementById('btn-logout').addEventListener('click', () => { State.reset(); goTo('welcome'); });
-
+  document.querySelector('.side-menu__avatar').addEventListener('click', () => { closeMenu(); goTo('profile-settings'); });
+  document.querySelector('.side-menu__name').addEventListener('click', () => { closeMenu(); goTo('profile-settings'); });
+  document.querySelector('.side-menu__email').addEventListener('click', () => { closeMenu(); goTo('profile-settings'); });
   document.querySelectorAll('.nav-btn[data-page], .side-menu__item[data-page]').forEach(btn => {
     btn.addEventListener('click', () => { closeMenu(); goTo(btn.dataset.page); });
   });
