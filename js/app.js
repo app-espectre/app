@@ -590,8 +590,6 @@ function initProfessionals() {
         <div class="pro-card__name">${p.name}</div>
         <div class="pro-card__spec">${p.spec}</div>
         <div class="pro-card__location">📍 ${p.location}</div>
-
-        <!-- fila meta: rating a la izquierda, botón a la derecha -->
         <div class="pro-card__meta mt-8">
           <div class="pro-card__rating">
             <span class="star">★</span>
@@ -765,7 +763,7 @@ function renderChat() {
   list.innerHTML = s.chatMessages.map(m => `
     <div class="flex flex-col ${m.from === 'out' ? 'items-end' : 'items-start'} gap-4">
       ${m.from === 'in' && m.author ? `<span class="text-xs text-secondary" style="padding-left:4px">${m.author}</span>` : ''}
-      <div class="chat-bubble chat-bubble--${m.from}">${m.text}</div><div class="chat-bubble__time">${m.time}</div>
+      <div class="chat-bubble chat-bubble--${m.from}">${m.text}</div>
     </div>
   `).join('');
   list.scrollTop = list.scrollHeight;

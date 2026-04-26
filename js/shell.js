@@ -45,7 +45,7 @@ function renderShell(currentPageId) {
       <span></span><span></span><span></span>
     </button>
     <div class="top-bar__title" role="heading" aria-level="1"></div>
-    <button class="avatar-btn" id="btn-avatar" aria-label="Perfil">AM</button>
+    <button class="avatar-btn" id="btn-avatar" aria-label="Perfil"></button>
   `;
   app.appendChild(topBar);
 

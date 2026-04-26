@@ -243,16 +243,10 @@ img, svg {
 
 /* Avatar botón */
 .avatar-btn {
-  width: 36px;
+  width: 42px;
   height: 36px;
-  border-radius: var(--r-full);
-  background: var(--color-primary);
-  color: var(--color-white);
-  font-size: var(--fs-xs);
-  font-weight: var(--fw-bold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-image: url(../img/Logoazul.svg);
+  background-size: cover;
 }
 
 /* Navegación inferior */
@@ -1470,7 +1464,8 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 
 .dot-accent { 
-  color: var(--color-accent); 
+  color: var(--color-accent);
+  margin: 0 var(--sp-8);
 }
 
 .lead { 
