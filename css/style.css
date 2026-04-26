@@ -2212,7 +2212,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   margin-bottom: var(--sp-24); 
   display: flex;
     flex-direction: column;
-  gap: var(--sp-16);
+  gap: var(--sp-12);
 }
 
 .settings-section__title { 
@@ -2231,7 +2231,6 @@ body[data-page="report-done"] .progress-bar__fill::after,
   background: var(--color-card-bg);
   border: 1.5px solid var(--color-border);
   border-radius: var(--r-md);
-  margin-bottom: var(--sp-8);
 }
 
 .settings-row__body { 
@@ -2439,13 +2438,20 @@ body[data-page="report-done"] .progress-bar__fill::after,
   width: 44px; 
   height: 44px; 
   border-radius: var(--r-full);
-  background: var(--color-bg-header);
+  background-size: cover;
+  background-position: center;
   display: flex; 
   align-items: center; 
   justify-content: center;
   font-size: var(--fs-xl);
   flex-shrink: 0;
+  border: 2px solid var(--color-border);
 }
+
+.group-card__icon:nth-child(1) { background-image: url(../img/pare1.jpg); }
+.group-card__icon:nth-child(2) { background-image: url(../img/pare2.jpg); }
+.group-card__icon:nth-child(3) { background-image: url(../img/pare3.jpg); }
+.group-card__icon:nth-child(4) { background-image: url(../img/pare4.jpg); }
 
 .group-card__body { 
   flex: 1; 
