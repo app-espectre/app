@@ -640,7 +640,7 @@ img, svg {
 .avatar--lg { 
   width: 56px; 
   height: 56px; 
-  border: var(--color-border) solid;
+  border: 1.5px solid var(--color-border);
 }
 
 .avatar--xl { 
@@ -1063,6 +1063,8 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 .star { 
   color: var(--color-yellow); 
+  display: inline-block;
+  margin-left: 12px;
 }
 
 /* Post de la comunidad */
@@ -1458,6 +1460,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 .avatar--green { 
   background: var(--color-green); 
+  margin-right: var(--sp-12);
 }
 
 .page-header--row { 
