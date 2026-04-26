@@ -85,7 +85,7 @@ function apptCardHTML(r, idx, showDelete = false) {
         <p class="appt-card__title">${r.title}</p>
         <p class="appt-card__time">${r.time}</p>
       </div>
-      ${showDelete ? `<button class="btn btn--transparent btn--sm" data-delete="${idx}" aria-label="Eliminar">
+      ${showDelete ? `<button class="btn btn--transparent btn--sm btn--delete" data-delete="${idx}" aria-label="Eliminar">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="3,6 5,6 21,6"/><path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6"/><path d="M8,6V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2v2"/></svg>
       </button>` : ''}
     </article>
