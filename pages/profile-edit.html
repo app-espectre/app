@@ -6,7 +6,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#d1eaff">
-  <title>Editar perfil</title>
+  <title>Perfil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
@@ -26,7 +26,10 @@
     </div>
     <div class="page-scroll">
       <div class="flex justify-center mb-24">
-        <div class="avatar avatar--xl avatar--accent">M</div>
+        <div class="avatar-container">
+          <div class="avatar avatar--xl avatar--accent" id="profile-child-avatar">M</div>
+          <img src="../img/edit.png" class="avatar-edit-icon" alt="Editar avatar">
+        </div>
       </div>
       <div class="flex flex-col gap-16">
         <div class="field"><label class="field__label" for="edit-name">Nom i cognoms de l'infant</label><input class="field__input" id="edit-name" type="text" value="Martina Molina Reyes"></div>
@@ -35,6 +38,17 @@
           <label class="field__label">Diagnòstic</label>
           <select class="field__select"><option selected>TEA nivell de suport 1</option><option>TEA nivell de suport 2</option><option>TEA nivell de suport 3</option><option>En procés de diagnòstic</option></select>
         </div>
+        <div class="field">
+          <label class="field__label">Necessitats</label>
+          <div class="needs-selection">
+            <div class="option-chip needs-chip" data-need="Comunicació">Comunicació</div>
+            <div class="option-chip needs-chip" data-need="Autonomia">Autonomia</div>
+            <div class="option-chip needs-chip" data-need="Sensorial">Sensorial</div>
+            <div class="option-chip needs-chip" data-need="Social">Social</div>
+            <div class="option-chip needs-chip" data-need="Aprenentatge">Aprenentatge</div>
+            <div class="option-chip needs-chip" data-need="Conductual">Conductual</div>
+          </div>
+        </div>
       </div>
       <div class="flex flex-col gap-12 mt-24">
         <button class="btn btn--primary" id="btn-save-profile">Desar canvis</button>
@@ -42,6 +56,26 @@
       </div>
     </div>
   </section>
+</div>
+
+<!-- Modal para cambiar avatar -->
+<div id="avatar-modal" class="modal hidden">
+  <div class="modal-overlay" id="avatar-modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close" id="avatar-modal-close">&times;</button>
+    <h3>Escull un personatge</h3>
+    <div class="avatar-grid">
+      <img src="../img/personatge1.svg" alt="Personatge 1" data-avatar="personatge1.svg" class="avatar-option">
+      <img src="../img/personatge2.svg" alt="Personatge 2" data-avatar="personatge2.svg" class="avatar-option">
+      <img src="../img/personatge3.svg" alt="Personatge 3" data-avatar="personatge3.svg" class="avatar-option">
+      <img src="../img/personatge4.svg" alt="Personatge 4" data-avatar="personatge4.svg" class="avatar-option">
+      <img src="../img/personatge5.svg" alt="Personatge 5" data-avatar="personatge5.svg" class="avatar-option">
+      <img src="../img/personatge6.svg" alt="Personatge 6" data-avatar="personatge6.svg" class="avatar-option">
+      <img src="../img/personatge7.svg" alt="Personatge 7" data-avatar="personatge7.svg" class="avatar-option">
+      <img src="../img/personatge8.svg" alt="Personatge 8" data-avatar="personatge8.svg" class="avatar-option">
+      <img src="../img/personatge9.svg" alt="Personatge 9" data-avatar="personatge9.svg" class="avatar-option">
+    </div>
+  </div>
 </div>
 
   <script src="../js/state.js"></script>

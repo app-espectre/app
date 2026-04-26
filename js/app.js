@@ -30,7 +30,6 @@ const PAGE_MAP = {
   'profile-edit':         'profile-edit.html',
   'profile-view':         'profile-view.html',
   'profile-note':         'profile-note.html',
-  'profile-skill':        'profile-skill.html',
 };
 
 function goTo(pageId, opts = {}) {
@@ -104,6 +103,109 @@ function todayStr() {
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 }
 
+function renderRadarChart(container, data, opts = {}) {
+  if (!container || !data || data.length === 0) return;
+  const width = opts.width || 360;
+  const height = opts.height || 360;
+  const padding = opts.padding || 24;
+  const levels = opts.levels || 4;
+  const maxValue = opts.maxValue || 100;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const radius = Math.min(width, height) / 2 - padding;
+  const angleStep = (Math.PI * 2) / data.length;
+
+  container.innerHTML = '';
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+  svg.classList.add('radar-chart__svg');
+
+  // Grid rings
+  for (let level = levels; level >= 1; level--) {
+    const levelRadius = (radius * level) / levels;
+    const points = data.map((_, i) => {
+      const angle = -Math.PI / 2 + angleStep * i;
+      return `${centerX + Math.cos(angle) * levelRadius},${centerY + Math.sin(angle) * levelRadius}`;
+    }).join(' ');
+    const ring = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    ring.setAttribute('points', points);
+    ring.setAttribute('class', 'radar-chart__grid-line');
+    ring.setAttribute('fill', 'none');
+    svg.appendChild(ring);
+  }
+
+  // Axes
+  data.forEach((item, i) => {
+    const angle = -Math.PI / 2 + angleStep * i;
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+    const axis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    axis.setAttribute('x1', centerX);
+    axis.setAttribute('y1', centerY);
+    axis.setAttribute('x2', x);
+    axis.setAttribute('y2', y);
+    axis.setAttribute('class', 'radar-chart__axis');
+    svg.appendChild(axis);
+  });
+
+  // Data polygon
+  const dataPoints = data.map((point, i) => {
+    const ratio = Math.max(0, Math.min(1, point.value / maxValue));
+    const angle = -Math.PI / 2 + angleStep * i;
+    return {
+      x: centerX + Math.cos(angle) * radius * ratio,
+      y: centerY + Math.sin(angle) * radius * ratio,
+      label: point.label,
+      value: point.value,
+      angle,
+    };
+  });
+  const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  polygon.setAttribute('points', dataPoints.map(p => `${p.x},${p.y}`).join(' '));
+  polygon.setAttribute('class', 'radar-chart__area');
+  svg.appendChild(polygon);
+
+  dataPoints.forEach(point => {
+    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    dot.setAttribute('cx', point.x);
+    dot.setAttribute('cy', point.y);
+    dot.setAttribute('r', 4);
+    dot.setAttribute('class', 'radar-chart__point');
+    svg.appendChild(dot);
+  });
+
+  dataPoints.forEach(point => {
+    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    const offset = 14;
+    const labelX = point.x + (Math.cos(point.angle) * offset);
+    const labelY = point.y + (Math.sin(point.angle) * offset);
+    label.setAttribute('x', labelX);
+    label.setAttribute('y', labelY);
+    label.setAttribute('class', 'radar-chart__label');
+    label.setAttribute('text-anchor', Math.cos(point.angle) > 0.2 ? 'start' : Math.cos(point.angle) < -0.2 ? 'end' : 'middle');
+    const firstSpace = point.label.indexOf(' ');
+    if (firstSpace >= 0) {
+      const firstPart = point.label.slice(0, firstSpace);
+      const secondPart = point.label.slice(firstSpace + 1);
+      const tspan1 = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+      tspan1.setAttribute('x', labelX);
+      tspan1.setAttribute('dy', '0');
+      tspan1.textContent = firstPart;
+      const tspan2 = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+      tspan2.setAttribute('x', labelX);
+      tspan2.setAttribute('dy', '16');
+      tspan2.textContent = secondPart;
+      label.appendChild(tspan1);
+      label.appendChild(tspan2);
+    } else {
+      label.textContent = point.label;
+    }
+    svg.appendChild(label);
+  });
+
+  container.appendChild(svg);
+}
+
 /* ══════════════════════════════════════════════════════════
    PAGE INITS
 ══════════════════════════════════════════════════════════ */
@@ -116,6 +218,9 @@ function initHome() {
 
 function initProgress() {
   const s = State.load();
+  const radarTarget = document.getElementById('radar-chart');
+  renderRadarChart(radarTarget, Object.entries(s.skills).map(([name, skill]) => ({ label: name, value: skill.pct })));
+
   const list = document.getElementById('progress-areas');
   if (!list) return;
   list.innerHTML = Object.entries(s.skills).map(([name, skill]) => `
@@ -600,7 +705,31 @@ function initProfileView() {
   setEl('profile-child-name', s.profile.childName);
   setEl('profile-child-sub', `${s.profile.childAge} · ${s.profile.diagnosis}`);
   const avatarEl = document.getElementById('profile-child-avatar');
-  if (avatarEl) avatarEl.textContent = s.profile.childName[0].toUpperCase();
+  if (avatarEl) {
+    avatarEl.style.backgroundImage = `url('../img/${s.profile.childAvatar}')`;
+    avatarEl.style.backgroundSize = 'cover';
+    avatarEl.style.backgroundPosition = 'center';
+    avatarEl.style.backgroundRepeat = 'no-repeat';
+    avatarEl.style.color = 'transparent';
+    avatarEl.addEventListener('click', () => {
+      document.getElementById('avatar-modal').classList.remove('hidden');
+    });
+  }
+
+  // Modal handlers
+  document.getElementById('avatar-modal-close')?.addEventListener('click', () => {
+    document.getElementById('avatar-modal').classList.add('hidden');
+  });
+  document.querySelectorAll('.avatar-option').forEach(img => {
+    img.addEventListener('click', () => {
+      const selected = img.dataset.avatar;
+      const s2 = State.load();
+      s2.profile.childAvatar = selected;
+      State.save(s2);
+      avatarEl.style.backgroundImage = `url('../img/${selected}')`;
+      document.getElementById('avatar-modal').classList.add('hidden');
+    });
+  });
 
   document.getElementById('tab-btn-info')?.addEventListener('click', () => renderProfileTab('info'));
   document.getElementById('tab-btn-diary')?.addEventListener('click', () => renderProfileTab('diary'));
@@ -619,7 +748,7 @@ function renderProfileTab(tab) {
 
   if (tab === 'info') {
     active.innerHTML = `
-      <div class="flex flex-col gap-12">
+      <div class="flex flex-col gap-20">
         <div class="flex justify-between items-center">
           <h2 class="section-title mb-0">Informació bàsica</h2>
           <button class="btn btn--outline btn--sm" style="width:auto" onclick="goTo('profile-edit')">Editar</button>
@@ -632,7 +761,7 @@ function renderProfileTab(tab) {
       </div>`;
   } else if (tab === 'diary') {
     active.innerHTML = `
-      <div class="flex flex-col gap-12">
+      <div class="flex flex-col gap-20">
         <div class="flex justify-between items-center">
           <h2 class="section-title mb-0">Diari d'observacions</h2>
           <button class="btn btn--primary btn--sm" style="width:auto" onclick="goTo('profile-note')">+ Afegir</button>
@@ -641,25 +770,26 @@ function renderProfileTab(tab) {
           <div class="diary-entry diary-entry--${e.type}">
             <span class="diary-entry__date">${e.date}</span>
             <p class="diary-entry__text">${e.text}</p>
-            <span class="diary-entry__type tag tag--${e.type === 'achievement' ? 'green' : e.type === 'difficulty' ? 'blue' : 'yellow'}">${e.typeLabel}</span>
+            <span class="diary-entry__type tag tag--${e.type === 'achievement' ? 'green' : e.type === 'change' ? 'yellow' : e.type === 'difficulty' ? 'red' : 'blue'}">${e.typeLabel}</span>
           </div>`).join('')}
       </div>`;
   } else if (tab === 'skills') {
     active.innerHTML = `
       <div class="flex flex-col gap-12">
         <h2 class="section-title mb-0">Àrees de seguiment</h2>
-        <p class="text-sm text-secondary">Toca l'apartat que vulguis editar</p>
         ${Object.entries(s.skills).map(([name, skill]) => `
           <div class="skill-row" data-skill="${name}">
             <div class="skill-row__header"><span class="skill-row__name">${name}</span><span class="skill-row__pct">${skill.pct}%</span></div>
             <div class="progress-bar"><div class="progress-bar__fill" style="width:${skill.pct}%"></div></div>
           </div>`).join('')}
+          <button class="btn btn--primary" id="btn-full-assessment" style="margin-top: 1rem;">Fer avaluació completa</button>
+
       </div>`;
-    active.querySelectorAll('.skill-row[data-skill]').forEach(row => {
-      row.addEventListener('click', () => {
-        const s2 = State.load(); s2.editingSkill = row.dataset.skill; State.save(s2); goTo('profile-skill');
-      });
+      
+    active.querySelectorAll('.skill-row').forEach(row => {
+      row.addEventListener('click', () => goTo('assessment'));
     });
+    document.getElementById('btn-full-assessment')?.addEventListener('click', () => goTo('assessment'));
   }
 }
 
@@ -667,10 +797,72 @@ function initProfileEdit() {
   const s = State.load();
   const nameEl = document.getElementById('edit-name');
   if (nameEl) nameEl.value = s.profile.childName;
+
+  // Load diagnosis
+  const diagnosisSelect = document.querySelector('.field__select');
+  if (diagnosisSelect) diagnosisSelect.value = s.profile.diagnosis;
+
+  // Load birth date (assuming childAge is in format "X anys")
+  const birthEl = document.getElementById('edit-birth');
+  if (birthEl && s.profile.childAge) {
+    const age = parseInt(s.profile.childAge);
+    const currentYear = new Date().getFullYear();
+    const birthYear = currentYear - age;
+    birthEl.value = `${birthYear}-03-15`; // Approximate
+  }
+
+  // Needs selection
+  document.querySelectorAll('.needs-chip').forEach(chip => {
+    const need = chip.dataset.need;
+    if (s.profile.needs.includes(need)) chip.classList.add('selected');
+  });
+
+  // Avatar handling
+  const avatarEl = document.getElementById('profile-child-avatar');
+  if (avatarEl) {
+    avatarEl.style.backgroundImage = `url('../img/${s.profile.childAvatar}')`;
+    avatarEl.style.backgroundSize = 'cover';
+    avatarEl.style.backgroundPosition = 'center';
+    avatarEl.style.backgroundRepeat = 'no-repeat';
+    avatarEl.style.color = 'transparent';
+    avatarEl.addEventListener('click', () => {
+      document.getElementById('avatar-modal').classList.remove('hidden');
+    });
+  }
+
+  // Modal handlers
+  document.getElementById('avatar-modal-close')?.addEventListener('click', () => {
+    document.getElementById('avatar-modal').classList.add('hidden');
+  });
+  document.querySelectorAll('.avatar-option').forEach(img => {
+    img.addEventListener('click', () => {
+      const selected = img.dataset.avatar;
+      const s2 = State.load();
+      s2.profile.childAvatar = selected;
+      State.save(s2);
+      avatarEl.style.backgroundImage = `url('../img/${selected}')`;
+      document.getElementById('avatar-modal').classList.add('hidden');
+    });
+  });
+
   document.getElementById('btn-save-profile')?.addEventListener('click', () => {
     const s2 = State.load();
     const name = document.getElementById('edit-name')?.value?.trim();
     if (name) s2.profile.childName = name;
+    // Save birth date and calculate age
+    const birthDate = document.getElementById('edit-birth')?.value;
+    if (birthDate) {
+      const birthYear = new Date(birthDate).getFullYear();
+      const currentYear = new Date().getFullYear();
+      const age = currentYear - birthYear;
+      s2.profile.childAge = `${age} anys`;
+    }
+    // Save diagnosis
+    const diagnosisSelect = document.querySelector('.field__select');
+    if (diagnosisSelect) s2.profile.diagnosis = diagnosisSelect.value;
+    // Save selected needs
+    const selectedNeeds = Array.from(document.querySelectorAll('.needs-chip.selected')).map(chip => chip.dataset.need);
+    s2.profile.needs = selectedNeeds;
     State.save(s2);
     goTo('profile-view');
   });
@@ -698,47 +890,6 @@ function initProfileNote() {
     goTo('profile-view');
   });
   document.getElementById('btn-cancel-note')?.addEventListener('click', goBack);
-}
-
-function initProfileSkill() {
-  const s = State.load();
-  const skillName = s.editingSkill;
-  const titleEl = document.getElementById('skill-editor-title');
-  if (titleEl) titleEl.textContent = skillName;
-  renderSkillLevels(skillName);
-  document.getElementById('btn-save-skill')?.addEventListener('click', () => goTo('profile-view'));
-}
-
-function renderSkillLevels(skillName) {
-  const s = State.load();
-  const skill = s.skills[skillName] || { pct: 50 };
-  const currentLvl = Math.min(4, Math.floor((skill.pct - 1) / 20));
-  const levels = [
-    { label: 'Necessita suport constant', pct: '0–20%', lvl: 0, value: 10 },
-    { label: 'Suport freqüent', pct: '21–40%', lvl: 1, value: 30 },
-    { label: 'Suport moderat', pct: '41–60%', lvl: 2, value: 50 },
-    { label: 'Suport ocasional', pct: '61–80%', lvl: 3, value: 70 },
-    { label: 'Molt autònom/a', pct: '81–100%', lvl: 4, value: 90 },
-  ];
-  const listEl = document.getElementById('skill-editor-list');
-  if (!listEl) return;
-  listEl.innerHTML = levels.map(l => `
-    <div class="skill-level-item ${l.lvl === currentLvl ? 'active' : ''}" data-lvl="${l.lvl}" data-value="${l.value}">
-      <div class="skill-level-item__dot"></div>
-      <div class="skill-level-item__body">
-        <div class="skill-level-item__label">${l.label}</div>
-        <div class="skill-level-item__pct">${l.pct}</div>
-      </div>
-    </div>`).join('');
-  listEl.querySelectorAll('.skill-level-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const s2 = State.load();
-      s2.skills[skillName].pct = parseInt(item.dataset.value);
-      s2.skills[skillName].level = parseInt(item.dataset.lvl);
-      State.save(s2);
-      renderSkillLevels(skillName);
-    });
-  });
 }
 
 function initReportGen() {
@@ -790,7 +941,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'community-chat': initCommunityChat, 'community-publish': initCommunityPublish,
     'settings': initSettings, 'profile-view': initProfileView,
     'profile-edit': initProfileEdit, 'profile-note': initProfileNote,
-    'profile-skill': initProfileSkill, 'report-gen': initReportGen,
+    'report-gen': initReportGen,
   };
   PAGE_INITS[currentPage]?.();
 

@@ -9,9 +9,10 @@ const State = (() => {
   const defaults = {
     authenticated: false,
     profile: {
-      childName: 'Martina',
+      childName: 'Martina Reyes',
       childAge: '7 anys',
-      diagnosis: 'TEA nivell 1',
+      diagnosis: 'TEA nivell de suport 1',
+      childAvatar: 'personatge1.svg',
       needs: ['Comunicació', 'Sensorial', 'Social'],
       parentName: 'Ana Molina',
       parentEmail: 'anamolina@gmail.com',

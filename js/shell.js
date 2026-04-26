@@ -15,7 +15,7 @@ function renderShell(currentPageId) {
     'professional-detail','community','community-search',
     'community-chat','community-publish',
     'settings','profile-edit','profile-view',
-    'profile-note','profile-skill',
+    'profile-note',
   ];
 
   const isAuth = authPages.includes(currentPageId);
@@ -30,7 +30,7 @@ function renderShell(currentPageId) {
     'info': 'info',
     'professionals': 'professionals', 'professional-detail': 'professionals',
     'profile-view': 'profile-view', 'profile-edit': 'profile-view',
-    'profile-note': 'profile-view', 'profile-skill': 'profile-view',
+    'profile-note': 'profile-view',
     'report-gen': 'report-gen', 'report-done': 'report-gen',
     'settings': 'settings',
   };
