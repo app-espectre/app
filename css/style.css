@@ -2545,7 +2545,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 
 .reminder-type-btn {
-  padding: var(--sp-8) var(--sp-14);
+  padding: var(--sp-8);
   border: 2px solid var(--color-border);
   border-radius: var(--r-full);
   font-size: var(--fs-sm); 
@@ -2572,7 +2572,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 .mini-calendar__header { 
   background: var(--color-bg-header); 
-  padding: var(--sp-12) var(--sp-16); 
+  padding: var(--sp-8) var(--sp-16); 
   display: flex; 
   justify-content: space-between; 
   align-items: center; 
@@ -2592,7 +2592,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 
 .mini-calendar__day {
-  aspect-ratio: 1;
+  aspect-ratio: 1.5;
   display: flex; 
   align-items: center; 
   justify-content: center;
@@ -2604,9 +2604,9 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 .mini-calendar__day.header { 
   font-weight: var(--fw-bold); 
-  font-size: 9px; 
+  font-size: var(--fs-xs); 
   text-transform: uppercase; 
-  color: var(--color-border); 
+  color: var(--color-accent); 
 }
 
 .mini-calendar__day.today { 
@@ -2625,7 +2625,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   width: 4px; 
   height: 4px; 
   border-radius: var(--r-full); 
-  background: var(--color-accent); 
+  background: var(--event-color, var(--color-accent)); 
   position: absolute; 
   bottom: 2px; 
 }

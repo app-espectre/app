@@ -520,12 +520,30 @@ function initResults() {
 }
 
 function initReminders() {
-  renderReminderList();
-  renderCalendar();
+  let selectedDate = new Date();
+  const prevBtn = document.querySelector('.mini-calendar__header [data-action="prev"]');
+  const nextBtn = document.querySelector('.mini-calendar__header [data-action="next"]');
+
+  const refresh = () => {
+    renderReminderList(selectedDate);
+    renderCalendar(selectedDate);
+  };
+
+  prevBtn?.addEventListener('click', () => {
+    selectedDate.setMonth(selectedDate.getMonth() - 1);
+    refresh();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    selectedDate.setMonth(selectedDate.getMonth() + 1);
+    refresh();
+  });
+
+  refresh();
   document.getElementById('fab')?.addEventListener('click', () => goTo('reminder-add'));
 }
 
-function renderReminderList() {
+function renderReminderList(displayDate = new Date()) {
   const s = State.load();
   const list = document.getElementById('reminders-list');
   if (!list) return;
@@ -535,23 +553,57 @@ function renderReminderList() {
       const s2 = State.load();
       s2.reminders.splice(parseInt(btn.dataset.delete), 1);
       State.save(s2);
-      renderReminderList();
+      renderReminderList(displayDate);
+      renderCalendar(displayDate);
     });
   });
 }
 
-function renderCalendar() {
+function renderCalendar(displayDate = new Date()) {
+  const titleEl = document.querySelector('.mini-calendar__title');
   const grid = document.getElementById('calendar-grid');
-  if (!grid) return;
+  if (!grid || !titleEl) return;
   const s = State.load();
-  const eventDays = s.reminders.map(r => r.day);
+  const now = new Date();
+  const year = displayDate.getFullYear();
+  const month = displayDate.getMonth();
+
+  const monthNames = ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'];
+  titleEl.textContent = `${monthNames[month]} ${year}`;
+
+  const reminderMonthIndex = (abbr) => {
+    const map = { GEN:0, FEB:1, MAR:2, ABR:3, MAI:4, JUN:5, JUL:6, AGO:7, SET:8, OCT:9, NOV:10, DES:11 };
+    return map[String(abbr).toUpperCase()] ?? -1;
+  };
+
+  const currentMonthReminders = s.reminders
+    .filter(r => reminderMonthIndex(r.month) === month)
+    .reduce((acc, r) => {
+      const day = Number(r.day);
+      if (!acc[day]) acc[day] = [];
+      acc[day].push(r);
+      return acc;
+    }, {});
+
   const days = ['Dl','Dt','Dc','Dj','Dv','Ds','Dg'];
   const cells = days.map(d => `<div class="mini-calendar__day header">${d}</div>`);
-  for (let i = 0; i < 2; i++) cells.push('<div class="mini-calendar__day"></div>');
-  for (let d = 1; d <= 30; d++) {
-    const isToday = d === 14, hasEvent = eventDays.includes(d);
-    cells.push(`<div class="mini-calendar__day ${isToday ? 'today' : ''} ${hasEvent && !isToday ? 'has-event' : ''}">${d}</div>`);
+
+  const firstWeekday = new Date(year, month, 1).getDay();
+  const offset = (firstWeekday + 6) % 7;
+  for (let i = 0; i < offset; i++) cells.push('<div class="mini-calendar__day"></div>');
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isToday = year === now.getFullYear() && month === now.getMonth() && d === now.getDate();
+    const remindersForDay = currentMonthReminders[d] || [];
+    const hasEvent = remindersForDay.length > 0;
+    const eventColor = hasEvent ? remindersForDay[0].color : '';
+    const classes = ['mini-calendar__day'];
+    if (isToday) classes.push('today');
+    if (hasEvent) classes.push('has-event');
+    cells.push(`<div class="${classes.join(' ')}" style="${eventColor ? `--event-color:${eventColor};` : ''}">${d}</div>`);
   }
+
   grid.innerHTML = cells.join('');
 }
 
