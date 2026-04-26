@@ -24,6 +24,59 @@ const State = (() => {
       'Habilitats motrius':{ pct: 55, level: 2 },
       'Conducta emocional':{ pct: 48, level: 1 },
     },
+    selectedEvaluationIndex: 4,
+    historialEvaluaciones: [
+      {
+        fecha: '5 de octubre 2025',
+        datos: {
+          'Comunicació':       { pct: 35, level: 1 },
+          'Interacció social': { pct: 25, level: 1 },
+          'Autonomia':         { pct: 42, level: 1 },
+          'Habilitats motrius':{ pct: 30, level: 1 },
+          'Conducta emocional':{ pct: 28, level: 1 },
+        }
+      },
+      {
+        fecha: '20 de novembre 2025',
+        datos: {
+          'Comunicació':       { pct: 42, level: 1 },
+          'Interacció social': { pct: 32, level: 1 },
+          'Autonomia':         { pct: 50, level: 2 },
+          'Habilitats motrius':{ pct: 38, level: 1 },
+          'Conducta emocional':{ pct: 35, level: 1 },
+        }
+      },
+      {
+        fecha: '10 de desembre 2025',
+        datos: {
+          'Comunicació':       { pct: 48, level: 2 },
+          'Interacció social': { pct: 38, level: 1 },
+          'Autonomia':         { pct: 58, level: 2 },
+          'Habilitats motrius':{ pct: 45, level: 2 },
+          'Conducta emocional':{ pct: 40, level: 1 },
+        }
+      },
+      {
+        fecha: '18 de gener 2026',
+        datos: {
+          'Comunicació':       { pct: 54, level: 2 },
+          'Interacció social': { pct: 40, level: 1 },
+          'Autonomia':         { pct: 62, level: 2 },
+          'Habilitats motrius':{ pct: 50, level: 2 },
+          'Conducta emocional':{ pct: 43, level: 1 },
+        }
+      },
+      {
+        fecha: '5 de abril 2026',
+        datos: {
+          'Comunicació':       { pct: 60, level: 2 },
+          'Interacció social': { pct: 45, level: 1 },
+          'Autonomia':         { pct: 70, level: 3 },
+          'Habilitats motrius':{ pct: 55, level: 2 },
+          'Conducta emocional':{ pct: 48, level: 1 },
+        }
+      },
+    ],
     assessment: { currentQ: 0, answers: [], area: 'Comunicació' },
     results: { score: 72, area: 'Comunicació' },
     reminders: [

@@ -207,6 +207,109 @@ function renderRadarChart(container, data, opts = {}) {
 }
 
 /* ══════════════════════════════════════════════════════════
+   TIMELINE SLIDER
+══════════════════════════════════════════════════════════ */
+
+function formatDateShort(dateStr) {
+  const months = ['gen', 'feb', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'oct', 'nov', 'des'];
+  const parts = dateStr.split(' ');
+  const day = parts[0];
+  const monthText = parts[2];
+  const year = parts[4];
+  const monthIdx = months.findIndex(m => monthText.toLowerCase().includes(m));
+  const monthAbbr = monthIdx >= 0 ? months[monthIdx] : monthText;
+  return `${day} ${monthAbbr} ${year}`;
+}
+
+function renderTimelineSlider(state) {
+  const radarChart = document.getElementById('radar-chart');
+  const btnFullAssessment = document.getElementById('btn-full-assessment');
+  
+  if (!btnFullAssessment || !radarChart || !state.historialEvaluaciones || state.historialEvaluaciones.length === 0) return;
+
+  const maxIdx = state.historialEvaluaciones.length - 1;
+  const currentIdx = state.selectedEvaluationIndex || maxIdx;
+  const currentEval = state.historialEvaluaciones[currentIdx];
+
+  // Crear contenedor del slider si no existe
+  let sliderContainer = document.getElementById('timeline-slider-container');
+  if (!sliderContainer) {
+    sliderContainer = document.createElement('div');
+    sliderContainer.id = 'timeline-slider-container';
+    sliderContainer.className = 'timeline-slider-container mb-12';
+    btnFullAssessment.insertAdjacentElement('beforebegin', sliderContainer);
+  }
+
+  // Renderizar el contenido del slider (solo input + fecha)
+  sliderContainer.innerHTML = `
+    <span class="timeline-slider__date" id="timeline-date">${formatDateShort(currentEval?.fecha || 'Sense data')}</span>
+    <input 
+      type="range" 
+      id="timeline-range" 
+      class="timeline-slider__input" 
+      min="0" 
+      max="${maxIdx}" 
+      value="${currentIdx}"
+      aria-label="Selector de línea de tiempo"
+    >
+  `;
+
+  // Evento del slider
+  const rangeInput = document.getElementById('timeline-range');
+  const dateDisplay = document.getElementById('timeline-date');
+
+  rangeInput.addEventListener('input', (e) => {
+    const idx = parseInt(e.target.value, 10);
+    const selectedEval = state.historialEvaluaciones[idx];
+
+    // Actualizar estado
+    state.selectedEvaluationIndex = idx;
+    State.save(state);
+
+    // Actualizar la fecha mostrada
+    dateDisplay.textContent = formatDateShort(selectedEval?.fecha || 'Sense data');
+
+    // Actualizar el gráfico de radar con animación suave
+    const skillsArray = Object.entries(selectedEval.datos).map(([name, skill]) => ({
+      label: name,
+      value: skill.pct
+    }));
+    
+    // Animar el en cambio (fade effect)
+    radarChart.style.opacity = '0.5';
+    radarChart.style.transition = 'opacity 200ms ease';
+    
+    setTimeout(() => {
+      renderRadarChart(radarChart, skillsArray);
+      radarChart.style.opacity = '1';
+    }, 100);
+
+    // Actualizar las tarjetas de áreas de progreso
+    const progressList = document.getElementById('progress-areas');
+    progressList.innerHTML = Object.entries(selectedEval.datos).map(([name, skill]) => `
+      <article class="area-card" data-skill="${name}" style="cursor:pointer">
+        <div class="area-card__header">
+          <span class="area-card__name">${name}</span>
+          <span class="area-card__pct" style="color:${skillColor(name)}">${skill.pct}%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar__fill" style="width:${skill.pct}%;background:${skillColor(name)}"></div></div>
+        <div class="area-card__meta"><span class="area-card__meta-item">Avaluació a data: ${selectedEval?.fecha}</span></div>
+      </article>
+    `).join('');
+
+    // Reattach event listeners to new cards
+    progressList.querySelectorAll('.area-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const s2 = State.load();
+        s2.assessment = { currentQ: 0, answers: [], area: card.dataset.skill };
+        State.save(s2);
+        goTo('assessment');
+      });
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
    PAGE INITS
 ══════════════════════════════════════════════════════════ */
 
@@ -219,20 +322,35 @@ function initHome() {
 function initProgress() {
   const s = State.load();
   const radarTarget = document.getElementById('radar-chart');
-  renderRadarChart(radarTarget, Object.entries(s.skills).map(([name, skill]) => ({ label: name, value: skill.pct })));
-
   const list = document.getElementById('progress-areas');
+  
   if (!list) return;
-  list.innerHTML = Object.entries(s.skills).map(([name, skill]) => `
+
+  // Obtener el índice de la evaluación seleccionada
+  const selectedIdx = s.selectedEvaluationIndex || (s.historialEvaluaciones?.length - 1) || 0;
+  const evaluacionActual = s.historialEvaluaciones?.[selectedIdx];
+  const datosActuales = evaluacionActual?.datos || s.skills;
+
+  // Renderizar el gráfico de radar con los datos actuales
+  const skillsArray = Object.entries(datosActuales).map(([name, skill]) => ({
+    label: name,
+    value: skill.pct
+  }));
+  
+  renderRadarChart(radarTarget, skillsArray);
+
+  // Renderizar las tarjetas de áreas
+  list.innerHTML = Object.entries(datosActuales).map(([name, skill]) => `
     <article class="area-card" data-skill="${name}" style="cursor:pointer">
       <div class="area-card__header">
         <span class="area-card__name">${name}</span>
         <span class="area-card__pct" style="color:${skillColor(name)}">${skill.pct}%</span>
       </div>
       <div class="progress-bar"><div class="progress-bar__fill" style="width:${skill.pct}%;background:${skillColor(name)}"></div></div>
-      <div class="area-card__meta"><span class="area-card__meta-item">Darrera avaluació: 5 abr 2026</span></div>
+      <div class="area-card__meta"><span class="area-card__meta-item">Avaluació a data: ${evaluacionActual?.fecha || '5 abr 2026'}</span></div>
     </article>
   `).join('');
+  
   list.querySelectorAll('.area-card').forEach(card => {
     card.addEventListener('click', () => {
       const s2 = State.load();
@@ -241,6 +359,10 @@ function initProgress() {
       goTo('assessment');
     });
   });
+
+  // Renderizar el slider de línea de tiempo
+  renderTimelineSlider(s);
+
   document.getElementById('btn-full-assessment')?.addEventListener('click', () => {
     const s2 = State.load();
     s2.assessment = { currentQ: 0, answers: [], area: 'Comunicació' };
