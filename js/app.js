@@ -613,15 +613,35 @@ function initReminderAdd() {
     btn.addEventListener('click', () => { document.querySelectorAll('.reminder-type-btn').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); });
   });
   document.querySelector('.reminder-type-btn')?.classList.add('selected');
+  
+  // Set today's date as default
+  const datePicker = document.getElementById('edit-reminder-date');
+  if (datePicker) {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    datePicker.value = `${year}-${month}-${day}`;
+  }
+  
   document.getElementById('btn-save-reminder')?.addEventListener('click', () => {
     const title = document.getElementById('reminder-title')?.value?.trim();
     const time = document.getElementById('reminder-time')?.value || '10:00';
     const type = document.querySelector('.reminder-type-btn.selected')?.dataset.type || 'Teràpia';
-    if (!title) return;
+    const dateStr = document.getElementById('edit-reminder-date')?.value;
+    
+    if (!title || !dateStr) return;
+    
+    // Parse the date
+    const date = new Date(dateStr);
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const monthMap = ['GEN', 'FEB', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OCT', 'NOV', 'DES'];
+    const month = monthMap[monthIndex];
+    
     const colorMap = { 'Teràpia':'#508bbf','Cita mèdica':'#ffb100','Medicació':'#e74c3c','Escola':'#00943a' };
     const s = State.load();
-    const day = (s.reminders.length + 14) % 28 + 1;
-    s.reminders.push({ day, month: 'ABR', title, time: time + ' h', color: colorMap[type] || '#508bbf' });
+    s.reminders.push({ day, month, title, time: time + ' h', color: colorMap[type] || '#508bbf' });
     State.save(s);
     goTo('reminders');
   });

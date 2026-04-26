@@ -2688,10 +2688,6 @@ body[data-page="report-done"] .progress-bar__fill::after,
   cursor: pointer; 
 }
 
-.mini-calendar__day:hover { 
-  background: var(--color-bg-header); 
-}
-
 .bottom-nav__icon {
   width: 18px;          /* cambia a 16px/14px si lo prefieres */
   height: 18px;
