@@ -470,6 +470,11 @@ img, svg {
   background: var(--color-bg-header); 
 }
 
+.btn--transparent { 
+  background: transparent; 
+  color: var(--color-accent);
+}
+
 .btn--green { 
   background: var(--color-green); 
   color: var(--color-white); 
@@ -2140,9 +2145,6 @@ body[data-page="report-done"] .progress-bar__fill::after,
   align-items: center; 
   padding: var(--sp-14, 14px); 
   border-bottom: 2px solid var(--color-border); 
-  border-top-left-radius: var(--r-md);
-  border-top-right-radius: var(--r-md);
-  background: white;
 }
 
 .info-row__key { 
