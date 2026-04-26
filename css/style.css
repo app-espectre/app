@@ -2215,6 +2215,13 @@ body[data-page="report-done"] .progress-bar__fill::after,
   gap: var(--sp-12);
 }
 
+.settings-section-settings-profile {
+  margin-bottom: var(--sp-24); 
+  display: flex;
+    flex-direction: column;
+  gap: var(--sp-16);
+}
+
 .settings-section__title { 
   font-size: var(--fs-xs); 
   font-weight: var(--fw-black); 
