@@ -576,10 +576,10 @@ function initReminderAdd() {
 
 function initProfessionals() {
   const pros = [
-    { initials: 'MP', name: 'Dra. Marta Puig', spec: 'Psicòloga especialista TEA', location: 'Barcelona · Presencial + Online', rating: 4.9, reviews: 227, color: '#508bbf' },
-    { initials: 'MF', name: 'Marc Ferrer', spec: 'Logopeda · Comm. augmentativa', location: 'Gràcia, BCN · Presencial', rating: 4.8, reviews: 189, color: '#508bbf' },
-    { initials: 'LS', name: 'Laura Sánchez', spec: 'Terapeuta ocupacional', location: 'Sarrià, BCN · Presencial', rating: 4.7, reviews: 117, color: '#508bbf' },
-    { initials: 'PB', name: 'Pau Bosch', spec: 'Psiquiatre infantil TEA', location: 'L\'Eixample · Online + Presencial', rating: 4.9, reviews: 203, color: '#508bbf' },
+    { initials: 'MP', name: 'Dra. Marta Puig', spec: 'Psicòloga especialista TEA', location: 'Barcelona · Presencial + Online', rating: 4.9, reviews: 227, color: '#508bbf', tipo: 'Psicòleg/a', zona: 'BCN', modalitat: ['Presencial', 'Online'] },
+    { initials: 'MF', name: 'Marc Ferrer', spec: 'Logopeda · Comm. augmentativa', location: 'Gràcia, BCN · Presencial', rating: 4.8, reviews: 189, color: '#508bbf', tipo: 'Logopeda', zona: 'Gràcia', modalitat: ['Presencial'] },
+    { initials: 'LS', name: 'Laura Sánchez', spec: 'Terapeuta ocupacional', location: 'Sarrià, BCN · Presencial', rating: 4.7, reviews: 117, color: '#508bbf', tipo: 'Terapeuta ocupacional', zona: 'Sarrià', modalitat: ['Presencial'] },
+    { initials: 'PB', name: 'Pau Bosch', spec: 'Psiquiatre infantil TEA', location: 'L\'Eixample · Online + Presencial', rating: 4.9, reviews: 203, color: '#508bbf', tipo: 'Psicòleg/a', zona: 'BCN', modalitat: ['Online', 'Presencial'] },
   ];
   const list = document.getElementById('professionals-list');
   if (!list) return;
@@ -604,8 +604,11 @@ function initProfessionals() {
     </article>
   `).join('');
 
-  // Wire the search-bar to filter professionals in real time
+  // Wire the search-bar and filter-chips to filter professionals in real time
   const searchInput = document.querySelector('.search-bar input');
+  const typeSelect = document.querySelector('.filter-chip:nth-child(1) select');
+  const zoneSelect = document.querySelector('.filter-chip:nth-child(2) select');
+  const modeSelect = document.querySelector('.filter-chip:nth-child(3) select');
   const cards = Array.from(list.querySelectorAll('.pro-card'));
   const noMsg = document.createElement('p');
   noMsg.className = 'text-sm text-secondary mt-12';
@@ -614,22 +617,57 @@ function initProfessionals() {
 
   const applyFilter = () => {
     const q = (searchInput?.value || '').trim().toLowerCase();
+    const selectedType = (typeSelect?.value || 'Tots').trim();
+    const selectedZone = (zoneSelect?.value || 'Tots').trim();
+    const selectedMode = (modeSelect?.value || 'Tots').trim();
+    
     let visible = 0;
     cards.forEach((card, idx) => {
+      const pro = pros[idx];
       const name = card.querySelector('.pro-card__name')?.textContent.trim().toLowerCase() || '';
       const spec = card.querySelector('.pro-card__spec')?.textContent.trim().toLowerCase() || '';
       const loc = card.querySelector('.pro-card__location')?.textContent.trim().toLowerCase() || '';
-      if (!q || name.includes(q) || spec.includes(q) || loc.includes(q)) { card.style.display = ''; visible++; }
-      else card.style.display = 'none';
+      
+      // Check search filter
+      const matchSearch = !q || name.includes(q) || spec.includes(q) || loc.includes(q);
+      
+      // Check type filter
+      const matchType = selectedType === 'Tots' || pro.tipo === selectedType;
+      
+      // Check zone filter
+      const matchZone = selectedZone === 'Tots' || pro.zona === selectedZone;
+      
+      // Check mode filter
+      const matchMode = selectedMode === 'Tots' || pro.modalitat.includes(selectedMode);
+      
+      if (matchSearch && matchType && matchZone && matchMode) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
     });
-    if (visible === 0 && !appended) { list.appendChild(noMsg); appended = true; }
-    else if (visible > 0 && appended) { noMsg.remove(); appended = false; }
+    
+    if (visible === 0 && !appended) {
+      list.appendChild(noMsg);
+      appended = true;
+    } else if (visible > 0 && appended) {
+      noMsg.remove();
+      appended = false;
+    }
   };
 
   if (searchInput) {
     searchInput.addEventListener('input', applyFilter);
     searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') { searchInput.value = ''; applyFilter(); searchInput.blur(); } });
   }
+
+  // Wire filter-chip selects to trigger filtering
+  [typeSelect, zoneSelect, modeSelect].forEach(sel => {
+    if (sel) {
+      sel.addEventListener('change', applyFilter);
+    }
+  });
 
   cards.forEach(card => {
     card.style.cursor = 'pointer';
