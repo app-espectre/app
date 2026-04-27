@@ -484,7 +484,8 @@ img, svg {
 .btn--sm { 
   min-height: 36px; 
   font-size: var(--fs-sm); 
-  padding: var(--sp-8) var(--sp-16); 
+  padding: var(--sp-8) var(--sp-16);
+  box-shadow: none; 
 }
 
 .btn--icon {
