@@ -26,6 +26,7 @@ const PAGE_MAP = {
   'community-search':     'community-search.html',
   'community-chat':       'community-chat.html',
   'community-publish':    'community-publish.html',
+  'community-post':       'community-post.html',
   'settings':             'settings.html',
   'profile-settings':     'profile-settings.html',
   'profile-edit':         'profile-edit.html',
@@ -507,7 +508,6 @@ function initResults() {
   const { score, area } = s.results || { score: 72, area: 'Comunicació' };
   const setEl = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
   setEl('results-score', score + '%');
-  setEl('results-area', area);
   setEl('results-rec', score >= 70 ? 'Excel·lent progrés! Continua amb les rutines actuals.' : score >= 50 ? `Parla amb el logopeda sobre ${area.toLowerCase()}.` : 'Es recomana consulta amb especialista aviat.');
   const subs = [
     { name: 'Comunicació verbal', val: Math.min(100, score + 8) },
