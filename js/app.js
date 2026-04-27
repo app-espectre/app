@@ -936,7 +936,7 @@ function renderPosts() {
          <svg viewBox="0 0 24 24" fill="${post.liked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
          ${post.likes}
        </button>
-       <button class="post__action" onclick="goTo('community-chat')">
+       <button class="post__action" onclick="goTo('community-post')">
          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
          ${post.replies} respostes
        </button>
@@ -1377,13 +1377,134 @@ document.addEventListener('DOMContentLoaded', () => {
    'home': initHome, 'info': initInfo, 'progress': initProgress, 'assessment': initAssessment,
    'results': initResults, 'reminders': initReminders, 'reminder-add': initReminderAdd,
    'professionals': initProfessionals, 'community': initCommunity,
-   'community-chat': initCommunityChat, 'community-publish': initCommunityPublish,
+   'community-chat': initCommunityChat, 'community-publish': initCommunityPublish, 'community-post': initCommunityPost,
    'settings': initSettings, 'profile-view': initProfileView,
    'profile-settings': initProfileSettings, 'profile-edit': initProfileEdit, 'profile-note': initProfileNote,
    'report-gen': initReportGen,
  };
  PAGE_INITS[currentPage]?.();
 
+ /* ══════════════════════════════════════════════════════════
+   COMMUNITY POST DETAIL
+══════════════════════════════════════════════════════════ */
+
+function initCommunityPost() {
+  renderCommunityPost();
+  document.getElementById('btn-send-reply')?.addEventListener('click', sendReply);
+  document.getElementById('reply-input')?.addEventListener('keypress', e => { 
+    if (e.key === 'Enter') sendReply(); 
+  });
+}
+
+function renderCommunityPost() {
+  const s = State.load();
+  const post = s.currentPost;
+  if(!post) return;
+
+  // 1. Renderitzar el post principal
+  const mainContainer = document.getElementById('community-main-post');
+  if(mainContainer) {
+    mainContainer.innerHTML = `
+      <div class="post-detail-main">
+        <div class="post-detail__header">
+          <div class="avatar avatar--sm" style="background-color: var(--color-accent); color: white;">${post.initials}</div>
+          <div class="post-detail__author">${post.author}</div>
+          <div class="post-detail__time">${post.time}</div>
+        </div>
+        <div class="post-detail__title">${post.title}</div>
+        <div class="post-detail__body">${post.text}</div>
+        <div class="post-detail__actions">
+          <button class="post-detail__action ${post.liked ? 'liked' : ''}" id="btn-like-main">
+            <svg viewBox="0 0 24 24" fill="${post.liked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            ${post.likes}
+          </button>
+          <button class="post-detail__action" style="cursor:default;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ${post.repliesCount} respostes
+          </button>
+        </div>
+      </div>
+    `;
+
+    // Funcionalitat de Like al post principal
+    document.getElementById('btn-like-main')?.addEventListener('click', () => {
+      const s2 = State.load();
+      s2.currentPost.liked = !s2.currentPost.liked;
+      s2.currentPost.likes += s2.currentPost.liked ? 1 : -1;
+      State.save(s2);
+      renderCommunityPost();
+    });
+  }
+
+  // 2. Títol del número de respostes
+  const repliesTitle = document.getElementById('replies-count-title');
+  if(repliesTitle) repliesTitle.textContent = `${post.replies.length} Respostes`;
+
+  // 3. Renderitzar les respostes
+  const repliesContainer = document.getElementById('community-replies');
+  if(repliesContainer) {
+    repliesContainer.innerHTML = post.replies.map((r, i) => `
+      <div class="post-detail-reply">
+        <div class="post-detail__header">
+          <div class="avatar avatar--sm" style="background-color: var(--color-bg-header); color: var(--color-primary); border: 1px solid var(--color-accent);">${r.initials}</div>
+          <div class="post-detail__author">${r.author}</div>
+          <div class="post-detail__time">${r.time}</div>
+        </div>
+        <div class="post-detail__body">${r.text}</div>
+        <div class="post-detail__actions">
+          <button class="post-detail__action ${r.liked ? 'liked' : ''}" onclick="toggleReplyLike(${i})">
+            <svg viewBox="0 0 24 24" fill="${r.liked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            ${r.likes}
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+// Funció global per donar like a una resposta específica
+window.toggleReplyLike = function(idx) {
+  const s = State.load();
+  s.currentPost.replies[idx].liked = !s.currentPost.replies[idx].liked;
+  s.currentPost.replies[idx].likes += s.currentPost.replies[idx].liked ? 1 : -1;
+  State.save(s);
+  renderCommunityPost();
+};
+
+// Funció per enviar un nou comentari
+function sendReply() {
+  const input = document.getElementById('reply-input');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+  
+  const s = State.load();
+  // Creem la nova resposta agafant el nom d'usuari (Ana Molina)
+  const authorName = s.profile.parentName || 'Ana Molina';
+  const authorInitial = authorName.charAt(0).toUpperCase();
+
+  s.currentPost.replies.push({
+    author: authorName,
+    initials: authorInitial,
+    time: 'ara mateix',
+    text: text,
+    likes: 0,
+    liked: false
+  });
+  s.currentPost.repliesCount = s.currentPost.replies.length;
+  State.save(s);
+  
+  input.value = '';
+  renderCommunityPost();
+  
+  // Fem scroll automàtic fins al final per veure la nova resposta
+  const scrollArea = document.querySelector('#page-community-post .page-scroll');
+  if(scrollArea) {
+    setTimeout(() => {
+      scrollArea.scrollTop = scrollArea.scrollHeight;
+    }, 50);
+  }
+}
 
  document.querySelectorAll('.diagnosis-chip').forEach(chip => {
    chip.addEventListener('click', () => { document.querySelectorAll('.diagnosis-chip').forEach(c => c.classList.remove('selected')); chip.classList.add('selected'); });
