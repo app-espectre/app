@@ -180,9 +180,67 @@ function renderShell(currentPageId) {
   overlay.id = 'overlay';
   app.appendChild(overlay);
 
+  // ── HELP MODAL ────────────────────────────────────────────
+  const helpModal = document.createElement('div');
+  helpModal.className = 'help-modal';
+  helpModal.id = 'help-modal';
+  helpModal.innerHTML = `
+    <button class="help-modal__close" id="btn-help-close" aria-label="Tancar">✕</button>
+    <div class="help-modal__header">
+      <p class="help-modal__label">Comunitat</p>
+      <div class="help-modal__card">
+        <div class="help-modal__img-wrap">
+          <img src="../img/help.svg" alt="Ajuda">
+        </div>
+        <p class="help-modal__card-title">Tens algun dubte?</p>
+        <p class="help-modal__card-sub">Pregunta'm el que vulguis i<br>t'ajudaré al moment.</p>
+      </div>
+    </div>
+    <div class="help-modal__body" id="help-modal-body">
+      <p class="help-modal__faq-title">Preguntes freqüents</p>
+      <div class="help-modal__faq-list">
+        <div class="help-modal__faq-item">
+          <div class="help-modal__faq-dot"></div>
+          <div>
+            <p class="help-modal__faq-q">Què puc fer dins la comunitat?</p>
+            <p class="help-modal__faq-a">Pots publicar contingut, comentar, interactuar amb altres usuaris i participar en discussions.</p>
+          </div>
+        </div>
+        <div class="help-modal__faq-item">
+          <div class="help-modal__faq-dot"></div>
+          <div>
+            <p class="help-modal__faq-q">És gratuït utilitzar la comunitat?</p>
+            <p class="help-modal__faq-a">Sí, l'accés bàsic és gratuït.</p>
+          </div>
+        </div>
+        <div class="help-modal__faq-item">
+          <div class="help-modal__faq-dot"></div>
+          <div>
+            <p class="help-modal__faq-q">Quines normes he de seguir?</p>
+            <p class="help-modal__faq-a">Has de respectar els altres usuaris i evitar contingut ofensiu o inadequat.</p>
+          </div>
+        </div>
+      </div>
+      <div class="help-modal__replies" id="help-replies"></div>
+    </div>
+    <div class="help-modal__input-bar">
+      <input class="help-modal__input" id="help-input" type="text" placeholder="Afegeix un comentari">
+      <button class="help-modal__send" id="btn-help-send" aria-label="Enviar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#023059" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
+      </button>
+    </div>
+  `;
+  app.appendChild(helpModal);
+
+  document.getElementById('btn-help-close').addEventListener('click', closeHelpModal);
+  document.getElementById('btn-help-send').addEventListener('click', sendHelpMessage);
+  document.getElementById('help-input').addEventListener('keypress', e => {
+    if (e.key === 'Enter') sendHelpMessage();
+  });
+
   // ── EVENTS ────────────────────────────────────────────────
   document.getElementById('btn-menu').addEventListener('click', openMenu);
-  document.getElementById('btn-avatar').addEventListener('click', () => { closeMenu(); goTo('profile-view'); });
+document.getElementById('btn-avatar').addEventListener('click', () => { closeMenu(); openHelpModal(); });
   document.getElementById('overlay').addEventListener('click', closeMenu);
   document.getElementById('btn-logout').addEventListener('click', () => { State.reset(); goTo('welcome'); });
   document.querySelector('.side-menu__avatar').addEventListener('click', () => { closeMenu(); goTo('profile-settings'); });
@@ -208,4 +266,72 @@ function closeMenu() {
     overlay.classList.remove('active');
     setTimeout(() => overlay.classList.remove('visible'), 260);
   }
+}
+
+function openHelpModal() {
+  const m = document.getElementById('help-modal');
+  if (!m) return;
+  m.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => m.classList.add('open')));
+}
+
+function closeHelpModal() {
+  const m = document.getElementById('help-modal');
+  if (!m) return;
+  m.classList.remove('open');
+  setTimeout(() => { m.style.display = 'none'; }, 400);
+}
+
+async function sendHelpMessage() {
+  const input    = document.getElementById('help-input');
+  const repliesEl = document.getElementById('help-replies');
+  if (!input || !repliesEl) return;
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+
+  // Missatge de l'usuari
+  const userBubble = document.createElement('div');
+  userBubble.className = 'help-bubble help-bubble--out';
+  userBubble.textContent = text;
+  repliesEl.appendChild(userBubble);
+
+  // Indicador "escrivint..."
+  const typingBubble = document.createElement('div');
+  typingBubble.className = 'help-bubble help-bubble--typing';
+  typingBubble.textContent = 'Escrivint...';
+  repliesEl.appendChild(typingBubble);
+
+  // Scroll baix
+  const body = document.getElementById('help-modal-body');
+  if (body) body.scrollTop = body.scrollHeight;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: `Ets un assistent amable de l'aplicació ESPECTRE, una app de suport per a famílies amb fills amb TEA (Trastorn de l'Espectre Autista). Respon sempre en català, de manera breu, càlida i comprensiva. Ajuda amb dubtes sobre la comunitat i sobre la criança de nens amb TEA.`,
+        messages: [{ role: 'user', content: text }],
+      }),
+    });
+    const data = await res.json();
+    typingBubble.remove();
+
+    const aiText = data?.content?.[0]?.text || 'Ho sento, no he pogut respondre ara.';
+    const aiBubble = document.createElement('div');
+    aiBubble.className = 'help-bubble help-bubble--in';
+    aiBubble.textContent = aiText;
+    repliesEl.appendChild(aiBubble);
+  } catch (e) {
+    typingBubble.remove();
+    const errBubble = document.createElement('div');
+    errBubble.className = 'help-bubble help-bubble--in';
+    errBubble.textContent = 'Ho sento, hi ha hagut un error. Torna a intentar-ho.';
+    repliesEl.appendChild(errBubble);
+  }
+
+  if (body) body.scrollTop = body.scrollHeight;
 }
