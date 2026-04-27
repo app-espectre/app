@@ -1391,7 +1391,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
  const PAGE_INITS = {
-   'home': initHome, 'info': initInfo, 'progress': initProgress, 'assessment': initAssessment,
+  'register': initRegisterWizard, 
+  'home': initHome, 'info': initInfo, 'progress': initProgress, 'assessment': initAssessment,
    'results': initResults, 'reminders': initReminders, 'reminder-add': initReminderAdd,
    'professionals': initProfessionals, 'community': initCommunity,
    'community-chat': initCommunityChat, 'community-publish': initCommunityPublish, 'community-post': initCommunityPost,
@@ -1561,3 +1562,91 @@ function sendReply() {
  });
  document.querySelectorAll('.group-card').forEach(card => card.addEventListener('click', () => goTo('community-chat')));
 });
+
+/* ══════════════════════════════════════════════════════════
+   REGISTRE PAS A PAS (WIZARD)
+══════════════════════════════════════════════════════════ */
+let currentStep = 1;
+
+function initRegisterWizard() {
+  currentStep = 1;
+  updateWizardUI();
+
+  // Botó Continuar / Següent
+  const btnNext = document.getElementById('btn-next-step');
+  if (btnNext) {
+    btnNext.onclick = () => {
+      if (currentStep < 3) {
+        currentStep++;
+        updateWizardUI();
+      } else {
+        // En acabar el pas 3, guardem les dades i anem a la pantalla final
+        const s = State.load();
+        s.profile.parentName = document.getElementById('reg-name').value || s.profile.parentName;
+        s.profile.childName = document.getElementById('child-name').value || s.profile.childName;
+        s.authenticated = true; // Simulem login
+        State.save(s);
+        goTo('onboard-done');
+      }
+    };
+  }
+
+  // Botó Enrere (fletxa a la capçalera)
+  const btnBack = document.getElementById('btn-back-step');
+  if (btnBack) {
+    btnBack.onclick = () => {
+      if (currentStep > 1) {
+        currentStep--;
+        updateWizardUI();
+      }
+    };
+  }
+
+  // Lògica per als xips (Diagnòstic i Gènere)
+  document.querySelectorAll('.gender-chip, .diagnosis-chip').forEach(chip => {
+    chip.onclick = () => {
+      chip.parentElement.querySelectorAll('.option-chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+    };
+  });
+
+  // Lògica per als xips de Necessitats (Selecció múltiple)
+  document.querySelectorAll('.needs-chip').forEach(chip => {
+    chip.onclick = () => chip.classList.toggle('selected');
+  });
+}
+
+function updateWizardUI() {
+  // Amagar tots els passos
+  document.querySelectorAll('.wizard-step').forEach(s => s.style.display = 'none');
+  
+  // Mostrar el pas actual
+  document.getElementById(`step-${currentStep}`).style.display = 'block';
+
+  // Actualitzar texts i botons de la capçalera fixa
+  const title = document.getElementById('step-title');
+  const desc = document.getElementById('step-desc');
+  const btnNext = document.getElementById('btn-next-step');
+  const btnBack = document.getElementById('btn-back-step');
+
+  if (currentStep === 1) {
+    title.textContent = 'Crea el teu compte';
+    desc.textContent = 'Pas 1 de 3: Les teves dades';
+    btnNext.textContent = 'Continuar';
+    btnBack.style.display = 'none';
+  } else if (currentStep === 2) {
+    title.textContent = "Dades de l'infant";
+    desc.textContent = 'Pas 2 de 3: Coneguem la Martina';
+    btnNext.textContent = 'Continuar';
+    btnBack.style.display = 'block';
+  } else if (currentStep === 3) {
+    title.textContent = 'Diagnòstic i necessitats';
+    desc.textContent = 'Pas 3 de 3: Personalitza el perfil';
+    btnNext.textContent = 'Finalitzar i entrar';
+    btnBack.style.display = 'block';
+  }
+
+  // Tornar el scroll a dalt de tot en cada pas
+  const scrollArea = document.querySelector('#page-register .page-scroll');
+  if (scrollArea) scrollArea.scrollTop = 0;
+}

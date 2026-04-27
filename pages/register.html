@@ -10,42 +10,88 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
-
   <link rel="manifest" href="../manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Espectre">
-  
 </head>
 <body data-page="register">
 <div id="app">
   <section class="page active" id="page-register">
+    
     <div class="auth-page-outer">
-      <div class="auth-header">
-        <div class="auth-header__title">Crea el teu compte</div>
-        <div class="auth-header__sub">És gratuït i triga un minut.</div>
-        <div class="circulo" aria-hidden="true">
-          <span></span>
+      
+      <div class="auth-header" style="position: relative;">
+        <button class="back-btn mb-16" id="btn-back-step" style="display: none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>
+        </button>
+        <div class="auth-header__title" id="step-title">Crea el teu compte</div>
+        <div class="auth-header__sub" id="step-desc">Pas 1 de 3: Les teves dades</div>
+        <div class="circulo" aria-hidden>
           <span></span>
           <span></span>
         </div>
       </div>
-      <div class="auth-content">
-        <div class="flex flex-col gap-16">
-        <div class="field"><label class="field__label" for="reg-name">Nom i cognoms</label><input class="field__input" id="reg-name" type="text" placeholder="Ana Molina Reyes"></div>
-        <div class="field"><label class="field__label" for="reg-email">Correu electrònic</label><input class="field__input" id="reg-email" type="email" placeholder="exemple@gmail.com"></div>
-        <div class="field"><label class="field__label" for="reg-pass">Contrasenya</label><input class="field__input" id="reg-pass" type="password" placeholder="•••••••• (mínim 8 caràcters)"></div>
-        <div class="field"><label class="field__label" for="reg-pass2">Confirmar contrasenya</label><input class="field__input" id="reg-pass2" type="password" placeholder="••••••••"></div>
-        <div class="checkbox-row"><input type="checkbox" id="reg-terms" checked><label for="reg-terms">He llegit i accepto els <a href="#">Termes d'ús</a> i la <a href="#">Política de privacitat</a>.</label></div>
+      
+      <div class="auth-content-register">
+        
+        <div class="wizard-step" id="step-1">
+          <div class="flex flex-col gap-16">
+            <div class="field"><label class="field__label" for="reg-name">Nom i cognoms</label><input class="field__input" id="reg-name" type="text" placeholder="Ana Molina Reyes"></div>
+            <div class="field"><label class="field__label" for="reg-email">Correu electrònic</label><input class="field__input" id="reg-email" type="email" placeholder="exemple@gmail.com"></div>
+            <div class="field"><label class="field__label" for="reg-pass">Contrasenya</label><input class="field__input" id="reg-pass" type="password" placeholder="•••••••• (mínim 8 caràcters)"></div>
+            <div class="field"><label class="field__label" for="reg-pass2">Confirmar contrasenya</label><input class="field__input" id="reg-pass2" type="password" placeholder="••••••••"></div>
+            <div class="checkbox-row"><input type="checkbox" id="reg-terms" checked><label for="reg-terms">He llegit i accepto els <a href="#">Termes d'ús</a> i la <a href="#">Política de privacitat</a>.</label></div>
+          </div>
+        </div>
+
+        <div class="wizard-step" id="step-2" style="display: none;">
+          <div class="flex flex-col gap-16">
+            <div class="field"><label class="field__label" for="child-name">Nom de l'infant</label><input class="field__input" id="child-name" type="text" placeholder="Martina" value="Martina"></div>
+            <div class="field"><label class="field__label" for="child-birth">Data de neixement</label><input class="field__input" id="child-birth" type="date" value="2018-03-15"></div>
+            <div class="field">
+              <label class="field__label">Gènere</label>
+              <div class="gender-options">
+                <div class="option-chip gender-chip selected">Nena</div>
+                <div class="option-chip gender-chip">Nen</div>
+                <div class="option-chip gender-chip">Prefereixo no dir</div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="child-course">Curs escolar (opcional)</label>
+              <select class="field__select" id="child-course">
+                <option>Selecciona...</option><option>P3</option><option>P4</option><option>P5</option>
+                <option selected>1r de primària</option><option>2n de primària</option><option>3r de primària</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="wizard-step" id="step-3" style="display: none;">
+          <div class="flex flex-col gap-20">
+            <div class="field">
+          <label class="field__label">Diagnòstic</label>
+          <select class="field__select"><option selected="">TEA nivell de suport 1</option><option>TEA nivell de suport 2</option><option>TEA nivell de suport 3</option><option>En procés de diagnòstic</option></select>
+        </div>
+            <div class="field">
+              <label class="field__label">Necessitats específiques <span class="text-secondary text-xs">(selecció múltiple)</span></label>
+              <div class="option-chips">
+                <div class="option-chip needs-chip selected">Comunicació</div>
+                <div class="option-chip needs-chip">Autonomia</div>
+                <div class="option-chip needs-chip selected">Sensorial</div>
+                <div class="option-chip needs-chip selected">Social</div>
+                <div class="option-chip needs-chip">Aprenentatge</div>
+                <div class="option-chip needs-chip">Conductual</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn--primary mt-24" id="btn-next-step" style="width: 100%;">Continuar</button>
+        
       </div>
-      <button class="btn btn--primary" id="btn-register-submit">Crear compte</button>
-      <p class="auth-footer-link">Ja tens compte? <button id="link-to-login">Inicia sessió</button></p>
     </div>
   </section>
 </div>
 
-  <script src="../js/state.js"></script>
-  <script src="../js/shell.js"></script>
-  <script src="../js/app.js"></script>
+<script src="../js/state.js"></script>
+<script src="../js/shell.js"></script>
+<script src="../js/app.js"></script>
 </body>
 </html>
