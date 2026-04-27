@@ -429,6 +429,7 @@ img, svg {
   cursor: pointer;
   width: 100%;
   min-height: 48px;
+  box-shadow: var(--shadow-card);
 }
 
 .btn:active { 
@@ -438,6 +439,7 @@ img, svg {
 .btn--primary { 
   background: var(--color-accent); 
   color: var(--color-white); 
+  box-shadow: var(--shadow-card);
 }
 
 .btn--primary:hover { 
@@ -535,6 +537,7 @@ img, svg {
   background: var(--color-white);
   transition: border-color var(--transition);
   width: 100%;
+  box-shadow: var(--shadow-card);
 }
 
 .field__input:focus, .field__textarea:focus, .field__select:focus {
@@ -838,6 +841,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   display: flex;
   align-items: stretch;
   gap: var(--sp-12);
+  box-shadow: var(--shadow-card);
 }
 
 .appt-card__date {
@@ -974,7 +978,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   border: 1.5px solid var(--color-border);
   border-radius: var(--r-md);
   cursor: pointer;
-  transition: box-shadow var(--transition);
+  box-shadow: var(--shadow-card);
 }
 
 .skill-row__header { 
@@ -1006,6 +1010,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   border-radius: var(--r-md);
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition);
+  box-shadow: var(--shadow-card);
 }
 
 .radio-option:hover { 
@@ -1062,7 +1067,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   gap: var(--sp-12);
   align-items: flex-start;
   cursor: pointer;
-  transition: box-shadow var(--transition);
+  box-shadow: var(--shadow-card);
 }
 
 .pro-card__body { 
@@ -1116,6 +1121,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   border-radius: var(--r-md);
   padding: var(--sp-16);
   display: flex; flex-direction: column; gap: var(--sp-12);
+  box-shadow: var(--shadow-card);
 }
 
 .post__header { 
@@ -1288,6 +1294,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   border: 1.5px solid var(--color-border);
   border-radius: var(--r-md);
   padding: var(--sp-10) var(--sp-16);
+  box-shadow: var(--shadow-card);
 }
 
 .search-bar svg { 
@@ -1337,6 +1344,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   background: var(--color-white);
   cursor: pointer; 
   transition: background var(--transition), border-color var(--transition);
+  box-shadow: var(--shadow-card);
 }
 
 .filter-chip:hover { 
@@ -1757,7 +1765,8 @@ body[data-page="report-done"] .progress-bar__fill::after,
 .option-chips { 
   display: flex; 
   flex-wrap: wrap; 
-  gap: var(--sp-10); 
+  gap: var(--sp-10);
+  box-shadow: var(--shadow-card); 
 }
 
 .needs-selection {
@@ -1898,7 +1907,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   border-radius: var(--r-md);
   padding: var(--sp-16);
   cursor: pointer;
-  transition: box-shadow var(--transition);
+  box-shadow: var(--shadow-card);
 }
 
 .area-card:hover { 
@@ -2056,6 +2065,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   right: 0;
   width: 20px;
   height: 20px;
+  box-shadow: var(--shadow-card);
 }
 
 /* Info/Artículos */
@@ -2081,7 +2091,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   border: 1.5px solid var(--color-border);
   border-radius: var(--r-md);
   cursor: pointer; 
-  transition: box-shadow var(--transition);
+  box-shadow: var(--shadow-card);
   margin-bottom: var(--sp-8);
 }
 
@@ -2238,6 +2248,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   background: var(--color-card-bg);
   border: 1.5px solid var(--color-border);
   border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
 }
 
 .settings-row__body { 
@@ -2279,7 +2290,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   display: flex; 
   align-items: center; 
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(80,139,191,.45);
+  box-shadow: var(--shadow-elevated);
   font-size: 26px; 
   font-weight: var(--fw-bold);
   cursor: pointer;
@@ -2434,7 +2445,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   border: 1.5px solid var(--color-border);
   border-radius: var(--r-md);
   cursor: pointer; 
-  transition: box-shadow var(--transition);
+  box-shadow: var(--shadow-card);
 }
 
 .group-card:hover { 
@@ -2597,6 +2608,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   background: var(--color-white);
   cursor: pointer; 
   transition: all var(--transition);
+  box-shadow: var(--shadow-card);
 }
 
 .note-type-btn.selected { 
@@ -2636,6 +2648,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
   border: 1.5px solid var(--color-border); 
   border-radius: var(--r-md); 
   overflow: hidden; 
+  box-shadow: var(--shadow-card);
 }
 
 .mini-calendar__header { 
