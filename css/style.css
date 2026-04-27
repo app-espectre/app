@@ -3531,8 +3531,9 @@ body[data-page="report-done"] .progress-bar__fill::after,
 }
 
 .post-detail-reply .post-detail__body {
-  color: var(--color-primary); /* El text de les respostes és més fosc al mockup */
-  font-size: var(--fs-base);
+    font-size: var(--fs-sm);
+    color: var(--color-primary);
+    line-height: 1.55;
 }
 
 .post-detail__actions {

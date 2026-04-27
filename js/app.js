@@ -35,6 +35,21 @@ const PAGE_MAP = {
  'profile-note':         'profile-note.html',
 };
 
+/* Funció per obtenir el HTML de l'avatar amb imatge */
+function getAvatarHTML(authorName, index = 0) {
+  const s = State.load();
+  // Si l'autor és l'Ana Molina o l'usuari principal
+  if (authorName === 'Ana Molina' || authorName === s.profile.parentName) {
+    return `<div class="avatar avatar--sm" style="background-image: url('../img/ana.jpg'); background-size: cover; background-position: center; color: transparent;"></div>`;
+  }
+  
+  // Per a la resta, alternem entre pare1 i pare6
+  const imgNum = (index % 6) + 1;
+  const imgPath = `../img/pare${imgNum}.jpg`;
+  
+  return `<div class="avatar avatar--sm" style="background-image: url('${imgPath}'); background-size: cover; background-position: center; color: transparent;"></div>`;
+}
+
 
 function goTo(pageId, opts = {}) {
  const s = State.load();
@@ -917,43 +932,45 @@ function initCommunity() {
 
 
 function renderPosts() {
- const s = State.load();
- const list = document.getElementById('community-posts');
- if (!list) return;
- const colors = ['#508bbf','#00943a','#9b59b6','#e67e22'];
- const avatarClasses = ['avatar--image', 'avatar--image-2', 'avatar--image-3'];
- list.innerHTML = s.posts.map((post, i) => {
-   const avatarClass = post.author === 'Ana Molina' ? 'avatar--ana-sm' : avatarClasses[i % 3];
-   return `
-   <article class="post">
-     <div class="post__header">
-       <div class="avatar avatar--sm ${avatarClass}"></div>
-       <div class="post__meta"><div class="post__author">${post.author}</div><div class="post__time">${post.time}</div></div>
-     </div>
-     <p class="post__text">${post.text}</p>
-     <div class="post__actions">
-       <button class="post__action ${post.liked ? 'liked' : ''}" data-like="${i}">
-         <svg viewBox="0 0 24 24" fill="${post.liked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-         ${post.likes}
-       </button>
-       <button class="post__action" onclick="goTo('community-post')">
-         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-         ${post.replies} respostes
-       </button>
-     </div>
-   </article>
- `;
- }).join('');
- list.querySelectorAll('[data-like]').forEach(btn => {
-   btn.addEventListener('click', () => {
-     const s2 = State.load();
-     const idx = parseInt(btn.dataset.like);
-     s2.posts[idx].liked = !s2.posts[idx].liked;
-     s2.posts[idx].likes += s2.posts[idx].liked ? 1 : -1;
-     State.save(s2);
-     renderPosts();
-   });
- });
+  const s = State.load();
+  const list = document.getElementById('community-posts');
+  if (!list) return;
+
+  list.innerHTML = s.posts.map((post, i) => {
+    const numReplies = Array.isArray(post.replies) ? post.replies.length : post.replies;
+    const avatarHTML = getAvatarHTML(post.author, i);
+
+    return `
+    <article class="post">
+      <div class="post__header">
+        ${avatarHTML}
+        <div class="post__meta"><div class="post__author">${post.author}</div><div class="post__time">${post.time}</div></div>
+      </div>
+      <p class="post__text">${post.text}</p>
+      <div class="post__actions">
+        <button class="post__action ${post.liked ? 'liked' : ''}" data-like="${i}">
+          <svg viewBox="0 0 24 24" fill="${post.liked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          ${post.likes}
+        </button>
+        <button class="post__action" onclick="viewPost(${i})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          ${numReplies} respostes
+        </button>
+      </div>
+    </article>
+    `;
+  }).join('');
+
+  list.querySelectorAll('[data-like]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const s2 = State.load();
+      const idx = parseInt(btn.dataset.like);
+      s2.posts[idx].liked = !s2.posts[idx].liked;
+      s2.posts[idx].likes += s2.posts[idx].liked ? 1 : -1;
+      State.save(s2);
+      renderPosts();
+    });
+  });
 }
 
 
@@ -1384,10 +1401,35 @@ document.addEventListener('DOMContentLoaded', () => {
  };
  PAGE_INITS[currentPage]?.();
 
- /* ══════════════════════════════════════════════════════════
-   COMMUNITY POST DETAIL
+/* ══════════════════════════════════════════════════════════
+   COMMUNITY POST DETAIL & REPLIES
 ══════════════════════════════════════════════════════════ */
 
+// 1. Funció que es crida quan fem clic a "respostes" des del mur principal
+window.viewPost = function(idx) {
+  const s = State.load();
+  const post = s.posts[idx];
+  
+  // Si la publicació no té respostes detallades creades, li posem les de la imatge de mostra
+  if (!Array.isArray(post.replies)) {
+    post.repliesCount = post.replies; // Guardem quantes en deia originalment
+    post.replies = [
+       { author: 'Dolors L.', initials: 'D', time: 'fa 1 h', text: "Sí! El nostre fill hi va. La PT és excel·lent i molt implicada.", likes: 7, liked: true },
+       { author: 'Andreu M.', initials: 'A', time: 'fa 45 m', text: "Nosaltres el coneixem bé! Escriu-nos per privat.", likes: 4, liked: true },
+       { author: 'Jordina P.', initials: 'J', time: 'fa 30 m', text: "L'adaptació que van fer va ser molt bona. El recomano!", likes: 2, liked: false }
+    ];
+  }
+  
+  s.currentPost = post;
+  s.currentPostIndex = idx; // Guardem quin número de post és per poder actualitzar els likes globals
+  State.save(s);
+  
+  // Naveguem a la pàgina de la publicació
+  goTo('community-post');
+};
+
+
+// 2. Inicialització i dibuix de la pantalla community-post
 function initCommunityPost() {
   renderCommunityPost();
   document.getElementById('btn-send-reply')?.addEventListener('click', sendReply);
@@ -1401,17 +1443,16 @@ function renderCommunityPost() {
   const post = s.currentPost;
   if(!post) return;
 
-  // 1. Renderitzar el post principal
   const mainContainer = document.getElementById('community-main-post');
   if(mainContainer) {
     mainContainer.innerHTML = `
       <div class="post-detail-main">
         <div class="post-detail__header">
-          <div class="avatar avatar--sm" style="background-color: var(--color-accent); color: white;">${post.initials}</div>
+          ${getAvatarHTML(post.author, s.currentPostIndex || 0)}
           <div class="post-detail__author">${post.author}</div>
           <div class="post-detail__time">${post.time}</div>
         </div>
-        <div class="post-detail__title">${post.title}</div>
+        ${post.title ? `<div class="post-detail__title">${post.title}</div>` : ''}
         <div class="post-detail__body">${post.text}</div>
         <div class="post-detail__actions">
           <button class="post-detail__action ${post.liked ? 'liked' : ''}" id="btn-like-main">
@@ -1420,33 +1461,34 @@ function renderCommunityPost() {
           </button>
           <button class="post-detail__action" style="cursor:default;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            ${post.repliesCount} respostes
+            ${post.replies.length} respostes
           </button>
         </div>
       </div>
     `;
 
-    // Funcionalitat de Like al post principal
     document.getElementById('btn-like-main')?.addEventListener('click', () => {
       const s2 = State.load();
       s2.currentPost.liked = !s2.currentPost.liked;
       s2.currentPost.likes += s2.currentPost.liked ? 1 : -1;
+      if (s2.currentPostIndex !== undefined) {
+         s2.posts[s2.currentPostIndex].liked = s2.currentPost.liked;
+         s2.posts[s2.currentPostIndex].likes = s2.currentPost.likes;
+      }
       State.save(s2);
       renderCommunityPost();
     });
   }
 
-  // 2. Títol del número de respostes
   const repliesTitle = document.getElementById('replies-count-title');
   if(repliesTitle) repliesTitle.textContent = `${post.replies.length} Respostes`;
 
-  // 3. Renderitzar les respostes
   const repliesContainer = document.getElementById('community-replies');
   if(repliesContainer) {
     repliesContainer.innerHTML = post.replies.map((r, i) => `
       <div class="post-detail-reply">
         <div class="post-detail__header">
-          <div class="avatar avatar--sm" style="background-color: var(--color-bg-header); color: var(--color-primary); border: 1px solid var(--color-accent);">${r.initials}</div>
+          ${getAvatarHTML(r.author, i + 5)}
           <div class="post-detail__author">${r.author}</div>
           <div class="post-detail__time">${r.time}</div>
         </div>
@@ -1462,16 +1504,21 @@ function renderCommunityPost() {
   }
 }
 
-// Funció global per donar like a una resposta específica
+// 3. Funció per donar like a les respostes individuals
 window.toggleReplyLike = function(idx) {
   const s = State.load();
   s.currentPost.replies[idx].liked = !s.currentPost.replies[idx].liked;
   s.currentPost.replies[idx].likes += s.currentPost.replies[idx].liked ? 1 : -1;
+  
+  if (s.currentPostIndex !== undefined) {
+      s.posts[s.currentPostIndex].replies = s.currentPost.replies;
+  }
+  
   State.save(s);
   renderCommunityPost();
 };
 
-// Funció per enviar un nou comentari
+// 4. Funció per escriure una nova resposta (Ana Molina per defecte)
 function sendReply() {
   const input = document.getElementById('reply-input');
   if (!input) return;
@@ -1479,32 +1526,31 @@ function sendReply() {
   if (!text) return;
   
   const s = State.load();
-  // Creem la nova resposta agafant el nom d'usuari (Ana Molina)
   const authorName = s.profile.parentName || 'Ana Molina';
   const authorInitial = authorName.charAt(0).toUpperCase();
 
   s.currentPost.replies.push({
     author: authorName,
     initials: authorInitial,
-    time: 'ara mateix',
+    time: 'ara',
     text: text,
     likes: 0,
     liked: false
   });
-  s.currentPost.repliesCount = s.currentPost.replies.length;
-  State.save(s);
   
+  if (s.currentPostIndex !== undefined) {
+      s.posts[s.currentPostIndex].replies = s.currentPost.replies;
+  }
+  
+  State.save(s);
   input.value = '';
   renderCommunityPost();
   
-  // Fem scroll automàtic fins al final per veure la nova resposta
+  // Fa scroll cap a baix perquè vegis el teu missatge automàticament
   const scrollArea = document.querySelector('#page-community-post .page-scroll');
-  if(scrollArea) {
-    setTimeout(() => {
-      scrollArea.scrollTop = scrollArea.scrollHeight;
-    }, 50);
-  }
+  if(scrollArea) setTimeout(() => scrollArea.scrollTop = scrollArea.scrollHeight, 50);
 }
+
 
  document.querySelectorAll('.diagnosis-chip').forEach(chip => {
    chip.addEventListener('click', () => { document.querySelectorAll('.diagnosis-chip').forEach(c => c.classList.remove('selected')); chip.classList.add('selected'); });
