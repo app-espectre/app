@@ -3890,3 +3890,32 @@ auth-content-register {
   background: var(--color-accent);
   color: white;
 }
+
+/* ── BLOQUEIG DE PANTALLA HORITZONTAL ────────────────────── */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+  /* Ocultem tota l'aplicació */
+  #app {
+    display: none !important;
+  }
+
+  /* Creem un missatge a pantalla completa */
+  body::before {
+    content: "Si us plau, gira el dispositiu en vertical per fer servir l'aplicació.";
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10%;
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+    z-index: 999999;
+    box-sizing: border-box;
+  }
+}
