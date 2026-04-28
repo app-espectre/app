@@ -98,8 +98,8 @@ const HELP_CONFIG = {
  comunitat: {
    title: 'COMUNITAT',
    img: '../img/help7.svg',
-   cardTitle: 'Tens algun dubte?',
-   cardSub: 'Pregunta\'m el que vulguis i t\'ajudaré al moment.',
+   cardTitle: 'Connecta amb altres usuaris',
+   cardSub: 'Comparteix dubtes i ajuda altres famílies amb les teves experiències.',
    faqs: [
      { q: 'Què puc fer dins la comunitat?', a: 'Pots publicar contingut, comentar, interactuar amb altres usuaris i participar en discussions de grup.' },
      { q: 'És gratuït utilitzar la comunitat?', a: 'Sí, l\'accés bàsic és completament gratuït.' },

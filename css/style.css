@@ -816,7 +816,7 @@ img, svg {
 .progress-bar {
  height: 10px;
  border-radius: var(--r-full);
- background: var(--color-bg-header);
+ background: rgba(80,139,191,.1);
  overflow: hidden;
 }
 
