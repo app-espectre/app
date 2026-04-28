@@ -1,51 +1,64 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
- <meta name="mobile-web-app-capable" content="yes">
- <meta name="apple-mobile-web-app-capable" content="yes">
- <meta name="theme-color" content="#d1eaff">
- <title>Publicar</title>
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
- <link rel="stylesheet" href="../css/style.css">
-
-
- <link rel="manifest" href="../manifest.json">
- <meta name="apple-mobile-web-app-capable" content="yes">
- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
- <meta name="apple-mobile-web-app-title" content="Espectre">
- </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#d1eaff">
+  <title>Comunitat</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="manifest" href="../manifest.json">
+  
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Espectre">
+</head>
 <body data-page="community-publish">
 <div id="app">
- <section class="page active app" id="page-community-publish">
-   <div class="sub-top">
-     <button class="back-btn" data-action="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg></button>
-     <h1 class="sub-top__title">Tornar</h1>
-     <button id="btn-publish" class="btn btn--outline btn--sm" style="width:auto">Publicar</button></div>
-   <div class="page-scroll">
-     <div class="flex flex-col gap-16">
-       <div class="field"><label class="field__label" for="publish-title">Títol (opcional)</label><input class="field__input" id="publish-title" type="text" placeholder="Títol de la publicació"></div>
-       <div class="field">
-         <label class="field__label" for="publish-msg">Missatge</label>
-         <textarea class="field__textarea textarea-tall" id="publish-msg" placeholder="Escriu la teva publicació..."></textarea>
-         <div class="field__char-count" id="publish-char-count">0/1000 caràcters</div>
-       </div>
- <div class="alert alert--yellow mb-16 w-full text-left">
-   <div class="aler">
-     <p class="alert__title">Normes de conducta</p>
-         <p class="alert__text">Mantén un to respectuós. Les publicacions estan subjectes a moderació.</p>
-   </div>
-       </div>
-     </div>
-   </div>
- </section>
+  <section class="page active app" id="page-community-publish">
+    
+    <div class="sub-top">
+      <button class="back-btn" data-action="back" aria-label="Tornar enrere">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      <h1 class="sub-top__title">Tornar</h1>
+      <button id="btn-publish" class="btn btn--outline btn--sm" style="width:auto">Publicar</button>
+    </div>
+    
+    <div class="page-scroll">
+      <div class="flex flex-col gap-16">
+        
+        <div class="field">
+          <label class="field__label" for="publish-title">Títol (opcional)</label>
+          <input class="field__input" id="publish-title" type="text" placeholder="Títol de la publicació">
+        </div>
+        
+        <div class="field">
+          <label class="field__label" for="publish-msg">Missatge</label>
+          <textarea class="field__textarea textarea-tall" id="publish-msg" placeholder="Escriu la teva publicació..."></textarea>
+          <div class="field__char-count" id="publish-char-count">0/1000 caràcters</div>
+        </div>
+        
+        <div class="alert alert--yellow mb-16">
+          <div class="alert__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="alert__body">
+            <p class="alert__title">Normes de conducta</p>
+            <p class="alert__text">Mantén un to respectuós. Les publicacions estan subjectes a moderació.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </section>
 </div>
 
-
- <script src="../js/state.js"></script>
- <script src="../js/shell.js"></script>
- <script src="../js/app.js"></script>
+  <script src="../js/state.js"></script>
+  <script src="../js/shell.js"></script>
+  <script src="../js/app.js"></script>
 </body>
 </html>

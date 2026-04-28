@@ -4,52 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#d1eaff">
-  <title>Perfil</title>
+  <title>Perfil de l'Infant</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
-
   <link rel="manifest" href="../manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Espectre">
-  
 </head>
 <body data-page="profile-view">
 <div id="app">
   <section class="page active app" id="page-profile-view">
+    
     <div class="profile-hero">
-  <div class="avatar-container">
-    <div class="avatar avatar--xl" id="profile-child-avatar"></div>
-    <img src="../img/edit.png" class="avatar-edit-icon" alt="Editar avatar">
-  </div>
+      <div class="avatar-container" role="button" tabindex="0" aria-label="Canviar avatar" style="cursor: pointer;">
+        <div class="avatar avatar--xl" id="profile-child-avatar"></div>
+        <img src="../img/edit.png" class="avatar-edit-icon" alt="" aria-hidden="true">
+      </div>
       <div class="profile-hero__info">
         <div class="profile-hero__name" id="profile-child-name">Martina Reyes</div>
         <div class="profile-hero__sub" id="profile-child-sub">7 anys · TEA nivell de suport 1</div>
-        
       </div>
     </div>
-    <nav class="tab-bar">
-      <button class="tab-btn active" id="tab-btn-info">Info</button>
-      <button class="tab-btn" id="tab-btn-diary">Diari</button>
-      <button class="tab-btn" id="tab-btn-skills">Habilitats</button>
+
+    <nav class="tab-bar" role="tablist">
+      <button class="tab-btn active" id="tab-btn-info" role="tab" aria-selected="true" aria-controls="profile-tab-info">Info</button>
+      <button class="tab-btn" id="tab-btn-diary" role="tab" aria-selected="false" aria-controls="profile-tab-diary">Diari</button>
+      <button class="tab-btn" id="tab-btn-skills" role="tab" aria-selected="false" aria-controls="profile-tab-skills">Habilitats</button>
     </nav>
+
     <div class="page-scroll">
-      <div id="profile-tab-info"></div>
-      <div id="profile-tab-diary" class="hidden"></div>
-      <div id="profile-tab-skills" class="hidden"></div>
+      <div id="profile-tab-info" role="tabpanel" aria-labelledby="tab-btn-info"></div>
+      <div id="profile-tab-diary" class="hidden" role="tabpanel" aria-labelledby="tab-btn-diary"></div>
+      <div id="profile-tab-skills" class="hidden" role="tabpanel" aria-labelledby="tab-btn-skills"></div>
     </div>
+
   </section>
 </div>
 
-<!-- Modal para cambiar avatar -->
-<div id="avatar-modal" class="modal hidden">
+<div id="avatar-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-overlay" id="avatar-modal-overlay"></div>
   <div class="modal-content">
-    <button class="modal-close" id="avatar-modal-close">&times;</button>
-    <h3>Escull un personatge</h3>
+    <button class="modal-close" id="avatar-modal-close" aria-label="Tancar modal">&times;</button>
+    <h3 id="modal-title">Escull un personatge</h3>
     <div class="avatar-grid">
       <img src="../img/personatge1.svg" alt="Personatge 1" data-avatar="personatge1.svg" class="avatar-option">
       <img src="../img/personatge2.svg" alt="Personatge 2" data-avatar="personatge2.svg" class="avatar-option">

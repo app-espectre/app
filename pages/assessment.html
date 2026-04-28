@@ -4,37 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#d1eaff">
   <title>Avaluació</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
-
   <link rel="manifest" href="../manifest.json">
+  
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Espectre">
-  
 </head>
 <body data-page="assessment">
 <div id="app">
   <section class="page active app" id="page-assessment">
+    
     <div class="assessment-header">
-      <div class="progress-bar">
+      <div class="progress-bar" role="progressbar" aria-label="Progrés de l'avaluació">
         <div class="progress-bar__fill" id="assessment-steps"></div>
       </div>
       <div id="assessment-area" class="assessment-header__area"></div>
       <div id="assessment-q-num" class="text-xs text-secondary"></div>
       <h2 id="assessment-q-text" class="assessment-header__q"></h2>
     </div>
-  <div class="page-scroll page-scroll--padded">
+
+    <div class="page-scroll page-scroll--padded">
       <div id="assessment-options" class="flex flex-col gap-12"></div>
     </div>
+
     <footer class="assessment-footer">
       <button class="btn btn--outline flex-1" id="assessment-prev" disabled>Anterior</button>
       <button class="btn btn--primary flex-1" id="assessment-next">Següent</button>
     </footer>
+
   </section>
 </div>
 

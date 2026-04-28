@@ -4,18 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#d1eaff">
   <title>Configuració</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
-
   <link rel="manifest" href="../manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Espectre">
-  
 </head>
 
 <body data-page="settings">
@@ -27,28 +25,36 @@
         <div class="settings-section__title">Compte</div>
         <div class="settings-row">
           <div class="avatar avatar--ana-sm" id="settings-parent-avatar"></div>
-          <div class="settings-row__body"><div class="settings-row__title" id="settings-parent-name">Ana Molina</div><div class="settings-row__sub" id="settings-parent-email">anamolina@gmail.com</div></div>
+          <div class="settings-row__body">
+            <div class="settings-row__title" id="settings-parent-name">Ana Molina</div>
+            <div class="settings-row__sub" id="settings-parent-email">anamolina@gmail.com</div>
+          </div>
           <button class="btn btn--outline btn--sm btn--auto" onclick="goTo('profile-settings')">Edita</button>
         </div>
-  <div class="settings-row settings-row--clickable" onclick="goTo('profile-edit')">
-          <div class="settings-row__body"><div class="settings-row__title">Editar perfil de la Martina</div></div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-border)" stroke-width="2" stroke-linecap="round"><polyline points="9,18 15,12 9,6"/></svg>
+        <div class="settings-row settings-row--clickable" onclick="goTo('profile-edit')">
+          <div class="settings-row__body"><div class="settings-row__title">Editar perfil de l'infant</div></div>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9,18 15,12 9,6"/></svg>
         </div>
       </div>  
       
       <div class="settings-section">
         <div class="settings-section__title">Notificacions</div>
-        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Notificacions push</div></div><label class="toggle"><input type="checkbox" checked><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
-        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Recordatoris de cites</div></div><label class="toggle"><input type="checkbox" checked><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
-        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Consell diari</div></div><label class="toggle"><input type="checkbox" checked><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
-        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Activitat comunitat</div></div><label class="toggle"><input type="checkbox"><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
-        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Recordatoris de seguiment</div></div><label class="toggle"><input type="checkbox" checked><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+        <div class="settings-row">
+          <div class="settings-row__body"><div class="settings-row__title">Notificacions push</div></div>
+          <label class="toggle"><input type="checkbox" checked aria-label="Notificacions push"><div class="toggle__track"></div><div class="toggle__thumb"></div></label>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__body"><div class="settings-row__title">Recordatoris de cites</div></div>
+          <label class="toggle"><input type="checkbox" checked aria-label="Recordatoris de cites"><div class="toggle__track"></div><div class="toggle__thumb"></div></label>
+        </div>
       </div>
 
       <div class="settings-section">
         <div class="settings-section__title">Accessibilitat</div>
-        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Mode fosc</div></div><label class="toggle"><input type="checkbox" id="toggle-dark"><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
-        <div class="settings-row"><div class="settings-row__body"><div class="settings-row__title">Text gran</div></div><label class="toggle"><input type="checkbox"><div class="toggle__track"></div><div class="toggle__thumb"></div></label></div>
+        <div class="settings-row">
+          <div class="settings-row__body"><div class="settings-row__title">Mode fosc</div></div>
+          <label class="toggle"><input type="checkbox" id="toggle-dark" aria-label="Mode fosc"><div class="toggle__track"></div><div class="toggle__thumb"></div></label>
+        </div>
       </div>
 
       <div class="settings-section">
@@ -59,17 +65,19 @@
             <option value="cat">CAT</option>
             <option value="es">ES</option>
             <option value="en">EN</option>
-            <option value="fr">FR</option>
           </select>
         </div>
-        <div class="settings-row settings-row--clickable" onclick="goTo('profile-edit')">
-          <div class="settings-row__body"><div class="settings-row__title">Atenció al client</div></div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-border)" stroke-width="2" stroke-linecap="round"><polyline points="9,18 15,12 9,6"/></svg>
+        <div class="settings-row settings-row--clickable">
+          <div class="settings-row__body"><div class="settings-row__title">Suport tècnic</div></div>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9,18 15,12 9,6"/></svg>
         </div>
       </div>
 
-  <button class="btn btn--danger mt-8" id="btn-logout-settings">Tancar sessió</button>
-  <button class="btn btn--danger mt-8" id="btn-delete-account" onclick="goTo('welcome')">Eliminar compte</button>
+      <div class="flex flex-col gap-12 mt-24">
+        <button class="btn btn--primary" id="btn-logout-settings">Tancar sessió</button>
+        <button class="btn btn--danger " id="btn-delete-account" onclick="if(confirm('Segur que vols eliminar el compte?')) goTo('welcome')">Eliminar compte</button>
+      </div>
+      
     </div>
   </section>
 </div>

@@ -7,53 +7,50 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#d1eaff">
   <title>ESPECTRE</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="manifest" href="../manifest.json">
+  
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Espectre">
-
 </head>
 <body data-page="home">
 <div id="app">
   <section class="page active app" id="page-home">
     <div class="page-scroll">
 
-      <!-- GREETING -->
       <div class="home-greeting">
         <div class="home-greeting__left">
           <div class="home-greeting__hello">Benvinguda de nou</div>
-
           <div class="home-greeting__name" id="home-parent-name">Ana Molina</div>
         </div>
       </div>
 
-      <!-- CAROUSEL -->
       <div class="carousel-wrap" id="home-carousel">
         <div class="carousel-track" id="carousel-track">
-          <!-- Slides injectats per JS -->
-        </div>
+          </div>
         <div class="carousel-dots" id="carousel-dots"></div>
       </div>
 
-      <!-- STAT PILLS -->
       <div class="stat-pills">
-        <div class="stat-pill" onclick="goTo('reminders')">
+        <div class="stat-pill" role="button" tabindex="0" aria-label="Veure cites properes" onclick="goTo('reminders')" onkeydown="if(event.key==='Enter'||event.key===' ') goTo('reminders')">
           <div class="stat-pill__num" id="stat-reminders">4</div>
           <div class="stat-pill__label">Cites<br>properes</div>
         </div>
-        <div class="stat-pill" onclick="goTo('progress')">
+        
+        <div class="stat-pill" role="button" tabindex="0" aria-label="Veure el progrés global" onclick="goTo('progress')" onkeydown="if(event.key==='Enter'||event.key===' ') goTo('progress')">
           <div class="stat-pill__num" id="stat-progress">60%</div>
           <div class="stat-pill__label">Progrés<br>global</div>
         </div>
-        <div class="stat-pill" onclick="goTo('profile-view')">
+        
+        <div class="stat-pill" role="button" tabindex="0" aria-label="Veure les entrades al diari" onclick="goTo('profile-view')" onkeydown="if(event.key==='Enter'||event.key===' ') goTo('profile-view')">
           <div class="stat-pill__num" id="stat-diary">3</div>
           <div class="stat-pill__label">Entrades<br>al diari</div>
         </div>
       </div>
 
-      <!-- DAILY ALERT -->
       <div class="alert alert--green mb-20">
         <span class="alert__icon">✅</span>
         <div class="alert__body">
@@ -62,11 +59,9 @@
         </div>
       </div>
 
-      <!-- UPCOMING REMINDERS -->
       <h2 class="section-title">Propers recordatoris</h2>
       <div id="home-reminder-list" class="flex flex-col gap-12 mb-8"></div>
 
-      <!-- CONTACT / SOCIAL SECTION -->
       <div class="contact-section">
         <div class="contact-section__title">Connecta amb nosaltres</div>
         <div class="contact-section__sub">Segueix-nos a les xarxes socials i forma part de la nostra comunitat digital.</div>
@@ -110,8 +105,6 @@
           </div>
         </div>
       </div>
-
-     
 
     </div>
   </section>

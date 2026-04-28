@@ -4,43 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#d1eaff">
-  <title>Resultats</title>
+  <title>Avaluació</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
-
   <link rel="manifest" href="../manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Espectre">
-  
 </head>
 <body data-page="results">
 <div id="app">
   <section class="page active app" id="page-results">
+    
     <div class="results-hero">
-      <div class="results-score">
-        <span class="results-score__num" id="results-score">72%</span>
+      <div class="results-score" role="status" aria-live="polite" aria-label="Puntuació total de l'avaluació">
+        <span class="results-score__num" id="results-score">--%</span>
       </div>
+      
       <h2 class="fw-black text-primary text-lg">Resultats d'avaluació</h2>
-  <div class="alert alert--green w-full text-left">
-        <span class="alert__icon">💡</span>
+      
+      <div class="alert alert--green w-full text-left">
+        <span class="alert__icon" aria-hidden="true">💡</span>
         <div class="alert__body">
           <div class="alert__title">Recomanació</div>
-          <div class="alert__text" id="results-rec"></div>
+          <div class="alert__text" id="results-rec">Carregant recomanació...</div>
         </div>
       </div>
     </div>
+
     <div class="page-scroll">
-      <h2 class="section-title">Subcategories</h2>
+      <h2 class="section-title">Detall per subcategories</h2>
+      
       <div id="results-subs" class="flex flex-col gap-12 mb-24"></div>
+      
       <div class="flex flex-col gap-12">
-        <button class="btn btn--primary" id="btn-results-done">Guardar i tornar</button>
+        <button class="btn btn--primary" id="btn-results-done">Guardar i tornar al progrés</button>
         <button class="btn btn--outline" id="btn-results-back">Refer l'avaluació</button>
       </div>
     </div>
+
   </section>
 </div>
 

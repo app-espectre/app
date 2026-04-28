@@ -4,29 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#d1eaff">
-  <title>Professionals</title>
+  <title>Detall del Professional</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
-
   <link rel="manifest" href="../manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Espectre">
-  
 </head>
 <body data-page="professional-detail">
 <div id="app">
   <section class="page active app" id="page-professional-detail">
+    
     <div class="sub-top">
-      <button class="back-btn" data-action="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg></button>
+      <button class="back-btn" data-action="back" aria-label="Tornar enrere">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
       <h1 class="sub-top__title">Tornar</h1>
     </div>
+
     <div class="page-scroll page-scroll--no-pad">
+      
       <div class="pro-detail-hero">
-  <div class="avatar avatar--xl avatar--accent"></div>
+        <div class="avatar avatar--xl avatar--accent" style="background-image:url('../img/professional1.jpg'); background-size:cover; background-position:center;"></div>
         <div class="pro-detail-hero__name">Dra. Marta Puig</div>
         <div class="pro-detail-hero__spec">Psicòloga · 8 anys exp. TEA</div>
         <div class="pro-detail-hero__tags">
@@ -34,52 +37,60 @@
           <span class="tag tag--blue">Online</span>
           <span class="tag tag--blue">Presencial</span>
         </div>
-        <div class="flex items-center gap-8"><span class="star">★★★★★</span><span class="fw-bold text-primary">4.9</span><span class="text-xs text-secondary">(227 ressenyes)</span></div>
+        <div class="flex items-center gap-8" aria-label="Valoració de 4.9 estrelles de 5">
+          <span class="star" aria-hidden="true">★★★★★</span>
+          <span class="fw-bold text-primary">4.9</span>
+          <span class="text-xs text-secondary">(227 ressenyes)</span>
+        </div>
       </div>
-  <div class="pad-24">
-<a href="mailto:espectre@ifp-alguero.org?subject=Sol·licitar%20cita" class="btn btn--primary" style="margin-bottom: 1rem; display: inline-flex; align-items: center; justify-content: center;" id="btn-send-message">Enviar missatge</a>
-<h2 class="section-title">Sobre mi</h2>
-  <p class="text-sm text-primary lead mb-20">Soc psicòloga clínica amb més de 8 anys tractant nens i adolescents amb TEA. Em centro en l'orientació familiar i les tècniques conductuals.</p>
+
+      <div class="pad-24">
+        <a href="mailto:espectre@ifp-alguero.org?subject=Sol·licitar%20cita" class="btn btn--primary mb-16" id="btn-send-message">Enviar missatge</a>
+        
+        <h2 class="section-title">Sobre mi</h2>
+        <p class="text-sm text-primary lead mb-20">Soc psicòloga clínica amb més de 8 anys tractant nens i adolescents amb TEA. Em centro en l'orientació familiar i les tècniques conductuals.</p>
+        
         <h2 class="section-title">Àrees de treball</h2>
         <div class="flex flex-col gap-8 mb-20">
-          <div class="flex items-center gap-10 text-sm text-primary"><span class="dot-accent">•</span> Diagnòstic i avaluació TEA</div>
-          <div class="flex items-center gap-10 text-sm text-primary"><span class="dot-accent">•</span> Orientació familiar</div>
-          <div class="flex items-center gap-10 text-sm text-primary"><span class="dot-accent">•</span> Teràpia conductual (ABA)</div>
-          <div class="flex items-center gap-10 text-sm text-primary"><span class="dot-accent">•</span> Habilitats socials</div>
+          <div class="flex items-center gap-10 text-sm text-primary"><span class="dot-accent" aria-hidden="true">•</span> Diagnòstic i avaluació TEA</div>
+          <div class="flex items-center gap-10 text-sm text-primary"><span class="dot-accent" aria-hidden="true">•</span> Orientació familiar</div>
+          <div class="flex items-center gap-10 text-sm text-primary"><span class="dot-accent" aria-hidden="true">•</span> Teràpia conductual (ABA)</div>
+          <div class="flex items-center gap-10 text-sm text-primary"><span class="dot-accent" aria-hidden="true">•</span> Habilitats socials</div>
         </div>
+
         <h2 class="section-title">Informació</h2>
         <div class="info-row"><span class="info-row__key">Localitat</span><span class="info-row__val">Barcelona</span></div>
         <div class="info-row"><span class="info-row__key">Idiomes</span><span class="info-row__val">Català, Castellà</span></div>
         <div class="info-row"><span class="info-row__key">Modalitat</span><span class="info-row__val">Online + Presencial</span></div>
         <div class="info-row"><span class="info-row__key">Preu sessió</span><span class="info-row__val">60–80€</span></div>
-        <h2 class="section-title mt-20">Ressenyes de famílies</h2>
+
+        <h2 class="section-title mt-24">Ressenyes de famílies</h2>
+        
         <div class="card mb-12">
           <div class="flex items-center gap-10 mb-8">
-            <div class="avatar avatar--sm avatar--green" style="background-image:url('../img/pare1.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; color:transparent;"></div>
-            <div><div class="text-sm fw-bold text-primary">Sergi M.</div><div class="text-xs text-secondary">Fa 2 mesos</div></div>
-            <div class="flex-1 text-right"><span class="star">★★★★★</span></div>
+            <div class="avatar avatar--sm" style="background-image:url('../img/pare1.jpg'); background-size:cover; background-position:center; margin-right: 8px;"></div>
+            <div>
+              <div class="text-sm fw-bold text-primary">Sergi M.</div>
+              <div class="text-xs text-secondary">Fa 2 mesos</div>
+            </div>
+            <div class="flex-1 text-right"><span class="star" aria-hidden="true">★★★★★</span></div>
           </div>
           <p class="text-sm text-primary lead-sm">La Dra. Puig ha canviat la nostra vida. El nostre fill ha progressat molt en els últims 6 mesos.</p>
         </div>
+
         <div class="card mb-12">
           <div class="flex items-center gap-10 mb-8">
-            <div class="avatar avatar--sm avatar--green" style="background-image:url('../img/pare2.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; color:transparent;"></div>
-            <div><div class="text-sm fw-bold text-primary">Claudia R.</div><div class="text-xs text-secondary">Fa 4 mesos</div></div>
-            <div class="flex-1 text-right"><span class="star">★★★★★</span></div>
+            <div class="avatar avatar--sm" style="background-image:url('../img/pare2.jpg'); background-size:cover; background-position:center; margin-right: 8px;"></div>
+            <div>
+              <div class="text-sm fw-bold text-primary">Claudia R.</div>
+              <div class="text-xs text-secondary">Fa 4 mesos</div>
+            </div>
+            <div class="flex-1 text-right"><span class="star" aria-hidden="true">★★★★★</span></div>
           </div>
-          <p class="text-sm text-primary lead-sm">Increïble evolució. Abans era impossible anar al supermercat o a un restaurant, i ara podem gaudir de sortides en família gràcies a les pautes que ens han donat.</p>
+          <p class="text-sm text-primary lead-sm">Increïble evolució. Abans era impossible anar al supermercat o a un restaurant.</p>
         </div>
-        <div class="card mb-12">
-          <div class="flex items-center gap-10 mb-8">
-            <div class="avatar avatar--sm avatar--green" style="background-image:url('../img/pare3.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; color:transparent;"></div>
-            <div><div class="text-sm fw-bold text-primary">Jofre C.</div><div class="text-xs text-secondary">Fa 10 mesos</div></div>
-            <div class="flex-1 text-right"><span class="star">★★★★★</span></div>
-          </div>
-          <p class="text-sm text-primary lead-sm">Professionalitat i empatia absoluta. Ens han ajudat a entendre com veu el món la nostra filla i això ha millorat la seva relació amb els seus germans.</p>
-        </div>
+
       </div>
-      </div>
-      
     </div>
   </section>
 </div>

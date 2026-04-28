@@ -4,63 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#d1eaff">
-  <title>Informe generat</title>
+  <title>Informe</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
-
+  <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
-
   <link rel="manifest" href="../manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Espectre">
-  
 </head>
 <body data-page="report-done">
 <div id="app">
   <section class="page active app" id="page-report-done">
+    
     <div class="sub-top">
-      <button class="back-btn" data-action="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg></button>
+      <button class="back-btn" data-action="back" aria-label="Tornar enrere">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
       <h1 class="sub-top__title">Informe</h1>
     </div>
+
     <div class="page-scroll">
+      
       <div class="alert alert--green mb-20">
-        <span class="alert__icon">✅</span>
-        <div class="alert__body"><div class="alert__title">Informe generat correctament!</div><div class="alert__text">Martina · Abr 2026 · 8 pàgines · PDF</div></div>
-      </div>
-      <div class="card mb-24" onclick="window.open('../docs/Informe_Martina_Abril2026.pdf', '_blank');" style="cursor: pointer;">
-        <div class="flex items-center gap-12 mb-16">
-          <div class="emoji-large">📄</div>
-          <div><div class="fw-bold text-primary">Informe de seguiment de Martina Molina</div><div class="text-xs text-secondary">8 pàgines en total</div></div>
+        <span class="alert__icon" aria-hidden="true">✅</span>
+        <div class="alert__body">
+          <div class="alert__title">Informe generat correctament!</div>
+          <div class="alert__text">Martina · Abr 2026 · PDF</div>
         </div>
-  <div class="progress-bar"><div class="progress-bar__fill w-full"></div></div>
       </div>
-      <h2 class="section-title">Compartir</h2>
+
+      <div class="card mb-24" onclick="window.open('../docs/Informe_Martina_Abril2026.pdf', '_blank');" style="cursor: pointer;" role="button" tabindex="0" aria-label="Obrir informe PDF">
+        <div class="flex items-center gap-12 mb-16">
+          <div class="emoji-large" aria-hidden="true">📄</div>
+          <div>
+            <div class="fw-bold text-primary">Informe de seguiment de Martina Molina</div>
+            <div class="text-xs text-secondary">8 pàgines · Generat ara mateix</div>
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar__fill"></div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Compartir informe</h2>
+      
       <div class="flex flex-col gap-12">
-<a href="../docs/Informe_Martina_Abril2026.pdf" download="Informe_Martina_Abril2026.pdf" class="btn btn--primary">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-    <polyline points="7,10 12,15 17,10"/>
-    <line x1="12" y1="15" x2="12" y2="3"/>
-  </svg>
-  Descarregar al dispositiu
-</a>
-  <a href="mailto:?subject=Informe%20Martina&body=Hola!%20Et%20comparteixo%20l'informe:%20../docs/Informe_Martina_Abril2026.pdf" 
-   class="btn btn--outline">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-    <polyline points="22,6 12,13 2,6"/>
-  </svg>
-  Enviar per correu electrònic
-</a>
-  <a href="https://wa.me" 
-   target="_blank" 
-   class="btn btn--outline btn--whatsapp">
-   Compartir per WhatsApp
-</a>
+        <a href="../docs/Informe_Martina_Abril2026.pdf" download="Informe_Martina_Abril2026.pdf" class="btn btn--primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarregar PDF
+        </a>
+
+        <a href="mailto:?subject=Informe%20de%20seguiment%20-%20Martina&body=Hola!%20Et%20comparteixo%20l'informe%20de%20seguiment%20de%20la%20Martina%20generat%20amb%20l'app%20Espectre." class="btn btn--outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Enviar per correu
+        </a>
+
+        <a href="https://api.whatsapp.com/send?text=Hola!%20Et%20comparteixo%20l'informe%20de%20seguiment%20de%20la%20Martina." target="_blank" class="btn btn--outline btn--whatsapp" rel="noopener">
+          Compartir per WhatsApp
+        </a>
       </div>
+      
     </div>
   </section>
 </div>
