@@ -3460,7 +3460,7 @@ auth-content-register {
  display: flex;
  gap: 10px;
  align-items: center;
- padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+ padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
  background: rgba(0,0,0,0.15);
  flex-shrink: 0;
 }
