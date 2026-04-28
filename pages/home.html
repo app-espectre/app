@@ -10,42 +10,109 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://use.typekit.net/bxq7kde.css">
   <link rel="stylesheet" href="../css/style.css">
-
   <link rel="manifest" href="../manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Espectre">
-  
+
 </head>
 <body data-page="home">
 <div id="app">
   <section class="page active app" id="page-home">
     <div class="page-scroll">
-      <div class="alert alert--green mb-16">
+
+      <!-- GREETING -->
+      <div class="home-greeting">
+        <div class="home-greeting__left">
+          <div class="home-greeting__hello">Benvinguda de nou</div>
+
+          <div class="home-greeting__name" id="home-parent-name">Ana Molina</div>
+        </div>
+      </div>
+
+      <!-- CAROUSEL -->
+      <div class="carousel-wrap" id="home-carousel">
+        <div class="carousel-track" id="carousel-track">
+          <!-- Slides injectats per JS -->
+        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
+      </div>
+
+      <!-- STAT PILLS -->
+      <div class="stat-pills">
+        <div class="stat-pill" onclick="goTo('reminders')">
+          <div class="stat-pill__num" id="stat-reminders">4</div>
+          <div class="stat-pill__label">Cites<br>properes</div>
+        </div>
+        <div class="stat-pill" onclick="goTo('progress')">
+          <div class="stat-pill__num" id="stat-progress">60%</div>
+          <div class="stat-pill__label">Progrés<br>global</div>
+        </div>
+        <div class="stat-pill" onclick="goTo('profile-view')">
+          <div class="stat-pill__num" id="stat-diary">3</div>
+          <div class="stat-pill__label">Entrades<br>al diari</div>
+        </div>
+      </div>
+
+      <!-- DAILY ALERT -->
+      <div class="alert alert--green mb-20">
         <span class="alert__icon">✅</span>
         <div class="alert__body">
           <div class="alert__title">Recordatori diari</div>
-          <div class="alert__text">Ho estàs fent molt bé. Recorda cuidar-te tu també</div>
+          <div class="alert__text">Ho estàs fent molt bé. Recorda cuidar-te tu també.</div>
         </div>
       </div>
+
+      <!-- UPCOMING REMINDERS -->
       <h2 class="section-title">Propers recordatoris</h2>
-      <div id="home-reminder-list" class="flex flex-col gap-12 mb-24"></div>
-      <button class="btn btn--outline" onclick="goTo('reminders')">Veure tots els recordatoris</button>
-      <h2 class="section-title mt-24">Accés ràpid</h2>
-      <div class="flex flex-col gap-8">
-        <button class="card card--clickable flex items-center gap-16 text-left" onclick="goTo('progress')">
-          <div class="avatar avatar--md avatar--accent">📊</div>
-          <div><div class="fw-semi text-primary">Avaluació de progrés</div><div class="text-xs text-secondary">Darrera: 5 abr 2026</div></div>
-        </button>
-        <button class="card card--clickable flex items-center gap-16 text-left" onclick="goTo('info')">
-          <div class="avatar avatar--md avatar--purple">📖</div>
-          <div><div class="fw-semi text-primary">Recursos i articles</div><div class="text-xs text-secondary">Guies, vídeos i estratègies</div></div>
-        </button>
-        <button class="card card--clickable flex items-center gap-16 text-left" onclick="goTo('professionals')">
-          <div class="avatar avatar--md avatar--green">👩‍⚕️</div>
-          <div><div class="fw-semi text-primary">Trobar professionals</div><div class="text-xs text-secondary">Terapeutes, logopedes i més</div></div>
-        </button>
+      <div id="home-reminder-list" class="flex flex-col gap-12 mb-8"></div>
+
+      <!-- CONTACT / SOCIAL SECTION -->
+      <div class="contact-section">
+        <div class="contact-section__title">Connecta amb nosaltres</div>
+        <div class="contact-section__sub">Segueix-nos a les xarxes socials i forma part de la nostra comunitat digital.</div>
+
+        <div class="social-grid">
+          <a class="social-btn" href="https://instagram.com/espectre_app" target="_blank" rel="noopener">
+            <div class="social-btn__icon social-btn__icon--ig">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="white" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <span>Instagram</span>
+          </a>
+
+          <a class="social-btn" href="https://x.com/espectre_app" target="_blank" rel="noopener">
+            <div class="social-btn__icon social-btn__icon--tw">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </div>
+            <span>Twitter / X</span>
+          </a>
+
+          <a class="social-btn" href="https://facebook.com/espectre.app" target="_blank" rel="noopener">
+            <div class="social-btn__icon social-btn__icon--fb">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </div>
+            <span>Facebook</span>
+          </a>
+
+          <a class="social-btn" href="https://youtube.com/@espectre_app" target="_blank" rel="noopener">
+            <div class="social-btn__icon social-btn__icon--yt">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="#FF0000"/></svg>
+            </div>
+            <span>YouTube</span>
+          </a>
+        </div>
+
+        <div class="contact-divider"></div>
+
+        <div class="contact-email-row">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div>
+            <a href="mailto:hola@espectre-app.cat">hola@espectre-app.cat</a>
+          </div>
+        </div>
       </div>
+
+     
+
     </div>
   </section>
 </div>

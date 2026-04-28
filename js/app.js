@@ -360,10 +360,124 @@ function renderTimelineSlider(state) {
 ══════════════════════════════════════════════════════════ */
 
 
+// ════════════════════════════════════════════════════════════
+// SUBSTITUEIX la funció initHome() existent a app.js per aquesta
+// ════════════════════════════════════════════════════════════
+
 function initHome() {
- const s = State.load();
- const list = document.getElementById('home-reminder-list');
- if (list) list.innerHTML = s.reminders.slice(0, 3).map((r, i) => apptCardHTML(r, i)).join('') || '<p class="text-sm text-secondary">Cap recordatori pendent.</p>';
+  const s = State.load();
+
+  // ── Greeting ────────────────────────────────────────────────
+  const nameEl = document.getElementById('home-parent-name');
+  if (nameEl) nameEl.textContent = s.profile.parentName || 'Ana Molina';
+
+  const dateEl = document.getElementById('home-today-date');
+  if (dateEl) {
+    const days   = ['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
+    const months = ['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
+    const now = new Date();
+    dateEl.textContent = `${days[now.getDay()]}, ${now.getDate()} de ${months[now.getMonth()]} ${now.getFullYear()}`;
+  }
+
+  // ── Stat pills ───────────────────────────────────────────────
+  const remCount = document.getElementById('stat-reminders');
+  if (remCount) remCount.textContent = s.reminders.length;
+
+  const diaryCount = document.getElementById('stat-diary');
+  if (diaryCount) diaryCount.textContent = s.diary.length;
+
+  const progEl = document.getElementById('stat-progress');
+  if (progEl) {
+    const vals = Object.values(s.skills).map(sk => sk.pct);
+    const avg  = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+    progEl.textContent = avg + '%';
+  }
+
+  // ── Reminders list ───────────────────────────────────────────
+  const list = document.getElementById('home-reminder-list');
+  if (list) {
+    list.innerHTML = s.reminders.slice(0, 3).map((r, i) => apptCardHTML(r, i)).join('')
+      || '<p class="text-sm text-secondary">Cap recordatori pendent.</p>';
+  }
+
+  // ── Carousel ─────────────────────────────────────────────────
+  const carouselSlides = [
+    { key: 'progres',       page: 'progress',      label: 'PROGRÉS' },
+    { key: 'recordatoris',  page: 'reminders',     label: 'RECORDATORIS' },
+    { key: 'recursos',      page: 'info',          label: 'RECURSOS' },
+    { key: 'professionals', page: 'professionals', label: 'PROFESSIONALS' },
+    { key: 'comunitat',     page: 'community',     label: 'COMUNITAT' },
+    { key: 'informe',       page: 'report-gen',    label: 'INFORME' },
+    { key: 'perfil',        page: 'profile-view',  label: 'PERFIL' },
+    { key: 'configuracio',  page: 'settings',      label: 'CONFIGURACIÓ' },
+    { key: 'ajuda',         page: 'home',          label: 'AJUDA' },
+  ];
+
+  const track = document.getElementById('carousel-track');
+  const dotsEl = document.getElementById('carousel-dots');
+  if (!track || !dotsEl || typeof HELP_CONFIG === 'undefined') return;
+
+  // Build slides
+  track.innerHTML = carouselSlides.map(item => {
+    const cfg = HELP_CONFIG[item.key];
+    if (!cfg) return '';
+    return `
+      <div class="carousel-slide" data-page="${item.page}" style="cursor:pointer">
+        <div class="carousel-inner-card">
+          <img src="${cfg.img}" alt="${cfg.title}" onerror="this.style.display='none'">
+          <div class="carousel-inner-card__text">
+            <div class="carousel-inner-card__title">${cfg.cardTitle}</div>
+            <div class="carousel-inner-card__sub">${cfg.cardSub}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Build dots
+  dotsEl.innerHTML = carouselSlides.map((_, i) =>
+    `<div class="carousel-dot ${i === 0 ? 'active' : ''}" data-dot="${i}"></div>`
+  ).join('');
+
+  let current = 0;
+  const total  = carouselSlides.length;
+  let autoTimer;
+
+  function goToSlide(idx) {
+    current = (idx + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current)
+    );
+  }
+
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goToSlide(current + 1), 3500);
+  }
+
+  // Dot clicks
+  dotsEl.querySelectorAll('.carousel-dot').forEach(dot =>
+    dot.addEventListener('click', () => { goToSlide(+dot.dataset.dot); startAuto(); })
+  );
+
+  // Slide click → navigate
+  track.querySelectorAll('.carousel-slide').forEach(slide =>
+    slide.addEventListener('click', () => {
+      const pg = slide.dataset.page;
+      if (pg && pg !== 'home') goTo(pg);
+    })
+  );
+
+  // Touch swipe
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { goToSlide(diff > 0 ? current + 1 : current - 1); startAuto(); }
+  }, { passive: true });
+
+  startAuto();
 }
 
 
