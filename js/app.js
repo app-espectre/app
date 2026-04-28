@@ -1167,7 +1167,7 @@ function initSettings() {
    try {
      const stored = localStorage.getItem('theme');
      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-     const isDark = stored ? stored === 'dark' : prefersDark;
+     const isDark = stored === 'dark';
      document.documentElement.classList.toggle('theme--dark', isDark);
      toggle.checked = isDark;
    } catch (e) {}
