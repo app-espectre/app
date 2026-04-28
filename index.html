@@ -12,275 +12,172 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; background: #d1eaff; font-family: new-zen, sans-serif; }
+    
+    /* El fons comença una mica més fosc i s'anima cap al #f0faff clar */
+    html, body { 
+      height: 100%; 
+      overflow: hidden; 
+      background: #bce0ff; 
+      font-family: new-zen, sans-serif; 
+      animation: bg-lighten 1.2s cubic-bezier(0.4, 0, 0.2, 1) 2.5s forwards;
+    }
 
-    /* ── BACKGROUND GEOMETRIC SHAPES ─────────────────────── */
-    .bg-shapes {
-      position: fixed;
+    .page {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
       inset: 0;
-      pointer-events: none;
       overflow: hidden;
     }
 
-    .bg-shape {
-      position: absolute;
+    /* ── BLOC SUPERIOR (Logo) ── */
+    .welcome__top {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      padding: 115px 24px 70px;
+      position: relative;
+      /* Comença desplaçat cap avall perquè quedi al centre de la pantalla */
+      transform: translateY(12vh);
+      animation: shift-to-top 1.2s cubic-bezier(0.4, 0, 0.2, 1) 2.5s forwards;
+    }
+
+    .welcome__illustration {
+      width: 80px; height: 75px;
+      background-image: url(img/logo.svg);
+      background-size: cover;
+      background-position: center;
       opacity: 0;
-      animation: shape-pop 0.65s cubic-bezier(.34,1.56,.64,1) forwards;
+      transform: scale(0.5);
+      animation: pop-in 0.8s cubic-bezier(.34,1.56,.64,1) 0.3s forwards;
     }
 
-    /* Big soft circle — top-left corner */
-    .bs-1 {
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      background: #d1eaff;
-      top: -60px; left: -60px;
-      animation-delay: 0.05s;
-    }
-    /* Medium circle — top-right */
-    .bs-2 {
-      width: 130px; height: 130px;
-      border-radius: 50%;
-      background: #96c7f2;
-      top: 20px; right: -35px;
-      animation-delay: 0.2s;
-    }
-    /* Rounded square — bottom-left, tilted */
-    .bs-3 {
-      width: 100px; height: 100px;
-      border-radius: 22px;
-      background: #508bbf;
-      bottom: 90px; left: -28px;
-      animation-delay: 0.3s;
-      animation-name: shape-pop-tilt3;
-    }
-    @keyframes shape-pop-tilt3 {
-      0%   { opacity:0; transform: scale(0) rotate(0deg); }
-      70%  { opacity:1; transform: scale(1.1) rotate(27deg); }
-      100% { opacity:1; transform: scale(1)   rotate(22deg); }
+    .welcome__logo {
+      width: 168px; height: 37px;
+      background-image: url(img/espectre.svg);
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: fade-in-up 0.8s ease 0.6s forwards;
     }
 
-    /* Triangle — bottom-right */
-    .bs-4 {
-      width: 110px; height: 110px;
-      background: #023059;
-      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-      bottom: 50px; right: -20px;
-      animation-delay: 0.15s;
+    /* El text real de welcome.html que apareixerà al final */
+    .welcome__tagline {
+      font-size: 17px;
+      color: #5a7fa0;
+      text-align: center;
+      max-width: 280px;
+      line-height: 1.5;
+      opacity: 0;
+      animation: fade-in 0.8s ease 2.7s forwards;
     }
-    /* Small dot — top-center */
-    .bs-5 {
-      width: 44px; height: 44px;
+
+    /* ── ANIMACIÓ DE CÀRREGA (Punts suspensius) ── */
+    .loading-zone {
+      position: absolute;
+      top: calc(50% + 70px);
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      animation: 
+        fade-in 0.5s ease 1.2s forwards,
+        fade-out 0.4s ease 2.4s forwards;
+    }
+
+    .dots { display: flex; gap: 8px; }
+    .dot {
+      width: 10px; height: 10px;
       border-radius: 50%;
       background: #508bbf;
-      top: 110px; left: calc(50% - 22px);
-      animation-delay: 0.45s;
+      animation: dot-pulse 0.8s infinite alternate;
     }
-    /* Small rounded square — mid-left */
-    .bs-6 {
-      width: 55px; height: 55px;
-      border-radius: 14px;
-      background: #d1eaff;
-      top: calc(50% - 27px); left: 10px;
-      animation-delay: 0.38s;
-      animation-name: shape-pop-tilt6;
-    }
-    @keyframes shape-pop-tilt6 {
-      0%   { opacity:0; transform: scale(0) rotate(0deg); }
-      70%  { opacity:1; transform: scale(1.1) rotate(19deg); }
-      100% { opacity:1; transform: scale(1)   rotate(14deg); }
-    }
-    /* Small circle — mid-right */
-    .bs-7 {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: #96c7f2;
-      top: calc(52% - 20px); right: 16px;
-      animation-delay: 0.42s;
-    }
-    /* Diamond — bottom-center */
-    .bs-8 {
-      width: 64px; height: 64px;
-      background: #d1eaff;
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      bottom: 130px; left: calc(50% - 32px);
-      animation-delay: 0.52s;
-    }
-    /* Extra tiny circles scattered */
-    .bs-9 {
-      width: 24px; height: 24px;
-      border-radius: 50%;
-      background: #023059;
-      top: 200px; right: 55px;
-      animation-delay: 0.6s;
-    }
-    .bs-10 {
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: #508bbf;
-      bottom: 220px; left: 60px;
-      animation-delay: 0.65s;
-    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
 
-    @keyframes shape-pop {
-      0%   { opacity: 0; transform: scale(0); }
-      70%  { opacity: 1; transform: scale(1.1); }
-      100% { opacity: 1; transform: scale(1); }
-    }
 
-    /* ── SPLASH CENTER ─────────────────────────────────────── */
-    #splash {
-      position: fixed;
-      inset: 0;
+    /* ── BLOC INFERIOR (Caixa blava) ── */
+    /* La zona inferior blava és idèntica a welcome.html però arrenca amagada */
+    .welcome__bottom {
+      background: #d1eaff;
+      padding: 64px 24px;
+      margin-bottom: 200px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 20;
-    }
-
-    /* Logo icon card */
-    .logo-card {
-      width: 108px;
-      height: 108px;
-      border-radius: 32px;
-      background: #fff;
-      border: 3px solid #d1eaff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 26px;
-      box-shadow:
-        0 8px 0 #96c7f2,
-        0 16px 32px rgba(2,48,89,.13);
+      gap: 16px;
       opacity: 0;
-      transform: translateY(-40px) scale(0.6) rotate(-8deg);
-      animation:
-        card-in     0.7s cubic-bezier(.34,1.56,.64,1) 0.4s forwards,
-        card-bounce 0.5s cubic-bezier(.34,1.56,.64,1) 1.25s;
-    }
-    .logo-card img {
-      width: 76px;
-      height: 76px;
-      object-fit: contain;
+      transform: translateY(15vh);
+      animation: slide-up-bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1) 2.5s forwards;
     }
 
-    @keyframes card-in {
-      to { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
-    }
-    @keyframes card-bounce {
-      0%   { transform: translateY(0) rotate(0deg); }
-      35%  { transform: translateY(-14px) rotate(-4deg); }
-      65%  { transform: translateY(5px) rotate(2deg); }
-      100% { transform: translateY(0) rotate(0deg); }
+    /* Espais buits que ocupen l'espai dels futurs botons */
+    .btn-placeholder {
+      height: 48px;
+      width: 100%;
     }
 
-    /* Espectre text image */
-    .espectre-img {
-      height: 36px;
-      object-fit: contain;
-      opacity: 0;
-      transform: scale(0.7);
-      animation: title-pop 0.55s cubic-bezier(.34,1.4,.64,1) 1.1s forwards;
-      margin-bottom: 16px;
-    }
-    @keyframes title-pop {
-      to { opacity: 1; transform: scale(1); }
-    }
 
-    /* Tagline */
-    .tagline {
-      font-size: 20px;
-      color: #023059;
-      text-align: center;
-      max-width: 210px;
-      line-height: 1.6;
-      opacity: 0;
-      animation: fade-up 0.5s ease 1.6s forwards;
+    /* ── DEFINICIÓ DE LES ANIMACIONS ── */
+    @keyframes bg-lighten {
+      to { background: #f0faff; }
     }
-    @keyframes fade-up {
-      0%   { opacity:0; transform:translateY(10px); }
-      100% { opacity:1; transform:translateY(0); }
+    @keyframes shift-to-top {
+      to { transform: translateY(0); }
     }
-
-    /* Animated dots */
-    .dots {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-      opacity: 0;
-      animation: fade-up 0.4s ease 1.85s forwards;
+    @keyframes slide-up-bottom {
+      to { opacity: 1; transform: translateY(0); }
     }
-    .dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      animation: dot-bounce 0.9s ease-in-out infinite alternate;
+    @keyframes pop-in {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
     }
-    .dot:nth-child(1) { background: #96c7f2; animation-delay: 0.0s; }
-    .dot:nth-child(2) { background: #508bbf; animation-delay: 0.15s; }
-    .dot:nth-child(3) { background: #023059; animation-delay: 0.3s; }
-    @keyframes dot-bounce {
-      from { transform: translateY(0)   scale(1);   }
-      to   { transform: translateY(-7px) scale(1.2); }
+    @keyframes fade-in-up {
+      0% { opacity: 0; transform: translateY(15px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
-
-    
-    /* ── EXIT ─────────────────────────────────────────────── */
-    .exiting {
-      animation: page-out 0.38s ease forwards !important;
+    @keyframes fade-in {
+      to { opacity: 1; }
     }
-    @keyframes page-out {
-      to { opacity: 0; transform: scale(1.04); }
+    @keyframes fade-out {
+      to { opacity: 0; visibility: hidden; }
+    }
+    @keyframes dot-pulse {
+      0% { transform: scale(1); opacity: 0.4; }
+      100% { transform: scale(1.3); opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-<!-- Geometric background -->
-<div class="bg-shapes" id="bg-shapes">
-  <div class="bg-shape bs-1"></div>
-  <div class="bg-shape bs-2"></div>
-  <div class="bg-shape bs-3"></div>
-  <div class="bg-shape bs-4"></div>
-  <div class="bg-shape bs-5"></div>
-  <div class="bg-shape bs-6"></div>
-  <div class="bg-shape bs-7"></div>
-  <div class="bg-shape bs-8"></div>
-  <div class="bg-shape bs-9"></div>
-  <div class="bg-shape bs-10"></div>
-</div>
+  <section class="page">
+    <div class="welcome__top">
+      <div class="welcome__illustration"></div>
+      <div class="welcome__logo"></div>
+      
+      <p class="welcome__tagline">El teu espai de suport per acompanyar el teu fill o filla amb TEA.</p>
+      
+      <div class="loading-zone">
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
 
-
-<!-- Center content -->
-<div id="splash">
-  <div class="logo-card">
-    <img src="img/logo.svg" alt="Logo Espectre">
-  </div>
-
-  <img class="espectre-img" src="img/espectre.svg" alt="ESPECTRE">
-
-  <p class="tagline">Carregant</p>
-
-  <div class="dots">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
-</div>
-
-
+    <div class="welcome__bottom">
+      <div class="btn-placeholder"></div>
+      <div class="btn-placeholder"></div>
+    </div>
+  </section>
 
 <script>
-
-
-  /* ── REDIRECT ──────────────────────────────────────────── */
-  // Total display time ≈ 4.2s, then fade-out (0.38s), then navigate
+  /* Com que l'animació ja munta exactament la mateixa pantalla que welcome.html, 
+     fem una redirecció instantània al final. Serà tan fluid que no hi haurà tall, 
+     només veuràs aparèixer els botons. */
   setTimeout(() => {
-    ['splash', 'bg-shapes'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.classList.add('exiting');
-    });
-    setTimeout(() => window.location.replace('pages/welcome.html'), 390);
-  }, 4200);
+    window.location.replace('pages/welcome.html');
+  }, 3900);
 </script>
 
 </body>
