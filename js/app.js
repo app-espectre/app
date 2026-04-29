@@ -1760,7 +1760,7 @@ function updateWizardUI() {
     btnNext.textContent = 'Continuar';
   } else if (currentStep === 3) {
     title.textContent = 'Diagnòstic i necessitats';
-    btnNext.textContent = 'Finalitzar i entrar';
+    btnNext.textContent = 'Finalitzar';
   }
 
   // 4. Lògica dels cercles (mantenim el que hem fet abans)

@@ -3937,7 +3937,7 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 /* 2. Animació de la línia del check (Dibuixant-se) */
 @keyframes drawCheck {
-  0% { stroke-dashoffset: -40; } 
+  0% { stroke-dashoffset: 30; } 
   100% { stroke-dashoffset: 0; }
 }
 
@@ -3948,8 +3948,8 @@ body[data-page="report-done"] .progress-bar__fill::after,
 
 /* Preparem i animem el traçat del SVG amb un lleuger retard (usant 'both') */
 .onboard-done__check svg polyline {
-  stroke-dasharray: 40;
-  stroke-dashoffset: 40;
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
   animation: drawCheck 0.4s ease-out 0.3s both;
 }
 
