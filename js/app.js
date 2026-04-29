@@ -1705,17 +1705,6 @@ function initRegisterWizard() {
     };
   }
 
-  // Botó Enrere (fletxa a la capçalera)
-  const btnBack = document.getElementById('btn-back-step');
-  if (btnBack) {
-    btnBack.onclick = () => {
-      if (currentStep > 1) {
-        currentStep--;
-        updateWizardUI();
-      }
-    };
-  }
-
   // Lògica per als xips (Diagnòstic i Gènere)
   document.querySelectorAll('.gender-chip, .diagnosis-chip').forEach(chip => {
     chip.onclick = () => {
@@ -1731,36 +1720,38 @@ function initRegisterWizard() {
 }
 
 function updateWizardUI() {
-  // Amagar tots els passos
+  // 1. Amagar tots els passos
   document.querySelectorAll('.wizard-step').forEach(s => s.style.display = 'none');
   
-  // Mostrar el pas actual
+  // 2. Mostrar el pas actual
   document.getElementById(`step-${currentStep}`).style.display = 'block';
 
-  // Actualitzar texts i botons de la capçalera fixa
+  // 3. Actualitzar només el títol i el botó
   const title = document.getElementById('step-title');
-  const desc = document.getElementById('step-desc');
   const btnNext = document.getElementById('btn-next-step');
-  const btnBack = document.getElementById('btn-back-step');
 
   if (currentStep === 1) {
     title.textContent = 'Crea el teu compte';
-    desc.textContent = 'Pas 1 de 3: Les teves dades';
     btnNext.textContent = 'Continuar';
-    btnBack.style.display = 'none';
   } else if (currentStep === 2) {
     title.textContent = "Dades de l'infant";
-    desc.textContent = 'Pas 2 de 3: Coneguem la Martina';
     btnNext.textContent = 'Continuar';
-    btnBack.style.display = 'block';
   } else if (currentStep === 3) {
     title.textContent = 'Diagnòstic i necessitats';
-    desc.textContent = 'Pas 3 de 3: Personalitza el perfil';
     btnNext.textContent = 'Finalitzar i entrar';
-    btnBack.style.display = 'block';
   }
 
-  // Tornar el scroll a dalt de tot en cada pas
-  const scrollArea = document.querySelector('#page-register .page-scroll');
+  // 4. Lògica dels cercles (mantenim el que hem fet abans)
+  const dots = document.querySelectorAll('.circulo span');
+  dots.forEach((dot, index) => {
+    if (index + 1 === currentStep) {
+      dot.style.background = 'var(--color-accent)';
+    } else {
+      dot.style.background = '#96c7f2';
+    }
+  });
+
+  // 5. Tornar el scroll a dalt de tot
+  const scrollArea = document.getElementById('wizard-scroll-area');
   if (scrollArea) scrollArea.scrollTop = 0;
 }

@@ -7830,3 +7830,15 @@ body[data-page="report-done"] .progress-bar__fill::after,
     box-sizing: border-box;
   }
 }
+
+#step-title {
+  white-space: nowrap; /* Força que el text estigui en una sola línia */
+  display: block;      /* Assegura que es comporti com un bloc */
+  width: auto;         /* Permet que s'estengui més enllà del contenidor si cal */
+}
+
+/* Fa que els xips s'estirin per ocupar l'espai buit */
+.needs-chip {
+  flex-grow: 1;
+  text-align: center;
+}
