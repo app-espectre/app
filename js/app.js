@@ -1694,13 +1694,35 @@ function initRegisterWizard() {
         currentStep++;
         updateWizardUI();
       } else {
-        // En acabar el pas 3, guardem les dades i anem a la pantalla final
+        // En acabar el pas 3, guardem les dades
         const s = State.load();
         s.profile.parentName = document.getElementById('reg-name').value || s.profile.parentName;
         s.profile.childName = document.getElementById('child-name').value || s.profile.childName;
         s.authenticated = true; // Simulem login
         State.save(s);
-        goTo('onboard-done');
+
+        // === ANIMACIÓ DE CANVI DE PÀGINA SEGURA (Efecte Cortina) ===
+        // 1. Creem una capa que ocuparà tota la pantalla
+        const curtain = document.createElement('div');
+        curtain.style.position = 'fixed';
+        curtain.style.bottom = '0';
+        curtain.style.left = '0';
+        curtain.style.width = '100%';
+        curtain.style.height = '0vh'; // Comença amagada a baix
+        curtain.style.background = 'var(--bg)'; // Mateix color que la targeta i la següent pàgina
+        curtain.style.zIndex = '99999'; // Per sobre de tot (inclòs el header)
+        curtain.style.transition = 'height 0.5s cubic-bezier(0.65, 0, 0.35, 1)';
+        document.body.appendChild(curtain);
+
+        // 2. L'activem just després perquè pugi cap amunt
+        requestAnimationFrame(() => {
+          curtain.style.height = '100vh';
+        });
+
+        // 3. Quan acaba de pujar (0.5 segons), canviem a la pàgina final
+        setTimeout(() => {
+          goTo('onboard-done');
+        }, 500); 
       }
     };
   }
