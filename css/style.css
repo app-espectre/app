@@ -1,5 +1,4 @@
 /* ============================================================
-  ESPECTRE — style.css
   Seccions: reset · variables · base · layout · components · utilities · pàgines
   ============================================================ */
 
@@ -3933,23 +3932,23 @@ body[data-page="report-done"] .progress-bar__fill::after,
 @keyframes popIn {
   0% { transform: scale(0); opacity: 0; }
   70% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); }
+  100% { transform: scale(1); opacity: 1; } 
 }
 
 /* 2. Animació de la línia del check (Dibuixant-se) */
 @keyframes drawCheck {
-  0% { stroke-dashoffset: -40; } /* Només afegint aquest signe menys! */
+  0% { stroke-dashoffset: -40; } 
   100% { stroke-dashoffset: 0; }
 }
 
-/* Apliquem el rebot al contenidor rodó */
+/* Apliquem el rebot al contenidor rodó (usant 'both') */
 .onboard-done__check {
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-/* Preparem i animem el traçat del SVG amb un lleuger retard */
+/* Preparem i animem el traçat del SVG amb un lleuger retard (usant 'both') */
 .onboard-done__check svg polyline {
   stroke-dasharray: 40;
   stroke-dashoffset: 40;
-  animation: drawCheck 0.4s ease-out 0.3s forwards;
+  animation: drawCheck 0.4s ease-out 0.3s both;
 }
